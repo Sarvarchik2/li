@@ -87,7 +87,7 @@ import LiText from "@/assets/litext.png"
 import Model7 from '@/assets/li7.png'
 import Model8 from '@/assets/li8.png'
 import Model9 from '@/assets/li9.png'
-import Li9 from '@/assets/li99.png'
+import Li9 from '@/assets/Li99.png'
 </script>
 
 <style>
