@@ -5,6 +5,7 @@
 
       <NuxtPage />
     </div>
+    <Footer> </Footer>
   </div>
 </template>
 
@@ -75,4 +76,14 @@ body{
 
 </style>
 <script setup lang="ts">
+useHead({
+  title: 'Lixiang | Yas Auto', // укажи нужный заголовок
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }
+  ]
+});
 </script>
