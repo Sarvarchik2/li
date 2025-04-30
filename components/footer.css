@@ -5,3 +5,51 @@
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
 }
+.footer-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.footer-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+padding: 0;
+    margin: 0;
+}
+.footer-list h2{
+    font-size: 20px;
+    color: #fff;
+    margin: 0;
+}
+.footer-list li{
+    list-style: none;
+}
+.footer-list li a{
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.footer-first{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.footer-logo{
+    width: 102px;
+}
+.footer-first-link{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.footer-first-link a{
+    cursor: pointer;
+}
+.footer-first-link a img{
+    width: 50px;
+}
