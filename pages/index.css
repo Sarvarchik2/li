@@ -403,3 +403,38 @@
     font-weight: 600;
     color: #000;
 }
+
+.main-content-about{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+
+}
+.main-content-about-wrapper{
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+.main-content-about-wrapper img{
+    width: 29%;
+}
+.main-content-about-text{
+    width: 68%;
+    background: #fff;
+    justify-content: start;
+    align-items: start;
+    padding: 20px;
+    border-radius: 40px;
+}
+.main-content-about-text h2{
+    font-size: 26px;
+    font-weight: 600;
+    color: #000;
+    text-align: start;
+}
+.main-content-about-text p{
+    font-size: 18px;
+    color: #4B4B4B;
+}

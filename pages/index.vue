@@ -1,9 +1,11 @@
 <template>
   <div class="main">
+
     <header class="main-header">
       <img :src="Header" alt="logo"/>
       <img class="main-header-img1" :src="LiText" alt="logo"/>
     </header>
+
     <main class="main-content">
       <h2>Модели</h2>
       <div class="main-content-models">
@@ -186,6 +188,21 @@
       </div>
       <div class="main-content-about">
         <h3>О нас</h3>
+        <div class="main-content-about-wrapper">
+          <img :src="Video" alt="vidoe">
+          <div class="main-content-about-text">
+            <h2>Lorem Ipsum</h2>
+            <p>Yorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.Ω</p>
+          </div>
+        </div>
+        <div class="main-content-about-wrapper">
+          <div class="main-content-about-text">
+            <h2>Lorem Ipsum</h2>
+            <p>Yorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.Ω</p>
+          </div>
+          <img :src="Video2" alt="vidoe">
+
+        </div>
       </div>
     </main>
   </div>
@@ -200,6 +217,8 @@ import Model9 from '@/assets/li9.png';
 import Li9 from '@/assets/Li99.png';
 import Market from '@/assets/market.png';
 import Market2 from '@/assets/market2.png';
+import Video from '@/assets/vid1.png'
+import Video2 from '@/assets/vid1.png'
 
 </script>
 
