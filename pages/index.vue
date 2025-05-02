@@ -152,7 +152,7 @@
           </div>
 
         </div>
-        <NuxtLink class="main-content-models-item-link">
+        <NuxtLink to="/market" class="main-content-models-item-link">
           Смотреть еще
         </NuxtLink>
       </div>
@@ -182,7 +182,7 @@
           </div>
 
         </div>
-        <NuxtLink class="main-content-models-item-link">
+        <NuxtLink to="/contact" class="main-content-models-item-link">
           Оставить заявку
         </NuxtLink>
       </div>
