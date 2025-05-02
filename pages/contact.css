@@ -6,6 +6,7 @@
     border-radius: 30px;  margin-top: 30px;
 gap: 30px;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .contact-content-left{
     display: flex;
@@ -20,7 +21,7 @@ gap: 30px;
     color: #BFBFBF;
     padding: 10px;
     border-radius: 30px;
-    height: 300px;
+    height: 156px;
 }
 .contact-content button{
     border: none;

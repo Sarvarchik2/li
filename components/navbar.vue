@@ -1,28 +1,26 @@
 <template>
   <div class="navbar">
-    <!-- Desktop Nav (≥768px) -->
     <div class="desktop-nav">
       <ul class="navbar-list">
-        <li><NuxtLink to="#">Контакты</NuxtLink></li>
-        <li><NuxtLink to="#">О нас</NuxtLink></li>
-        <li><NuxtLink to="#">Конфигуратор</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="/contact">Контакты</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="#">О нас</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="#">Конфигуратор</NuxtLink></li>
       </ul>
-      <div class="logo">
+      <NuxtLink to="/" class="logo">
         <img :src="Logo" alt="LiLogo" />
-      </div>
+      </NuxtLink>
       <ul class="navbar-list">
-        <li><NuxtLink to="#">Магазин</NuxtLink></li>
-        <li><NuxtLink to="#">Авто в наличии</NuxtLink></li>
-        <li><NuxtLink to="#">Модели</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="#">Магазин</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="#">Авто в наличии</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="/models">Модели</NuxtLink></li>
       </ul>
     </div>
 
-    <!-- Mobile Nav (<768px) -->
     <div class="mobile-nav">
       <div class="mobile-header">
-        <div class="logo-center">
+        <NuxtLink to="/" class="logo-center">
           <img :src="Logo" alt="LiLogo" />
-        </div>
+        </NuxtLink>
         <button class="burger" @click="toggleMenu">
           <span :class="{ open: isOpen }"></span>
           <span :class="{ open: isOpen }"></span>
@@ -38,12 +36,12 @@
       <!-- Mobile Menu -->
       <transition name="slide-fade">
         <ul v-if="isOpen" class="navbar-list-mobile fixed-menu">
-          <li><NuxtLink to="#">Модели</NuxtLink></li>
-          <li><NuxtLink to="#">Авто в наличии</NuxtLink></li>
-          <li><NuxtLink to="#">Магазин</NuxtLink></li>
-          <li><NuxtLink to="#">Конфигуратор</NuxtLink></li>
-          <li><NuxtLink to="#">О нас</NuxtLink></li>
-          <li><NuxtLink to="#">Контакты</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="/models">Модели</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="#">Авто в наличии</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="#">Магазин</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="#">Конфигуратор</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="#">О нас</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="/contact">Контакты</NuxtLink></li>
         </ul>
       </transition>
     </div>
@@ -51,11 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onBeforeUnmount, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import Logo from '@/assets/logo.png';
 
 const isOpen = ref(false);
-
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
@@ -67,7 +65,20 @@ watch(isOpen, (open) => {
     document.body.classList.remove('menu-open');
   }
 });
+
+onBeforeUnmount(() => {
+  document.body.classList.remove('menu-open');
+});
+
+const router = useRouter();
+onMounted(() => {
+  router.afterEach(() => {
+    isOpen.value = false;
+    document.body.classList.remove('menu-open');
+  });
+});
 </script>
+
 
 <style scoped>
 /* Общие стили */
@@ -96,7 +107,9 @@ watch(isOpen, (open) => {
   color: #333;
   font-weight: 500;
 }
-
+.logo{
+  text-decoration: none;
+}
 .logo img {
   width: 100px;
 }
@@ -114,7 +127,10 @@ watch(isOpen, (open) => {
   align-items: center;
   width: 100%;
 }
+.logo-center{
+  text-decoration: none;
 
+}
 .logo-center img {
   width: 60px;
 }
