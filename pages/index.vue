@@ -150,11 +150,11 @@
             <h5>3.400.000 UZS</h5>
             <NuxtLink>В корзину</NuxtLink>
           </div>
-          <NuxtLink class="main-content-models-item-link">
-            Смотреть еще
-          </NuxtLink>
-        </div>
 
+        </div>
+        <NuxtLink class="main-content-models-item-link">
+          Смотреть еще
+        </NuxtLink>
       </div>
       <div class="main-content-contact">
         <h3>Контакты</h3>

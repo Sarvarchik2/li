@@ -3,7 +3,12 @@
     flex-direction: column;
     width: 100%;
 }
-
+.logo{
+    width: 100px;
+}
+.logo img{
+    width: 100%;
+}
 .main-header {
     height: 90vh;
     position: relative;
@@ -50,8 +55,10 @@
 .main-content-models {
     display: flex;
     width: 100%;
+    gap: 30px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .main-content-models-item {
@@ -157,7 +164,7 @@
 
 .main-content-models-bottom-right img {
     width: 100%;
-
+height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -437,4 +444,53 @@
 .main-content-about-text p{
     font-size: 18px;
     color: #4B4B4B;
+}
+
+@media (max-width: 769px) {
+    .logo{
+        width: 70px;
+    }
+    .main-content-models-item{
+        width: 46%;
+    }
+    .main-content-models-bottom{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .main-content-models-bottom-left{
+        width: 100%;
+    }
+    .main-content-models-bottom-right{
+        width: 100%;
+    }
+    .main-content-market-item img{
+        height: 90px;
+    }
+    .main-content-market-item h5{
+        font-size: 18px;
+    }
+    .main-content-market-item{
+        height: 398px;
+        width: 48%;
+    }
+    .main-content-contact-wrapper{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .main-content-contact-left{
+        width: 100%;
+    }
+    .main-content-contact-right{
+        width: 100%;
+        height: 270px;
+    }
+    .main-content-about-wrapper{
+        flex-direction: column;
+    }
+    .main-content-about-wrapper img{
+        width: 100%;
+    }
+    .main-content-about-text{
+        width: 100%;
+    }
 }
