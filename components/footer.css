@@ -54,3 +54,15 @@ padding: 0;
 .footer-first-link a img{
     width: 50px;
 }
+@media (max-width: 581px) {
+    .footer-wrapper {
+        width: 100%;
+        display: flex
+    ;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 53px;
+        padding: 20px;
+    }
+}
