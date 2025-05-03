@@ -127,13 +127,21 @@
     overflow: hidden;
     height: 375px;
     display: flex;
-    align-items: end;
-    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
 }
 .model-more-interier-item h4{
     color: #fff;
     font-size: 26px;
     margin: 0;
+
+}
+.model-more-interier-item p{
+    color: #fff;
+    font-size: 20px;
+    margin: 0;
+    margin-top: 20px;
 
 }
 .model-more-interier-item img{
@@ -145,13 +153,213 @@
     z-index: -1;
     left: 0;
 }
+
+.model-more-adas-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin: 80px 0;
+}
+
+.adas-tab-group {
+    display: flex;
+    background: #BFBFBF;
+    border-radius: 9999px;
+    gap: 0;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.adas-tab-group button {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 9999px;
+}
+
+.adas-tab-group button.active {
+    background: white;
+    color: #999;
+}
+
+.adas-image {
+    width: 100%;
+    border-radius: 16px;
+    height: 515px;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+.smart-driving {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.smart-driving-text h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.smart-driving-text h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.smart-driving-text p {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.smart-driving-content {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.smart-driving-content img {
+    width: 47%;
+    border-radius: 20px;
+    object-fit: cover;
+    height: 513px;
+}
+
+.smart-driving-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 47%;
+}
+
+.smart-driving-box {
+    background: #BFBFBF;
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-align: left;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.smart-driving-box h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.smart-driving-box p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #f9f9f9;
+}
+
+.safety-section {
+    width: 100%;
+    text-align: center;
+}
+
+.safety-section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.safety-subtitle {
+    max-width: 860px;
+    margin: 0 auto 40px auto;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.safety-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.safety-main,
+.safety-feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.safety-main img,
+.safety-feature img {
+    width: 57%;
+    object-fit: cover;
+    border-radius: 16px;
+    height: 300px;
+
+}
+
+.safety-text-block {
+    background: #C4C4C4;
+    border-radius: 16px;
+    padding: 24px;
+    width: 37%;
+    height: 300px;
+    color: white;
+    text-align: left;
+}
+
+.safety-text-block h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.safety-text-block p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+
 @media (max-width: 769px) {
+    .smart-driving-content img {
+        width: 100%;
+
+    }
+
+    .safety-main img,
+    .safety-feature img {
+        width: 100%;
+
+    }
+
+    .safety-text-block {
+        width: 100%;
+    }
+
+    .smart-driving-boxes {
+
+        width: 100%;
+    }
     .model-more-config{
         flex-wrap: wrap;
         gap: 20px;
     }
     .model-more-config-item{
         width: 48%;
+    }
+    .adas-tab-group button{
+        font-size: 12px;
     }
     .model-more-color-wrapper{
         justify-content: center;
@@ -164,6 +372,12 @@
     }
     .model-more-interier h2 span{
         font-size: 16px;
+    }
+    .model-more-interier-item p{
+        font-size: 18px;
+    }
+    .safety-text-block p{
+        font-size: 14px;
     }
 }
 @media (max-width: 577px) {
