@@ -236,6 +236,45 @@
         </div>
       </div>
     </div>
+    <div class="hybrid-section">
+      <h2>Электро-гибрид нового типа</h2>
+      <p class="subtitle">
+        Вы сами принимаете решение когда расходовать бензин, а когда нет переключая 4 режима движения — от батарейки, совместно с генератором, только на генераторе, а также режим кикдаун для максимального ускорения.
+      </p>
+
+      <!-- Первый блок -->
+      <div class="hybrid-row">
+        <div class="hybrid-image" >
+          <img :src="Hybrid1" alt="4WD" />
+        </div>
+        <div class="hybrid-text" >
+          <h3>Передний и задний моторы 4WD</h3>
+          <p>При максимальной мощности электропривода 330 кВт и крутящем моменте 620 Нм L9 разгоняется от 0 до 100 км/ч всего за 5,3 секунды, сохраняя мощность даже при полной загрузке.</p>
+        </div>
+      </div>
+
+      <!-- Второй блок -->
+      <div class="hybrid-row reverse">
+        <div class="hybrid-text" >
+          <h3>1.5-литровый четырёхцилиндровый бензо-генератор</h3>
+          <p>Четырехцилиндровый двигатель объёмом 1,5 литра обеспечивает увеличение дальности пробега на электротяге, а расход топлива CLTC составляет всего 5,9 л/100 км.</p>
+        </div>
+        <div class="hybrid-image" >
+          <img :src="Hybrid2" alt="Generator" />
+        </div>
+      </div>
+
+      <!-- Третий блок -->
+      <div class="hybrid-row">
+        <div class="hybrid-image" >
+          <img :src="Hybrid3" alt="Battery" />
+        </div>
+        <div class="hybrid-text" >
+          <h3>Огнезащитный аккумуляторный блок</h3>
+          <p>Аккумуляторная батарея емкостью 44,5 кВт*ч обеспечивает запас хода на чистом электричестве по циклу WLTC — до 180 км.</p>
+        </div>
+      </div>
+    </div>
 
       <div class="video-section">
         <h2>Видео и модели</h2>
@@ -292,6 +331,11 @@ import Interier6 from "@/assets/models/interier/interier6.png"
 
 import Electric from "@/assets/models/interier/electric1.png"
 import Electric2 from "@/assets/models/interier/electric2.png";
+
+
+import Hybrid1 from '@/assets/hybrid/hybrid1.png';
+import Hybrid2 from '@/assets/hybrid/hybrid2.png';
+import Hybrid3 from '@/assets/hybrid/hybrid3.png';
 
 const activeVideo = ref<string | null>(null);
 

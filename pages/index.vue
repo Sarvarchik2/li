@@ -9,24 +9,24 @@
     <main class="main-content">
       <h2>Модели</h2>
       <div class="main-content-models">
-        <div class="main-content-models-item">
+        <NuxtLink to="/model-more"  class="main-content-models-item">
           <img :src="Model7" alt="li7">
           <div class="main-content-models-item-text">
             <h3>L7 <span>От 40 000$</span></h3>
           </div>
-        </div>
-        <div class="main-content-models-item">
+        </NuxtLink>
+        <NuxtLink to="/model-more"  class="main-content-models-item">
           <img :src="Model8" alt="li8">
           <div class="main-content-models-item-text">
             <h3>L8 <span>От 50 000$</span></h3>
           </div>
-        </div>
-        <div class="main-content-models-item">
+        </NuxtLink>
+        <NuxtLink to="/model-more"  class="main-content-models-item">
           <img :src="Model9" alt="li9">
           <div class="main-content-models-item-text">
             <h3>L9 <span>От 60 000$</span></h3>
           </div>
-        </div>
+        </NuxtLink>
       </div>
       <div class="main-content-models-bottom">
         <div class="main-content-models-bottom-left">
@@ -37,7 +37,7 @@
           <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac
             aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
             himenaeos. Curabitur tempus urna at turpis condimentum lobortis.</p>
-          <NuxtLink>
+          <NuxtLink to="/model-more">
             Узнать больше
           </NuxtLink>
         </div>
@@ -45,8 +45,8 @@
           <img :src="Model9" alt="li9">
           <h3>L9 <span>От 60 000$</span></h3>
           <div class="main-content-models-bottom-right-text">
-            <NuxtLink>Построй свой L9</NuxtLink>
-            <NuxtLink>Все L9 модели</NuxtLink>
+            <NuxtLink to="/model-more">Построй свой L9</NuxtLink>
+            <NuxtLink to="/model-more">Все L9 модели</NuxtLink>
           </div>
         </div>
       </div>
