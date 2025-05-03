@@ -183,7 +183,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: center;
+  align-items: start;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -238,6 +238,11 @@ onMounted(() => {
   }
   .mobile-nav {
     display: flex;
+  }
+  .fixed-menu li{
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #BFBFBF;
   }
 }
 </style>

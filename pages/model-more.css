@@ -1,0 +1,179 @@
+.model-more-config{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 120px;
+}
+.model-more-config-item{
+    width: 24%;
+    background: #BFBFBF;
+    border-radius: 30px;
+    padding: 30px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+.model-more-config-item img{
+    width: 52px;
+    height: 52px;
+}
+.model-more-config-item h3{
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+}
+.model-more-config-item h3 span{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.model-more-color-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.model-more-color-wrapper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.model-more-color-wrapper-item:hover {
+    transform: scale(1.05);
+}
+
+.model-more-color-wrapper-item span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.model-more-color-wrapper-item.active span {
+    transform: scale(1.3);
+    border: 2px solid #AAAAAA;
+}
+
+.model-more-color-wrapper-item h2 {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #333;
+    font-weight: 400;
+}
+
+.car-image {
+    width: 90%;
+    display: block;
+    margin: 30px auto;
+}
+
+.model-more-color{
+    width: 100%;
+    border-radius: 30px;
+    padding: 30px;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    justify-content: center;
+}
+.model-more-color h3{
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+.model-more-interier{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 120px;
+}
+.model-more-interier h2{
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.model-more-interier h2 span{
+    font-size: 26px;
+}
+.model-more-interier-wrapper{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.model-more-interier-item{
+    width: 48%;
+    border-radius: 30px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    height: 375px;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+}
+.model-more-interier-item h4{
+    color: #fff;
+    font-size: 26px;
+    margin: 0;
+
+}
+.model-more-interier-item img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    object-fit: cover;
+    z-index: -1;
+    left: 0;
+}
+@media (max-width: 769px) {
+    .model-more-config{
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .model-more-config-item{
+        width: 48%;
+    }
+    .model-more-color-wrapper{
+        justify-content: center;
+    }
+    .model-more-interier-item h4{
+        font-size: 20px;
+    }
+    .model-more-interier h2 {
+        font-size: 24px;
+    }
+    .model-more-interier h2 span{
+        font-size: 16px;
+    }
+}
+@media (max-width: 577px) {
+
+    .model-more-config-item{
+        width: 100%;
+    }
+    .model-more-interier-item {
+        width: 100%;
+    }
+
+
+}
