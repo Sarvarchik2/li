@@ -237,6 +237,34 @@
       </div>
     </div>
 
+      <div class="video-section">
+        <h2>Видео и модели</h2>
+        <div class="video-grid">
+          <div
+              class="video-card"
+              v-for="(video, index) in videos"
+              :key="index"
+              @click="openVideo(video.youtubeId)"
+          >
+            <img :src="video.thumbnail" :alt="video.title" />
+            <div class="video-overlay">
+              <div class="play-button"></div>
+              <p>{{ video.title }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="activeVideo" class="video-modal" @click.self="closeVideo">
+          <iframe
+              :src="`https://www.youtube.com/embed/${activeVideo}?autoplay=1`"
+              frameborder="0"
+              allowfullscreen
+          ></iframe>
+          <button class="close-btn" @click="closeVideo">×</button>
+        </div>
+      </div>
+
+
 
 
   </div>
@@ -265,7 +293,38 @@ import Interier6 from "@/assets/models/interier/interier6.png"
 import Electric from "@/assets/models/interier/electric1.png"
 import Electric2 from "@/assets/models/interier/electric2.png";
 
+const activeVideo = ref<string | null>(null);
 
+const openVideo = (id: string) => {
+  activeVideo.value = id;
+};
+
+const closeVideo = () => {
+  activeVideo.value = null;
+};
+
+const videos = [
+  {
+    title: 'Li Auto L9 lixang тест-драйв электромобиля в китае',
+    youtubeId: 'VPB1YLCn-yc',
+    thumbnail: 'https://img.youtube.com/vi/VPB1YLCn-yc/maxresdefault.jpg',
+  },
+  {
+    title: 'Купил L9 первый отзыв',
+    youtubeId: 'FwuHrjwVOqA',
+    thumbnail: 'https://img.youtube.com/vi/FwuHrjwVOqA/maxresdefault.jpg',
+  },
+  {
+    title: 'Li L9 статический тест',
+    youtubeId: 'wVaDMOynGQY',
+    thumbnail: 'https://img.youtube.com/vi/wVaDMOynGQY/maxresdefault.jpg',
+  },
+  {
+    title: 'Автомобиль года 2022. Автомобиль с генератором Li L9',
+    youtubeId: 'VzpqhZEf5tw',
+    thumbnail: 'https://img.youtube.com/vi/VzpqhZEf5tw/maxresdefault.jpg',
+  },
+];
 
 const adasOptions = [
   { title: 'Навигация по ADAS', image: () => import('@/assets/models/adwantages/plus1.png') },
