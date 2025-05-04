@@ -4,7 +4,7 @@
       <ul class="navbar-list">
         <li><NuxtLink  @click="toggleMenu" to="/contact">Контакты</NuxtLink></li>
         <li><NuxtLink  @click="toggleMenu" to="#">О нас</NuxtLink></li>
-        <li><NuxtLink  @click="toggleMenu" to="#">Конфигуратор</NuxtLink></li>
+        <li><NuxtLink  @click="toggleMenu" to="/configurator">Конфигуратор</NuxtLink></li>
       </ul>
       <NuxtLink to="/" class="logo">
         <img :src="Logo" alt="LiLogo" />
@@ -39,7 +39,7 @@
           <li><NuxtLink  @click="toggleMenu" to="/models">Модели</NuxtLink></li>
           <li><NuxtLink  @click="toggleMenu" to="#">Авто в наличии</NuxtLink></li>
           <li><NuxtLink  @click="toggleMenu" to="/market">Магазин</NuxtLink></li>
-          <li><NuxtLink  @click="toggleMenu" to="#">Конфигуратор</NuxtLink></li>
+          <li><NuxtLink  @click="toggleMenu" to="/configurator">Конфигуратор</NuxtLink></li>
           <li><NuxtLink  @click="toggleMenu" to="#">О нас</NuxtLink></li>
           <li><NuxtLink  @click="toggleMenu" to="/contact">Контакты</NuxtLink></li>
         </ul>

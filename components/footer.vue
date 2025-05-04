@@ -21,33 +21,33 @@
         </div>
         <ul class="footer-list">
           <h2>Автомобили</h2>
-          <li><NuxtLink>Li 9</NuxtLink></li>
-          <li><NuxtLink>Li 8</NuxtLink></li>
-          <li><NuxtLink>Li 7</NuxtLink></li>
-          <li><NuxtLink>Li 6</NuxtLink></li>
+          <li><NuxtLink to="/model-more">Li 9</NuxtLink></li>
+          <li><NuxtLink  to="/model-more">Li 8</NuxtLink></li>
+          <li><NuxtLink  to="/model-more">Li 7</NuxtLink></li>
+          <li><NuxtLink  to="/model-more">Li 6</NuxtLink></li>
         </ul>
         <ul class="footer-list">
           <h2>Компания</h2>
           <li><NuxtLink>Журнал Li Auto</NuxtLink></li>
-          <li><NuxtLink>Контакты</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Контакты</NuxtLink></li>
           <li><NuxtLink>О компании</NuxtLink></li>
 
         </ul>
         <ul class="footer-list">
           <h2>Покупка</h2>
-          <li><NuxtLink>Найти диллера</NuxtLink></li>
-          <li><NuxtLink>Тест - драйв</NuxtLink></li>
-          <li><NuxtLink>Лизинг</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Найти диллера</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Тест - драйв</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Лизинг</NuxtLink></li>
 
-          <li><NuxtLink>Получить предложение</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Получить предложение</NuxtLink></li>
 
         </ul>
         <ul class="footer-list">
           <h2>Владельцам</h2>
-          <li><NuxtLink>Сервис</NuxtLink></li>
-          <li><NuxtLink>Запись на сервис</NuxtLink></li>
-          <li><NuxtLink>Аксессуары</NuxtLink></li>
-          <li><NuxtLink>Русификация</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Сервис</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Запись на сервис</NuxtLink></li>
+          <li><NuxtLink  to="/market">Аксессуары</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Русификация</NuxtLink></li>
 
         </ul>
       </div>

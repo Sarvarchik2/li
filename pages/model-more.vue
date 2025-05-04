@@ -24,7 +24,7 @@
             <p>Колесзная база</p>
           </div>
         </div>
-        <NuxtLink class="main-content-models-item-link">
+        <NuxtLink to="/configurator" class="main-content-models-item-link">
           Конфигуратор
         </NuxtLink>
       </div>
