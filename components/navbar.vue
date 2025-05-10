@@ -36,7 +36,10 @@
       <div class="mobile-header">
         <NuxtLink to="/" class="logo-center"><img :src="Logo" alt="LiLogo" /></NuxtLink>
         <div class="mobile-header-wrapper">
-          <img :src="Cart" alt="cart" class="nav-cart-btn" />
+          <NuxtLink to="/cart">
+            <img :src="Cart" alt="cart" class="nav-cart-btn" />
+
+          </NuxtLink>
           <div class="nav-lang-dropdown">
             <div class="lang-btn" @click="toggleLangMenu">
               <img :src="Lang" alt="language" />
