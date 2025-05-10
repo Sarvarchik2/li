@@ -5,10 +5,3 @@
     align-items: center;
     margin-top: 50px;
 }
-.navbar-list{
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
