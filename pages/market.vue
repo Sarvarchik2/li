@@ -8,7 +8,7 @@
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
 
         <div class="main-content-market-item">
@@ -16,7 +16,7 @@
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
 
         <div class="main-content-market-item">
@@ -24,22 +24,7 @@
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
-        </div>
-
-        <div class="main-content-market-item">
-          <img :src="Market2" alt="li9">
-          <h4>Lixiang R20-R23</h4>
-          <p>Колесные диски</p>
-          <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
-        </div>
-        <div class="main-content-market-item">
-          <img :src="Market" alt="li9">
-          <h4>Lixiang R20-R23</h4>
-          <p>Колесные диски</p>
-          <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
 
         <div class="main-content-market-item">
@@ -47,14 +32,14 @@
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
         <div class="main-content-market-item">
           <img :src="Market" alt="li9">
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
 
         <div class="main-content-market-item">
@@ -62,14 +47,29 @@
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
         <div class="main-content-market-item">
           <img :src="Market" alt="li9">
           <h4>Lixiang R20-R23</h4>
           <p>Колесные диски</p>
           <h5>3.400.000 UZS</h5>
-          <NuxtLink>В корзину</NuxtLink>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
+        </div>
+
+        <div class="main-content-market-item">
+          <img :src="Market2" alt="li9">
+          <h4>Lixiang R20-R23</h4>
+          <p>Колесные диски</p>
+          <h5>3.400.000 UZS</h5>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
+        </div>
+        <div class="main-content-market-item">
+          <img :src="Market" alt="li9">
+          <h4>Lixiang R20-R23</h4>
+          <p>Колесные диски</p>
+          <h5>3.400.000 UZS</h5>
+          <NuxtLink to="/productmore">Подробнее</NuxtLink>
         </div>
 
       </div>
