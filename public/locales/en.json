@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "contact": "Contact",
+    "about": "About",
+    "configurator": "Configurator",
+    "shop": "Shop",
+    "in_stock": "Cars in Stock",
+    "models": "Models"
+  },
+  "buttons": {
+    "add_to_cart": "Add to Cart",
+    "go": "Go",
+    "order": "Request to Dealer"
+  },
+  "product": {
+    "price": "Price",
+    "quantity": "Quantity",
+    "category": "Body kit",
+    "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+  },
+  "form": {
+    "first_name": "First Name*",
+    "last_name": "Last Name*",
+    "phone": "Phone Number",
+    "comment": "Comment",
+    "submit": "Request to Dealer",
+    "total": "Total"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "contact": "Контакты",
+    "about": "О нас",
+    "configurator": "Конфигуратор",
+    "shop": "Магазин",
+    "in_stock": "Авто в наличии",
+    "models": "Модели"
+  },
+  "buttons": {
+    "add_to_cart": "Добавить в корзину",
+    "go": "Перейти",
+    "order": "Заявка дилеру"
+  },
+  "product": {
+    "price": "Цена",
+    "quantity": "Количество товара",
+    "category": "Обвес корпуса",
+    "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+  },
+  "form": {
+    "first_name": "Имя*",
+    "last_name": "Фамилия*",
+    "phone": "Номер телефона",
+    "comment": "Комментарий",
+    "submit": "Заявка дилеру",
+    "total": "Итого"
+  }
+}

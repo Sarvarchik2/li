@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "contact": "Aloqa",
+    "about": "Biz haqimizda",
+    "configurator": "Konfigurator",
+    "shop": "Do‘kon",
+    "in_stock": "Avtomobillar mavjud",
+    "models": "Modellar"
+  },
+  "buttons": {
+    "add_to_cart": "Savatga qo‘shish",
+    "go": "O‘tish",
+    "order": "Dilerga so‘rov"
+  },
+  "product": {
+    "price": "Narxi",
+    "quantity": "Mahsulot soni",
+    "category": "Kuzov obvesi",
+    "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+  },
+  "form": {
+    "first_name": "Ism*",
+    "last_name": "Familiya*",
+    "phone": "Telefon raqami",
+    "comment": "Izoh",
+    "submit": "Dilerga so‘rov",
+    "total": "Jami"
+  }
+}

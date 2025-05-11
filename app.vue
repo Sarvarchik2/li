@@ -3,10 +3,6 @@
     <IntroAnimation />
     <div class="container">
       <Navbar></Navbar>
-
-<!--      <Transition name="page-fade" mode="out-in">-->
-<!--        <NuxtPage />-->
-<!--      </Transition>-->
       <PageTransition>
           <NuxtPage />
       </PageTransition>
@@ -14,7 +10,6 @@
     <Footer> </Footer>
   </div>
 </template>
-
 
 
 <style>
