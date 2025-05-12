@@ -26,46 +26,44 @@
       <h1>LiXiang L6</h1>
       <div class="price-order">
         <p class="price">67.000$</p>
-        <NuxtLink class="order-button" to="/cart">Заявка дилеру</NuxtLink>
+        <NuxtLink class="order-button" to="/cart">{{ $t('car.request') }}</NuxtLink>
       </div>
     </div>
 
     <!-- ИНФОРМАЦИЯ -->
     <div class="info-grid">
       <div class="column">
-        <p><b>Статус:</b> На заказ</p>
-        <p><b>Год выпуска:</b> 2024</p>
-        <p><b>Пробег:</b> 1 км</p>
-        <p><b>Кузов:</b> Внедорожник 5 дв.</p>
-        <p><b>Комплектация:</b> Pro</p>
-        <p><b>Двигатель:</b> 1.5 л / 408 л.с / Гибрид</p>
-        <p><b>Экстерьер:</b> Черный</p>
+        <p><b>{{ $t('car.status') }}:</b> {{ $t('car.on_order') }}</p>
+        <p><b>{{ $t('car.year') }}:</b> 2024</p>
+        <p><b>{{ $t('car.mileage') }}:</b> 1 км</p>
+        <p><b>{{ $t('car.body') }}:</b> {{ $t('car.suv_5d') }}</p>
+        <p><b>{{ $t('car.configuration') }}:</b> Pro</p>
+        <p><b>{{ $t('car.engine') }}:</b> 1.5 л / 408 л.с / {{ $t('car.hybrid') }}</p>
+        <p><b>{{ $t('car.exterior') }}:</b> {{ $t('car.black') }}</p>
       </div>
 
       <div class="column">
-        <p><b>Разгон до 100:</b> 5.3 сек</p>
-        <p><b>Макс. скорость:</b> 180 км/ч</p>
-        <p><b>Запас хода:</b> 182 км</p>
-        <p><b>Привод:</b> Полный</p>
-        <p><b>Коробка передач:</b> Автомат</p>
-        <p><b>Интерьер:</b> Белый, кожа</p>
+        <p><b>{{ $t('car.acceleration') }}:</b> 5.3 сек</p>
+        <p><b>{{ $t('car.max_speed') }}:</b> 180 км/ч</p>
+        <p><b>{{ $t('car.range') }}:</b> 182 км</p>
+        <p><b>{{ $t('car.drive') }}:</b> {{ $t('car.awd') }}</p>
+        <p><b>{{ $t('car.transmission') }}:</b> {{ $t('car.auto') }}</p>
+        <p><b>{{ $t('car.interior') }}:</b> {{ $t('car.white_leather') }}</p>
       </div>
 
       <div class="description">
-        <h2>Описание</h2>
-        <p>
-          LiXiang L6 — современный гибридный внедорожник с высокой динамикой, полным приводом и элегантным дизайном.
-        </p>
+        <h2>{{ $t('car.description_title') }}</h2>
+        <p>{{ $t('car.description_text') }}</p>
 
-        <h2>Комплектация</h2>
+        <h2>{{ $t('car.equipment_title') }}</h2>
         <ul>
-          <li>Противотуманные фары</li>
-          <li>Дневные ходовые огни</li>
-          <li>Автоматический корректор фар</li>
-          <li>Светодиодные фары</li>
-          <li>Электрообогрев лобового стекла</li>
-          <li>Электрообогрев боковых зеркал</li>
-          <li>Электрообогрев форсунок</li>
+          <li>{{ $t('car.equipment.fog') }}</li>
+          <li>{{ $t('car.equipment.drl') }}</li>
+          <li>{{ $t('car.equipment.headlight_adjust') }}</li>
+          <li>{{ $t('car.equipment.led') }}</li>
+          <li>{{ $t('car.equipment.windshield_heating') }}</li>
+          <li>{{ $t('car.equipment.mirror_heating') }}</li>
+          <li>{{ $t('car.equipment.nozzle_heating') }}</li>
         </ul>
       </div>
     </div>

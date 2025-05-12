@@ -7,6 +7,72 @@
     "in_stock": "Авто в наличии",
     "models": "Модели"
   },
+  "main": {
+    "models": "Модели",
+    "from": "От",
+    "learn_more": "Узнать больше",
+    "build_l9": "Построй свой L9",
+    "all_l9": "Все L9 модели",
+    "one_click": "Один клик к вашему новому Lixiang",
+    "create_ideal": "Создайте свой идеальный LiXiang с помощью конфигуратора",
+    "length": "Длина",
+    "width": "Ширина",
+    "height": "Высота",
+    "wheelbase": "Колёсная база",
+    "configurator": "Конфигуратор",
+    "shop": "Магазин",
+    "more": "Подробнее",
+    "see_more": "Смотреть еще",
+    "contact": "Контакты",
+    "branches": "Филиалы",
+    "address": "Адрес",
+    "phone": "Контактный телефон",
+    "worktime": "Время работы",
+    "leave_request": "Оставить заявку",
+    "about": "О нас",
+    "lorem_title": "Lorem Ipsum",
+    "lorem_text": "Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit..Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit.."
+
+  },
+  "car": {
+    "request": "Заявка дилеру",
+    "status": "Статус",
+    "on_order": "На заказ",
+    "year": "Год выпуска",
+    "mileage": "Пробег",
+    "body": "Кузов",
+    "suv_5d": "Внедорожник 5 дв.",
+    "configuration": "Комплектация",
+    "engine": "Двигатель",
+    "hybrid": "Гибрид",
+    "exterior": "Экстерьер",
+    "black": "Черный",
+    "acceleration": "Разгон до 100",
+    "max_speed": "Макс. скорость",
+    "range": "Запас хода",
+    "drive": "Привод",
+    "awd": "Полный",
+    "transmission": "Коробка передач",
+    "auto": "Автомат",
+    "interior": "Интерьер",
+    "white_leather": "Белый, кожа",
+    "description_title": "Описание",
+    "description_text": "LiXiang L6 — современный гибридный внедорожник с высокой динамикой, полным приводом и элегантным дизайном.",
+    "equipment_title": "Комплектация",
+    "equipment": {
+      "fog": "Противотуманные фары",
+      "drl": "Дневные ходовые огни",
+      "headlight_adjust": "Автоматический корректор фар",
+      "led": "Светодиодные фары",
+      "windshield_heating": "Электрообогрев лобового стекла",
+      "mirror_heating": "Электрообогрев боковых зеркал",
+      "nozzle_heating": "Электрообогрев форсунок"
+    }
+  },
+  "cart": {
+    "title": "Корзина",
+    "total": "Итого:"
+  },
   "buttons": {
     "add_to_cart": "Добавить в корзину",
     "go": "Перейти",
@@ -18,12 +84,31 @@
     "category": "Обвес корпуса",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
   },
+  "configurator": {
+    "title": "Конфигуратор",
+    "color": "Цвет кузова",
+    "wheels": "Колеса",
+    "interior": "Интерьер",
+    "extras": "Дополнительно",
+    "contact_heading": "Оставьте контактные данные, чтобы мы сделали вам коммерческое предложение"
+  },
   "form": {
     "first_name": "Имя*",
     "last_name": "Фамилия*",
     "phone": "Номер телефона",
     "comment": "Комментарий",
     "submit": "Заявка дилеру",
-    "total": "Итого"
+    "total": "Итого",
+    "error": "Пожалуйста, заполните обязательные поля",
+    "email": "Почта",
+    "next": "Далее",
+
+    "name_placeholder": "Асадбек",
+    "lastname_placeholder": "Журабаев",
+    "phone_placeholder": "+998 99 873 44 22",
+    "email_placeholder": "example mail.com",
+    "agreement": "Нажимая на кнопку “Оформить заявку”, я даю своё согласие на обработку моих персональных данных в соответствии с политикой конфиденциальности.",
+    "back": "Назад"
+
   }
 }

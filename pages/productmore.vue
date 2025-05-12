@@ -17,20 +17,16 @@
       <!-- ИНФО -->
       <div class="info-wrapper">
         <h2 class="name">Lixiang Oufer-Nell</h2>
-        <p class="category">Обвес корпуса</p>
-        <p class="description">
-          Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum,
-          ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.
-        </p>
+        <p class="category">{{ $t('product.category') }}</p>
+        <p class="description">{{ $t('product.description') }}</p>
 
         <div class="price-line">
-          <span class="label">Цена</span>
+          <span class="label">{{ $t('product.price') }}</span>
           <span class="price">600$</span>
         </div>
 
         <div class="quantity">
-          <label>Количество товара</label>
+          <label>{{ $t('product.quantity') }}</label>
           <div class="quantity-controls">
             <button @click="decrement">−</button>
             <span>{{ quantity }}</span>
@@ -39,9 +35,9 @@
         </div>
 
         <div class="buttons">
-          <button class="add-btn" :disabled="quantity === 0">Добавить в корзину</button>
+          <button class="add-btn" :disabled="quantity === 0">{{ $t('buttons.add_to_cart') }}</button>
           <button class="go-btn">
-            <span class="icon"><img :src="Cart" alt="asd"></span> Перейти
+            <span class="icon"><img :src="Cart" alt="asd" /></span> {{ $t('buttons.go') }}
           </button>
         </div>
       </div>

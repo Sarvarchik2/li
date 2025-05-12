@@ -17,7 +17,36 @@
     justify-content: center;
     gap: 20px;
 }
+.model-more-color-wrapper-item h2 {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #333;
+    font-weight: 400;
+}
 
+.model-more-color-wrapper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.model-more-color-wrapper-item:hover {
+    transform: scale(1.05);
+}
+
+.model-more-color-wrapper-item span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+.model-more-color-wrapper-item.active span {
+    transform: scale(1.3);
+    border: 2px solid #AAAAAA;
+}
 .color-option {
     cursor: pointer;
     padding: 10px;

@@ -2,12 +2,14 @@
   <div class="li">
     <IntroAnimation />
     <div class="container">
-      <Navbar></Navbar>
-      <PageTransition>
+      <Navbar />
+      <PageTransition name="page-fade">
+        <div>
           <NuxtPage />
+        </div>
       </PageTransition>
     </div>
-    <Footer> </Footer>
+    <Footer />
   </div>
 </template>
 

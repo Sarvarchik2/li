@@ -7,7 +7,69 @@
     "in_stock": "Cars in Stock",
     "models": "Models"
   },
-  "buttons": {
+  "main": {
+    "models": "Models",
+    "from": "From",
+    "learn_more": "Learn more",
+    "build_l9": "Build your L9",
+    "all_l9": "All L9 models",
+    "one_click": "One click to your new Lixiang",
+    "create_ideal": "Create your ideal LiXiang with our configurator",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "wheelbase": "Wheelbase",
+    "configurator": "Configurator",
+    "shop": "Shop",
+    "more": "More",
+    "see_more": "See more",
+    "contact": "Contacts",
+    "branches": "Branches",
+    "address": "Address",
+    "phone": "Contact phone",
+    "worktime": "Working hours",
+    "leave_request": "Leave a request",
+    "about": "About us",
+    "lorem_title": "Lorem Ipsum",
+    "lorem_text": "Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit..Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit.."
+  },
+  "car": {
+    "request": "Request to dealer",
+    "status": "Status",
+    "on_order": "On order",
+    "year": "Year of production",
+    "mileage": "Mileage",
+    "body": "Body type",
+    "suv_5d": "SUV 5-door",
+    "configuration": "Configuration",
+    "engine": "Engine",
+    "hybrid": "Hybrid",
+    "exterior": "Exterior",
+    "black": "Black",
+    "acceleration": "0–100 km/h acceleration",
+    "max_speed": "Max speed",
+    "range": "Range",
+    "drive": "Drive type",
+    "awd": "All-wheel drive",
+    "transmission": "Transmission",
+    "auto": "Automatic",
+    "interior": "Interior",
+    "white_leather": "White, leather",
+    "description_title": "Description",
+    "description_text": "LiXiang L6 is a modern hybrid SUV with high performance, all-wheel drive, and elegant design.",
+    "equipment_title": "Equipment",
+    "equipment": {
+      "fog": "Fog lights",
+      "drl": "Daytime running lights",
+      "headlight_adjust": "Automatic headlight adjustment",
+      "led": "LED headlights",
+      "windshield_heating": "Heated windshield",
+      "mirror_heating": "Heated side mirrors",
+      "nozzle_heating": "Heated nozzles"
+    }
+  },
+
+"buttons": {
     "add_to_cart": "Add to Cart",
     "go": "Go",
     "order": "Request to Dealer"
@@ -18,12 +80,34 @@
     "category": "Body kit",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
   },
+  "cart": {
+    "title": "Cart",
+    "total": "Total:"
+  },
+  "configurator": {
+    "title": "Configurator",
+    "color": "Body Color",
+    "wheels": "Wheels",
+    "interior": "Interior",
+    "extras": "Additional",
+    "contact_heading": "Leave your contact details so we can prepare a commercial offer for you"
+  },
   "form": {
     "first_name": "First Name*",
     "last_name": "Last Name*",
     "phone": "Phone Number",
+    "next": "Next",
+
     "comment": "Comment",
-    "submit": "Request to Dealer",
-    "total": "Total"
+    "total": "Total",
+    "error": "Please fill in the required fields",
+    "email": "Email",
+    "name_placeholder": "Asadbek",
+    "lastname_placeholder": "Jurabayev",
+    "phone_placeholder": "+998 99 873 44 22",
+    "email_placeholder": "example mail.com",
+    "agreement": "By clicking the 'Submit Request' button, I consent to the processing of my personal data in accordance with the privacy policy.",
+    "submit": "Submit Request",
+    "back": "Back"
   }
 }

@@ -1,24 +1,26 @@
 <template>
   <div class="navbar" ref="navbarRef">
     <div class="desktop-nav">
-      <NuxtLink to="/cart">
+      <NuxtLink :to="localePath('/cart')">
         <img :src="Cart" alt="cart" class="nav-cart-btn" />
-
       </NuxtLink>
+
       <ul class="navbar-list">
-
-        <li><NuxtLink @click="toggleMenu" to="/contact">{{ $t('nav.contact') }}</NuxtLink></li>
-        <li><NuxtLink @click="toggleMenu" to="#">{{ $t('nav.about') }}</NuxtLink>        </li>
-        <li><NuxtLink @click="toggleMenu" to="/models">{{ $t('nav.configurator') }}</NuxtLink> </li>
+        <li><NuxtLink :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
+        <li><NuxtLink @click="toggleMenu" to="#">{{ $t('nav.about') }}</NuxtLink></li>
+        <li><NuxtLink @click="toggleMenu" :to="localePath('/configurator')">{{ $t('nav.configurator') }}</NuxtLink></li>
       </ul>
-      <NuxtLink to="/" class="logo"><img :src="Logo" alt="LiLogo" /></NuxtLink>
+
+      <NuxtLink :to="localePath('/')" class="logo">
+        <img :src="Logo" alt="LiLogo" />
+      </NuxtLink>
+
       <ul class="navbar-list">
-
-        <li><NuxtLink @click="toggleMenu" to="/market">{{ $t('nav.shop') }}</NuxtLink></li>
-        <li><NuxtLink @click="toggleMenu" to="/carsinstock">{{ $t('nav.in_stock') }}</NuxtLink></li>
-        <li><NuxtLink @click="toggleMenu" to="/models">{{ $t('nav.models') }}</NuxtLink></li>
-
+        <li><NuxtLink @click="toggleMenu" :to="localePath('/market')">{{ $t('nav.shop') }}</NuxtLink></li>
+        <li><NuxtLink @click="toggleMenu" :to="localePath('/carsinstock')">{{ $t('nav.in_stock') }}</NuxtLink></li>
+        <li><NuxtLink @click="toggleMenu" :to="localePath('/models')">{{ $t('nav.models') }}</NuxtLink></li>
       </ul>
+
       <div class="nav-lang-dropdown">
         <div class="lang-btn" @click="toggleLangMenu">
           <img :src="Lang" alt="language" />
@@ -35,11 +37,12 @@
 
     <div class="mobile-nav">
       <div class="mobile-header">
-        <NuxtLink to="/" class="logo-center"><img :src="Logo" alt="LiLogo" /></NuxtLink>
+        <NuxtLink :to="localePath('/')" class="logo-center">
+          <img :src="Logo" alt="LiLogo" />
+        </NuxtLink>
         <div class="mobile-header-wrapper">
-          <NuxtLink to="/cart">
+          <NuxtLink :to="localePath('/cart')">
             <img :src="Cart" alt="cart" class="nav-cart-btn" />
-
           </NuxtLink>
           <div class="nav-lang-dropdown">
             <div class="lang-btn" @click="toggleLangMenu">
@@ -67,91 +70,18 @@
 
       <transition name="slide-fade">
         <ul v-if="isOpen" class="navbar-list-mobile fixed-menu">
-          <li><NuxtLink @click="toggleMenu" to="/models">{{ $t('nav.models') }}</NuxtLink></li>
-          <li><NuxtLink @click="toggleMenu" to="/carsinstock">{{ $t('nav.in_stock') }}</NuxtLink></li>
-          <li><NuxtLink @click="toggleMenu" to="/market">{{ $t('nav.shop') }}</NuxtLink></li>
-          <li><NuxtLink @click="toggleMenu" to="/configurator">{{ $t('nav.configurator') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" :to="localePath('/models')">{{ $t('nav.models') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" :to="localePath('/carsinstock')">{{ $t('nav.in_stock') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" :to="localePath('/market')">{{ $t('nav.shop') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" :to="localePath('/configurator')">{{ $t('nav.configurator') }}</NuxtLink></li>
           <li><NuxtLink @click="toggleMenu" to="#">{{ $t('nav.about') }}</NuxtLink></li>
-          <li><NuxtLink @click="toggleMenu" to="/contact">{{ $t('nav.contact') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
         </ul>
-
       </transition>
     </div>
   </div>
 </template>
 
-<!--<script setup lang="ts">-->
-<!--import { ref, watch, onBeforeUnmount, onMounted } from 'vue';-->
-<!--import Logo from '@/assets/logo.png';-->
-<!--import Cart from '@/assets/cart.png';-->
-<!--import Lang from '@/assets/lang.png';-->
-
-<!--const isLangMenuVisible = ref(false);-->
-<!--const isOpen = ref(false);-->
-<!--const navbarRef = ref<HTMLElement | null>(null);-->
-
-<!--import { useI18n } from 'vue-i18n';-->
-<!--import { useRouter, useRoute } from 'vue-router';-->
-
-<!--const { locale, setLocale } = useI18n();-->
-<!--const router = useRouter();-->
-<!--const route = useRoute();-->
-
-<!--const changeLang = async (lang: string) => {-->
-<!--  await setLocale(lang); // это автоматически обновляет locale и меняет URL-->
-<!--  localStorage.setItem('lang', lang); // сохранить-->
-<!--  isLangMenuVisible.value = false;-->
-<!--};-->
-
-<!--const toggleLangMenu = () => {-->
-<!--  isLangMenuVisible.value = !isLangMenuVisible.value;-->
-<!--};-->
-
-<!--const toggleMenu = () => {-->
-<!--  isOpen.value = !isOpen.value;-->
-<!--};-->
-
-
-
-<!--watch(isOpen, (open) => {-->
-<!--  document.body.classList.toggle('menu-open', open);-->
-<!--});-->
-
-<!--onBeforeUnmount(() => {-->
-<!--  document.body.classList.remove('menu-open');-->
-<!--});-->
-<!--console.log(locale.value, t('nav.contact'))-->
-<!--console.log('Current locale:', locale.value)-->
-<!--console.log('nav.contact translation:', t('nav.contact'))-->
-<!--const router = useRouter();-->
-<!--onMounted(() => {-->
-<!--  router.afterEach(() => {-->
-<!--    isOpen.value = false;-->
-<!--    document.body.classList.remove('menu-open');-->
-<!--  });-->
-
-<!--  const savedLang = localStorage.getItem('lang');-->
-<!--  if (savedLang) {-->
-<!--    locale.value = savedLang;-->
-<!--  }-->
-
-<!--  document.addEventListener('click', handleClickOutside);-->
-<!--});-->
-
-<!--onBeforeUnmount(() => {-->
-<!--  document.removeEventListener('click', handleClickOutside);-->
-<!--});-->
-
-<!--function handleClickOutside(event: MouseEvent) {-->
-<!--  if (-->
-<!--      isLangMenuVisible.value &&-->
-<!--      navbarRef.value &&-->
-<!--      !navbarRef.value.contains(event.target as Node)-->
-<!--  ) {-->
-<!--    isLangMenuVisible.value = false;-->
-<!--  }-->
-<!--}-->
-<!--</script>-->
 
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
@@ -174,6 +104,10 @@ const changeLang = async (lang: string) => {
   localStorage.setItem('lang', lang) // сохраняет язык
   isLangMenuVisible.value = false
 }
+
+import { useLocalePath } from '#imports'
+
+const localePath = useLocalePath()
 
 const toggleLangMenu = () => {
   isLangMenuVisible.value = !isLangMenuVisible.value
@@ -199,7 +133,7 @@ onMounted(async () => {
 
   const savedLang = localStorage.getItem('lang')
   if (savedLang && savedLang !== locale.value) {
-    await setLocale(savedLang) // важно: это меняет и locale и URL
+    await setLocale(savedLang)
   }
 
   document.addEventListener('click', handleClickOutside)

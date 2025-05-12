@@ -1,6 +1,6 @@
 <template>
   <div class="cart-page">
-    <h1 class="title">Корзина</h1>
+    <h1 class="title">{{ $t('cart.title') }}</h1>
 
     <!-- Список товаров -->
     <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
@@ -20,16 +20,16 @@
     <!-- Форма и итого -->
     <div class="form-total">
       <div class="form">
-        <input v-model="form.firstName" type="text" placeholder="Имя*" :class="{ invalid: errors.firstName }" />
-        <input v-model="form.lastName" type="text" placeholder="Фамилия*" :class="{ invalid: errors.lastName }" />
-        <input v-model="form.phone" type="text" placeholder="Номер телефона" :class="{ invalid: errors.phone }" />
-        <textarea v-model="form.comment" placeholder="Комментарий"></textarea>
+        <input v-model="form.firstName" type="text" :placeholder="$t('form.first_name')" :class="{ invalid: errors.firstName }" />
+        <input v-model="form.lastName" type="text" :placeholder="$t('form.last_name')" :class="{ invalid: errors.lastName }" />
+        <input v-model="form.phone" type="text" :placeholder="$t('form.phone')" :class="{ invalid: errors.phone }" />
+        <textarea v-model="form.comment" :placeholder="$t('form.comment')"></textarea>
       </div>
 
       <div class="summary">
-        <p><strong>Итого:</strong> {{ totalPrice.toLocaleString() }} UZS</p>
-        <button class="submit-btn" @click="submitForm">Заявка дилеру</button>
-        <p v-if="hasError" class="error-msg">Пожалуйста, заполните обязательные поля</p>
+        <p><strong>{{ $t('cart.total') }}</strong> {{ totalPrice.toLocaleString() }} UZS</p>
+        <button class="submit-btn" @click="submitForm">{{ $t('form.submit') }}</button>
+        <p v-if="hasError" class="error-msg">{{ $t('form.error') }}</p>
       </div>
     </div>
   </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="configurator">
-    <h1>Конфигуратор</h1>
+    <h1>{{ $t('configurator.title') }}</h1>
 
-    <!-- Шаг 1: Цвет кузова -->
     <div v-if="step === 1" class="model-more-color">
-      <h3>Цвет кузова</h3>
+      <h3>{{ $t('configurator.color') }}</h3>
+
       <img :src="carImage" alt="car" class="car-image" />
       <div class="model-more-color-wrapper">
         <div
@@ -20,9 +20,8 @@
       </div>
     </div>
 
-    <!-- Шаг 2: Колёса -->
     <div v-if="step === 2" class="configurator-step">
-      <h2>Колеса</h2>
+      <h2>{{ $t('configurator.wheels') }}</h2>
       <div class="wheel-options">
         <div
             v-for="(wheel, index) in wheelOptions"
@@ -37,9 +36,8 @@
       </div>
     </div>
 
-    <!-- Шаг 3: Интерьер -->
     <div v-if="step === 3" class="configurator-step">
-      <h2>Интерьер</h2>
+      <h2>{{ $t('configurator.interior') }}</h2>
       <div class="interior-options">
         <div
             v-for="(interior, index) in interiorOptions"
@@ -54,9 +52,8 @@
       </div>
     </div>
 
-    <!-- Шаг 4: Дополнительно -->
     <div v-if="step === 4" class="configurator-step">
-      <h2>Дополнительно</h2>
+      <h2>{{ $t('configurator.extras') }}</h2>
       <div class="extras-options">
         <div
             v-for="(extra, index) in extras"
@@ -71,42 +68,43 @@
       </div>
     </div>
 
-    <!-- Шаг 5: Контактная форма -->
     <div v-if="step === 5" class="configurator-step contact-step">
-      <h2 class="contact-heading">Оставьте контактные данные, чтобы мы сделали вам коммерческое предложение</h2>
+      <h2 class="contact-heading">{{ $t('configurator.contact_heading') }}</h2>
       <form class="contact-form" @submit.prevent="submitForm">
         <div class="form-grid">
           <div class="form-group">
-            <label>Имя</label>
-            <input v-model.trim="form.name" type="text" placeholder="Асадбек" required />
+            <label>{{ $t('form.first_name') }}</label>
+            <input v-model.trim="form.name" type="text" :placeholder="$t('form.name_placeholder')" required />
           </div>
           <div class="form-group">
-            <label>Телефон</label>
-            <input v-model.trim="form.phone" type="tel" placeholder="+998 99 873 44 22" required pattern="^\+998\s\d{2}\s\d{3}\s\d{2}\s\d{2}$" />
+            <label>{{ $t('form.phone') }}</label>
+            <input v-model.trim="form.phone" type="tel" :placeholder="$t('form.phone_placeholder')" required pattern="^\+998\s\d{2}\s\d{3}\s\d{2}\s\d{2}$" />
           </div>
           <div class="form-group">
-            <label>Фамилия</label>
-            <input v-model.trim="form.lastname" type="text" placeholder="Журабаев" required />
+            <label>{{ $t('form.last_name') }}</label>
+            <input v-model.trim="form.lastname" type="text" :placeholder="$t('form.lastname_placeholder')" required />
           </div>
           <div class="form-group">
-            <label>Почта</label>
-            <input v-model.trim="form.email" type="email" placeholder="example@mail.com" required />
+            <label>{{ $t('form.email') }}</label>
+            <input v-model.trim="form.email" type="email" :placeholder="$t('form.email_placeholder')" required />
           </div>
         </div>
         <div class="form-checkbox">
           <input type="checkbox" v-model="form.agree" id="agree" required />
-          <label for="agree">Нажимая на кнопку “Оформить заявку”, я даю своё согласие на обработку моих персональных данных в соответствии с политикой конфиденциальности.</label>
+          <label for="agree">{{ $t('form.agreement') }}</label>
         </div>
         <div class="configurator-buttons">
-          <button type="button" @click="prevStep">Назад</button>
-          <button type="submit" :disabled="!formValid">Оформить заявку</button>
+          <button type="button" @click="prevStep">{{ $t('form.back') }}</button>
+          <button type="submit" :disabled="!formValid">{{ $t('form.submit') }}</button>
+
         </div>
       </form>
     </div>
     <div v-else-if="step < 5" class="configurator-buttons">
-      <button @click="prevStep" :disabled="step === 1">Назад</button>
-      <button @click="nextStep" :disabled="step === maxStep">Далее</button>
+      <button type="button" @click="prevStep">{{ $t('form.back') }}</button>
+      <button type="button" @click="nextStep">{{ $t('form.next') }}</button>
     </div>
+
   </div>
 </template>
 

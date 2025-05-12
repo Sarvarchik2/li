@@ -7,6 +7,69 @@
     "in_stock": "Avtomobillar mavjud",
     "models": "Modellar"
   },
+  "main": {
+
+    "models": "Modellar",
+    "from": "Dan",
+    "learn_more": "Batafsil",
+    "build_l9": "O'z L9 avtomobilingizni tuzing",
+    "all_l9": "Barcha L9 modellar",
+    "one_click": "Yangi Lixiang avtomobilingizga birgina bosish",
+    "create_ideal": "Konfigurator yordamida o'zingizga mos Lixiang yarating",
+    "length": "Uzunlik",
+    "width": "Kenglik",
+    "height": "Balandlik",
+    "wheelbase": "G'ildirak bazasi",
+    "configurator": "Konfigurator",
+    "shop": "Do'kon",
+    "more": "Batafsil",
+    "see_more": "Yana ko‘rish",
+    "contact": "Kontaktlar",
+    "branches": "Filiallar",
+    "address": "Manzil",
+    "phone": "Aloqa raqami",
+    "worktime": "Ish vaqti",
+    "leave_request": "So'rov yuborish",
+    "about": "Biz haqimizda",
+    "lorem_title": "Lorem Ipsum",
+    "lorem_text": "Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit..Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit.."
+
+  },
+  "car": {
+    "request": "Dilerga so‘rov",
+    "status": "Holati",
+    "on_order": "Buyurtma asosida",
+    "year": "Chiqarilgan yili",
+    "mileage": "Yurgan masofa",
+    "body": "Kuzov",
+    "suv_5d": "Yo‘ltanlamas 5 eshikli",
+    "configuration": "Jihozlanish",
+    "engine": "Dvigatel",
+    "hybrid": "Gibrid",
+    "exterior": "Tashqi ko‘rinish",
+    "black": "Qora",
+    "acceleration": "100 gacha tezlanish",
+    "max_speed": "Maks. tezlik",
+    "range": "Yurish masofasi",
+    "drive": "Uzatma",
+    "awd": "To‘liq",
+    "transmission": "Uzatmalar qutisi",
+    "auto": "Avtomatik",
+    "interior": "Ichki bezak",
+    "white_leather": "Oq, charm",
+    "description_title": "Tavsif",
+    "description_text": "LiXiang L6 — zamonaviy gibrid yo‘ltanlamas bo‘lib, yuqori dinamikaga, to‘liq uzatmali tizimga va nafis dizaynga ega.",
+    "equipment_title": "Jihozlanish",
+    "equipment": {
+      "fog": "Tuman chiroqlari",
+      "drl": "Kunduzgi chiroqlar",
+      "headlight_adjust": "Avtomatik farani sozlagich",
+      "led": "LED chiroqlar",
+      "windshield_heating": "Old oynaning elektr isitgichi",
+      "mirror_heating": "Yon oynalarning elektr isitgichi",
+      "nozzle_heating": "Purkagichlarning elektr isitgichi"
+    }
+  },
   "buttons": {
     "add_to_cart": "Savatga qo‘shish",
     "go": "O‘tish",
@@ -18,12 +81,35 @@
     "category": "Kuzov obvesi",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
   },
+  "cart": {
+    "title": "Savatcha",
+    "total": "Jami:"
+  },
+  "configurator": {
+    "title": "Konfigurator",
+    "color": "Tashqi rang",
+    "wheels": "G'ildiraklar",
+    "interior": "Ichki bezak",
+    "extras": "Qo‘shimchalar",
+    "contact_heading": "Tijorat taklifini tayyorlash uchun kontaktlaringizni qoldiring"
+  },
+
   "form": {
     "first_name": "Ism*",
     "last_name": "Familiya*",
     "phone": "Telefon raqami",
     "comment": "Izoh",
-    "submit": "Dilerga so‘rov",
-    "total": "Jami"
+    "next": "Keyingisi",
+
+    "total": "Jami",
+    "error": "Iltimos, majburiy maydonlarni to‘ldiring",
+    "email": "Pochta",
+    "name_placeholder": "Asadbek",
+    "lastname_placeholder": "Jo‘raboyev",
+    "phone_placeholder": "+998 99 873 44 22",
+    "email_placeholder": "example gmail.com",
+    "agreement": "“So‘rov yuborish” tugmasini bosish orqali men shaxsiy ma’lumotlarimni maxfiylik siyosatiga muvofiq qayta ishlanishiga rozilik bildiraman.",
+    "submit": "So‘rov yuborish",
+    "back": "Ortga"
   }
 }
