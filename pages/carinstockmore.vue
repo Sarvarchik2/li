@@ -1,102 +1,148 @@
 <template>
   <div class="car-more">
-    <div class="carousel-wrapper">
-      <Carousel
-          v-model="currentSlide"
-          :items-to-show="1"
-          :wrap-around="true"
-          :mouse-drag="true"
-          class="carousel"
-          @slide-end="onSlideEnd"
-      >
-        <Slide v-for="(img, i) in images" :key="i">
-          <img :src="img" class="main-image" @click="openZoom(img)" />
-        </Slide>
-      </Carousel>
+    <div v-if="loading" class="loading">Загрузка...</div>
 
-      <div class="carousel-scrollbar">
-        <div
-            class="scrollbar-fill"
-            :style="{ width: (100 / images.length) + '%', transform: `translateX(${currentSlide * 100}%)` }"
-        ></div>
-      </div>
-    </div>
+    <template v-else-if="car">
+      <!-- КАРУСЕЛЬ -->
+      <div class="carousel-wrapper" v-if="car.images?.length">
+        <Carousel
+            v-model="currentSlide"
+            :items-to-show="1"
+            :wrap-around="true"
+            :mouse-drag="true"
+            class="carousel"
+        >
+          <Slide v-for="(img, i) in car.images" :key="i">
+            <img :src="img.image" class="main-image" @click="openZoom(img.image)" />
+          </Slide>
+        </Carousel>
 
-    <div class="header">
-      <h1>LiXiang L6</h1>
-      <div class="price-order">
-        <p class="price">67.000$</p>
-        <NuxtLink class="order-button" to="/cart">{{ $t('car.request') }}</NuxtLink>
-      </div>
-    </div>
-
-    <!-- ИНФОРМАЦИЯ -->
-    <div class="info-grid">
-      <div class="column">
-        <p><b>{{ $t('car.status') }}:</b> {{ $t('car.on_order') }}</p>
-        <p><b>{{ $t('car.year') }}:</b> 2024</p>
-        <p><b>{{ $t('car.mileage') }}:</b> 1 км</p>
-        <p><b>{{ $t('car.body') }}:</b> {{ $t('car.suv_5d') }}</p>
-        <p><b>{{ $t('car.configuration') }}:</b> Pro</p>
-        <p><b>{{ $t('car.engine') }}:</b> 1.5 л / 408 л.с / {{ $t('car.hybrid') }}</p>
-        <p><b>{{ $t('car.exterior') }}:</b> {{ $t('car.black') }}</p>
+        <div class="carousel-scrollbar">
+          <div
+              class="scrollbar-fill"
+              :style="{ width: (100 / car.images.length) + '%', transform: `translateX(${currentSlide * 100}%)` }"
+          ></div>
+        </div>
       </div>
 
-      <div class="column">
-        <p><b>{{ $t('car.acceleration') }}:</b> 5.3 сек</p>
-        <p><b>{{ $t('car.max_speed') }}:</b> 180 км/ч</p>
-        <p><b>{{ $t('car.range') }}:</b> 182 км</p>
-        <p><b>{{ $t('car.drive') }}:</b> {{ $t('car.awd') }}</p>
-        <p><b>{{ $t('car.transmission') }}:</b> {{ $t('car.auto') }}</p>
-        <p><b>{{ $t('car.interior') }}:</b> {{ $t('car.white_leather') }}</p>
+      <!-- Если нет изображений -->
+      <div class="carousel-wrapper" v-else>
+        <img :src="defaultImage" class="main-image" />
       </div>
 
-      <div class="description">
-        <h2>{{ $t('car.description_title') }}</h2>
-        <p>{{ $t('car.description_text') }}</p>
-
-        <h2>{{ $t('car.equipment_title') }}</h2>
-        <ul>
-          <li>{{ $t('car.equipment.fog') }}</li>
-          <li>{{ $t('car.equipment.drl') }}</li>
-          <li>{{ $t('car.equipment.headlight_adjust') }}</li>
-          <li>{{ $t('car.equipment.led') }}</li>
-          <li>{{ $t('car.equipment.windshield_heating') }}</li>
-          <li>{{ $t('car.equipment.mirror_heating') }}</li>
-          <li>{{ $t('car.equipment.nozzle_heating') }}</li>
-        </ul>
+      <!-- ЗАГОЛОВОК -->
+      <div class="header">
+        <h1>{{ car.car_name }}</h1>
+        <div class="price-order">
+          <p class="price">{{ car.price }}$</p>
+          <NuxtLink class="order-button" to="/cart">{{ $t('car.request') }}</NuxtLink>
+        </div>
       </div>
-    </div>
 
-    <!-- МОДАЛКА ЗУМА -->
-    <div class="zoom-modal" v-if="zoomImage" @click.self="closeZoom">
-      <img :src="zoomImage" class="zoom-img" />
+      <!-- ИНФО -->
+      <div class="info-grid">
+        <div class="column">
+          <p><b>{{ $t('car.status') }}:</b> {{ car.status ? $t('car.available') : $t('car.on_order') }}</p>
+          <p><b>{{ $t('car.year') }}:</b> {{ car.year_production }}</p>
+          <p><b>{{ $t('car.mileage') }}:</b> {{ car.mileage }} км</p>
+          <p><b>{{ $t('car.body') }}:</b> {{ car.body_type }}</p>
+          <p><b>{{ $t('car.configuration') }}:</b> {{ car.configuration }}</p>
+          <p><b>{{ $t('car.engine') }}:</b> {{ car.engine }}</p>
+          <p><b>{{ $t('car.exterior') }}:</b> {{ car.exterior }}</p>
+        </div>
+
+        <div class="column">
+          <p><b>{{ $t('car.acceleration') }}:</b> {{ car.zero_to_hundred }} сек</p>
+          <p><b>{{ $t('car.max_speed') }}:</b> {{ car.max_speed }} км/ч</p>
+          <p><b>{{ $t('car.range') }}:</b> {{ car.range }} км</p>
+          <p><b>{{ $t('car.drive') }}:</b> {{ car.drive_type }}</p>
+          <p><b>{{ $t('car.transmission') }}:</b> {{ car.transmission }}</p>
+          <p><b>{{ $t('car.interior') }}:</b> {{ car.interior }}</p>
+        </div>
+
+        <div class="description">
+          <h2>{{ $t('car.description_title') }}</h2>
+          <p>{{ car.description }}</p>
+
+          <h2>{{ $t('car.equipment_title') }}</h2>
+          <ul>
+            <li v-for="(item, index) in equipmentList" :key="index">{{ item }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- МОДАЛ ЗУМА -->
+      <div class="zoom-modal" v-if="zoomImage" @click.self="closeZoom">
+        <img :src="zoomImage" class="zoom-img" />
+      </div>
+    </template>
+
+    <!-- 404 -->
+    <div v-else class="not-found">
+      <h2>Автомобиль не найден</h2>
+      <NuxtLink to="/carsinstock">← Назад к списку</NuxtLink>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
 import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
+import defaultImage from '@/assets/li9.png'
 
-import Li1 from '@/assets/carinstock.png'
-import Li2 from '@/assets/li7.png'
-import Li3 from '@/assets/li6.png'
-
-const images = [Li1, Li2, Li3]
+const route = useRoute()
+const car = ref(null)
 const currentSlide = ref(0)
 const zoomImage = ref(null)
+const equipmentList = ref<string[]>([])
+const loading = ref(true)
 
-function openZoom(img) {
-  zoomImage.value = img
-}
-function closeZoom() {
-  zoomImage.value = null
-}
+const openZoom = (img: string) => (zoomImage.value = img)
+const closeZoom = () => (zoomImage.value = null)
+
+onMounted(async () => {
+  const id = route.query.id
+  if (!id) return
+
+  try {
+    const response = await axios.get(`http://173.212.193.32:8001/api/available-cars/${id}/`)
+    const data = response.data[0]  // <--- ВАЖНО!
+    if (!data) {
+      car.value = null
+      return
+    }
+    car.value = {
+      ...data,
+      images: data.images || []
+    }
+
+    console.log(data)
+    equipmentList.value = data.equipment ? data.equipment.split('\n') : []
+  } catch (e) {
+    console.error('Ошибка загрузки автомобиля:', e)
+    car.value = null
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
+
+
 <style scoped>
+
+.loading,
+.not-found {
+  text-align: center;
+  font-size: 20px;
+  padding: 50px;
+  color: #777;
+}
 .car-more {
+
   font-family: Arial, sans-serif;
   margin-top: 50px;
 }

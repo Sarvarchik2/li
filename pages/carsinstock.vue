@@ -1,40 +1,65 @@
 <template>
   <div class="stock">
     <h1>Авто в наличии</h1>
-    <div class="stock-wrapper">
-      <div class="stock-item">
-        <img :src="Li6" alt="lixiang">
+
+    <div v-if="cars.length" class="stock-wrapper">
+      <div v-for="car in cars" :key="car.id" class="stock-item">
+        <img
+            :src="car.images.length ? car.images[0].image : defaultImage"
+            alt="car image"
+        />
         <div class="stock-item-text">
-          <h3>LiXiang L6 2024</h3>
-          <p>Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.</p>
-          <h4>67000$ <NuxtLink to="/carinstockmore">Подробнее</NuxtLink></h4>
+          <h3>{{ car.car_name }} {{ car.year_production }}</h3>
+          <p>{{ car.description }}</p>
+          <h4>{{ car.price }}$ <NuxtLink :to="`/carinstockmore?id=${car.id}`">Подробнее</NuxtLink></h4>
         </div>
       </div>
-      <div class="stock-item">
-        <img :src="Li7" alt="lixiang">
-        <div class="stock-item-text">
-          <h3>LiXiang L7 2024</h3>
-          <p>Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.</p>
-          <h4>77000$ <NuxtLink to="/carinstockmore">Подробнее</NuxtLink></h4>
-        </div>
-      </div>
-      <div class="stock-item">
-        <img :src="Li7" alt="lixiang">
-        <div class="stock-item-text">
-          <h3>LiXiang L7 2024</h3>
-          <p>Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.</p>
-          <h4>77000$ <NuxtLink to="/carinstockmore">Подробнее</NuxtLink></h4>
-        </div>
-      </div>
+    </div>
+
+    <div v-else class="no-cars">
+      К сожелению пока нет машин в наличие.
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Li6 from "@/assets/li9.png";
-import Li7 from "@/assets/li7.png";
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
+import defaultImage from '@/assets/li9.png'
+
+interface CarImage {
+  id: number
+  image: string
+}
+
+interface AvailableCar {
+  id: number
+  car_name: string
+  price: number
+  description: string
+  year_production: number
+  images: CarImage[]
+}
+
+const cars = ref<AvailableCar[]>([])
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://173.212.193.32:8001/api/available-cars/')
+    cars.value = response.data
+  } catch (error) {
+    console.error('Ошибка при загрузке машин:', error)
+  }
+})
 </script>
 
-<style>
+<style scoped>
 @import "./carsinstock.css";
+
+.no-cars {
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+  padding: 40px;
+}
 </style>
