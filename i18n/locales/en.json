@@ -82,7 +82,9 @@
   },
   "cart": {
     "title": "Cart",
-    "total": "Total:"
+    "total": "Total:",
+    "empty": "Your cart is empty",
+    "go_to_market": "Go to shop"
   },
   "configurator": {
     "title": "Configurator",

@@ -1,86 +1,3 @@
-<!--<template>-->
-<!--  <div class="market">-->
-<!--    <div class="main-content-market">-->
-<!--      <h3>{{ $t('main.shop') }}</h3>-->
-<!--      <div class="main-content-market-wrapper">-->
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market2" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market2" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market2" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market2" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-<!--        <div class="main-content-market-item">-->
-<!--          <img :src="Market" alt="li9">-->
-<!--          <h4>Lixiang R20-R23</h4>-->
-<!--          <p>Колесные диски</p>-->
-<!--          <h5>3.400.000 UZS</h5>-->
-<!--          <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>-->
-<!--        </div>-->
-
-<!--      </div>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</template>-->
-<!--<script setup lang="ts">-->
-<!--import Market from "assets/market.png";-->
-<!--import Market2 from "assets/market2.png";-->
-<!--</script>-->
 
 <template>
   <div class="market">
@@ -94,7 +11,11 @@
             :key="product.id"
             class="main-content-market-item"
         >
-          <img :src="product.img" :alt="product.name" />
+          <img
+              :src="product.images.length ? product.images[0].img : '/fallback.png'"
+              :alt="product.name"
+          />
+
           <h4>{{ product.name }}</h4>
           <p>{{ $t('main.category') }}: {{ product.category }}</p>
           <h5>{{ formatPrice(product.price) }} UZS</h5>
@@ -111,12 +32,18 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+interface ProductImage {
+  id: number
+  product: number
+  img: string
+}
+
 interface Product {
   id: number
   name: string
-  img: string
   price: number
-  category: number
+  category: string
+  images: ProductImage[]
 }
 
 const products = ref<Product[]>([])

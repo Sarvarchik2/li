@@ -2,48 +2,63 @@
   <div class="cart-page">
     <h1 class="title">{{ $t('cart.title') }}</h1>
 
-    <!-- Список товаров -->
-    <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
-      <img :src="item.image" alt="Product Image" class="item-image" />
-      <div class="item-info">
-        <h3 class="item-name">{{ item.name }}</h3>
-        <p class="item-category">{{ item.category }}</p>
+    <!-- Корзина -->
+    <div v-if="cartItems.length">
+      <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
+        <img :src="item.image" alt="Product Image" class="item-image" />
+        <div class="item-info">
+          <h3 class="item-name">{{ item.name }}</h3>
+          <p class="item-category">{{ item.category }}</p>
+        </div>
+        <div class="item-price">{{ item.price.toLocaleString() }} UZS</div>
+        <div class="quantity-controls">
+          <button @click="decrement(index)">−</button>
+          <span>{{ item.quantity }}</span>
+          <button @click="increment(index)">+</button>
+          <button class="remove-btn" @click="remove(index)">✖</button>
+        </div>
       </div>
-      <div class="item-price">{{ item.price.toLocaleString() }} UZS</div>
-      <div class="quantity-controls">
-        <button @click="decrement(index)">−</button>
-        <span>{{ item.quantity }}</span>
-        <button @click="increment(index)">+</button>
+
+      <!-- Форма и итого -->
+      <div class="form-total">
+        <div class="form">
+          <input v-model="form.firstName" type="text" :placeholder="$t('form.first_name')" :class="{ invalid: errors.firstName }" />
+          <input v-model="form.lastName" type="text" :placeholder="$t('form.last_name')" :class="{ invalid: errors.lastName }" />
+          <input v-model="form.phone" type="text" :placeholder="$t('form.phone')" :class="{ invalid: errors.phone }" />
+          <textarea v-model="form.comment" :placeholder="$t('form.comment')"></textarea>
+        </div>
+
+        <div class="summary">
+          <p><strong>{{ $t('cart.total') }}</strong> {{ totalPrice.toLocaleString() }} UZS</p>
+          <button class="submit-btn" @click="submitForm">{{ $t('form.submit') }}</button>
+          <p v-if="hasError" class="error-msg">{{ $t('form.error') }}</p>
+        </div>
       </div>
     </div>
 
-    <!-- Форма и итого -->
-    <div class="form-total">
-      <div class="form">
-        <input v-model="form.firstName" type="text" :placeholder="$t('form.first_name')" :class="{ invalid: errors.firstName }" />
-        <input v-model="form.lastName" type="text" :placeholder="$t('form.last_name')" :class="{ invalid: errors.lastName }" />
-        <input v-model="form.phone" type="text" :placeholder="$t('form.phone')" :class="{ invalid: errors.phone }" />
-        <textarea v-model="form.comment" :placeholder="$t('form.comment')"></textarea>
-      </div>
-
-      <div class="summary">
-        <p><strong>{{ $t('cart.total') }}</strong> {{ totalPrice.toLocaleString() }} UZS</p>
-        <button class="submit-btn" @click="submitForm">{{ $t('form.submit') }}</button>
-        <p v-if="hasError" class="error-msg">{{ $t('form.error') }}</p>
-      </div>
+    <!-- Пустая корзина -->
+    <div v-else class="empty-cart">
+      <p class="empty-text">{{ $t('cart.empty') }}</p>
+      <NuxtLink to="/market" class="market-link">{{ $t('cart.go_to_market') }}</NuxtLink>
     </div>
+    <transition name="fade">
+      <div v-if="showSuccess" class="notification">✅ Заказ успешно отправлен!</div>
+    </transition>
+
   </div>
 </template>
 
 <script setup>
-import Img1 from '@/assets/market.png'
-import Img2 from '@/assets/market2.png'
 import { ref, computed } from 'vue'
+import { useCartStore } from '@/stores/cart'
 
-const cartItems = ref([
-  { name: 'Lixiang R20–R23', category: 'Колесные диски', price: 3400000, quantity: 1, image: Img1 },
-  { name: 'Lixiang R20–R23', category: 'Колесные диски', price: 3400000, quantity: 1, image: Img2 }
-])
+const cart = useCartStore()
+const cartItems = computed(() => cart.items)
+const totalPrice = computed(() => cart.totalPrice)
+
+const increment = (i) => cart.increment(i)
+const decrement = (i) => cart.decrement(i)
+const remove = (i) => cart.remove(i)
 
 const form = ref({
   firstName: '',
@@ -60,20 +75,9 @@ const errors = ref({
 
 const hasError = ref(false)
 
-const increment = (i) => {
-  cartItems.value[i].quantity++
-}
-const decrement = (i) => {
-  if (cartItems.value[i].quantity > 1) {
-    cartItems.value[i].quantity--
-  }
-}
-
-const totalPrice = computed(() =>
-    cartItems.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
-)
-
-function submitForm() {
+import axios from 'axios'
+const showSuccess = ref(false)
+async function submitForm() {
   errors.value.firstName = !form.value.firstName.trim()
   errors.value.lastName = !form.value.lastName.trim()
   errors.value.phone = !form.value.phone.trim()
@@ -84,12 +88,56 @@ function submitForm() {
   }
 
   hasError.value = false
-  alert('Форма успешно отправлена!')
-  // тут можно отправить form.value + cartItems.value на сервер
+
+  const payload = {
+    name: `${form.value.firstName} ${form.value.lastName}`,
+    phone_number: form.value.phone,
+    comment: form.value.comment,
+    sent_to_telegram: false,
+    items: cartItems.value.map(item => ({
+      product: item.id,
+      quantity: item.quantity
+    }))
+  }
+
+  try {
+    await axios.post('http://173.212.193.32:8001/api/market-orders/', payload)
+    showSuccess.value = true
+    setTimeout(() => {
+      showSuccess.value = false
+    }, 3000)
+    cart.clearCart()
+  } catch (error) {
+    console.error(error)
+    alert('❌ Ошибка при отправке заказа. Попробуйте позже.')
+  }
 }
+
 </script>
 
 <style scoped>
+
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #000;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 500;
+  z-index: 9999;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .cart-page {
   width: 100%;
   margin: 0 auto;
@@ -104,7 +152,6 @@ function submitForm() {
   margin-bottom: 30px;
 }
 
-/* Товар */
 .cart-item {
   background: white;
   border-radius: 20px;
@@ -162,7 +209,15 @@ function submitForm() {
   cursor: pointer;
 }
 
-/* Форма + итого */
+.remove-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
 .form-total {
   background: white;
   border-radius: 20px;
@@ -221,7 +276,30 @@ function submitForm() {
   margin-top: 10px;
 }
 
-/* Адаптивность */
+.empty-cart {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 20px;
+  margin-top: 40px;
+}
+
+.empty-text {
+  font-size: 20px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.market-link {
+  display: inline-block;
+  background: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .cart-item {
     flex-direction: column;

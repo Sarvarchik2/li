@@ -83,7 +83,9 @@
   },
   "cart": {
     "title": "Savatcha",
-    "total": "Jami:"
+    "total": "Jami:",
+    "empty": "Savat bo‘sh",
+    "go_to_market": "Do‘konga o‘tish"
   },
   "configurator": {
     "title": "Konfigurator",

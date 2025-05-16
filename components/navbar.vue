@@ -1,8 +1,9 @@
 <template>
   <div class="navbar" ref="navbarRef">
     <div class="desktop-nav">
-      <NuxtLink :to="localePath('/cart')">
+      <NuxtLink :to="localePath('/cart')" class="cart-wrapper">
         <img :src="Cart" alt="cart" class="nav-cart-btn" />
+        <div v-if="totalQuantity > 0" class="cart-count">{{ totalQuantity }}</div>
       </NuxtLink>
 
       <ul class="navbar-list">
@@ -41,8 +42,9 @@
           <img :src="Logo" alt="LiLogo" />
         </NuxtLink>
         <div class="mobile-header-wrapper">
-          <NuxtLink :to="localePath('/cart')">
+          <NuxtLink :to="localePath('/cart')" class="cart-wrapper">
             <img :src="Cart" alt="cart" class="nav-cart-btn" />
+            <div v-if="totalQuantity > 0" class="cart-count">{{ totalQuantity }}</div>
           </NuxtLink>
           <div class="nav-lang-dropdown">
             <div class="lang-btn" @click="toggleLangMenu">
@@ -78,6 +80,7 @@
           <li><NuxtLink @click="toggleMenu" :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
         </ul>
       </transition>
+
     </div>
   </div>
 </template>
@@ -89,6 +92,15 @@ import Logo from '@/assets/logo.png'
 import Cart from '@/assets/cart.png'
 import Lang from '@/assets/lang.png'
 
+import { useCartStore } from '@/stores/cart'
+import { computed } from 'vue'
+import { useLocalePath } from '#imports'
+
+
+
+const cart = useCartStore()
+const totalQuantity = computed(() => cart.items.reduce((sum, item) => sum + item.quantity, 0))
+const localePath = useLocalePath()
 import { useI18n } from 'vue-i18n'
 import { useRouter, useRoute } from 'vue-router'
 
@@ -105,9 +117,6 @@ const changeLang = async (lang: string) => {
   isLangMenuVisible.value = false
 }
 
-import { useLocalePath } from '#imports'
-
-const localePath = useLocalePath()
 
 const toggleLangMenu = () => {
   isLangMenuVisible.value = !isLangMenuVisible.value
@@ -151,6 +160,20 @@ function handleClickOutside(event: MouseEvent) {
 
 </script>
 <style scoped>
+
+.cart-wrapper {
+  position: relative;
+}
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #000;
+  color: white;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 2px 6px;
+}
 .nav-lang-dropdown{
   position: relative;
 }
