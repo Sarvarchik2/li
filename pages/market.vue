@@ -93,6 +93,18 @@ onMounted(async () => {
   border-radius: 34px;
   background-color: #fff;
 }
+@media (max-width: 769px) {
+  .main-content-market-item{
+    width: calc(50% - 10px);
 
+  }
 
+}
+@media (max-width: 580px) {
+  .main-content-market-item{
+    width: 100%;
+
+  }
+
+}
 </style>
