@@ -1,448 +1,266 @@
 <template>
-  <div class="model-more">
+  <div class="model-more" v-if="model">
+    <!-- Основная информация -->
     <div class="main-content-model">
-      <h3>Один клик к вашему новому Lixiang
-        <span>Создайте свой идеальный LiXiang с помощью конфигуратора</span>
+      <h3>Один клик к вашему новому {{ model.name }}
+        <span>Создайте свой идеальный {{ model.name }} с помощью конфигуратора</span>
       </h3>
-      <img :src="Li9" alt="">
+      <img :src="activeColorImage" alt="car" class="car-image" />
       <div class="main-content-model-content">
         <div class="main-content-models-item-text">
           <div class="main-content-models-item-text-item">
-            <h4>5 218 мм</h4>
+            <h4>{{ model.length }} мм</h4>
             <p>Длина</p>
           </div>
           <div class="main-content-models-item-text-item">
-            <h4>1 998 мм</h4>
+            <h4>{{ model.width }} мм</h4>
             <p>Ширина</p>
           </div>
           <div class="main-content-models-item-text-item">
-            <h4>1 800 мм</h4>
+            <h4>{{ model.height }} мм</h4>
             <p>Высота</p>
           </div>
           <div class="main-content-models-item-text-item">
-            <h4>3 105 мм</h4>
-            <p>Колесзная база</p>
+            <h4>{{ model.wheelbase }} мм</h4>
+            <p>Колёсная база</p>
           </div>
         </div>
-        <NuxtLink to="/configurator" class="main-content-models-item-link">
+        <NuxtLink :to="`/configurator?id=${model.id}`" class="main-content-models-item-link">
           Конфигуратор
         </NuxtLink>
       </div>
     </div>
+
+    <!-- Технические параметры -->
     <div class="model-more-config">
       <div class="model-more-config-item">
         <img :src="Fuel" alt="fuel"/>
         <h3>
-          1300 км
+          {{ model.power_reserve }} км
           <span>Запас хода</span>
         </h3>
       </div>
-
       <div class="model-more-config-item">
-        <img :src="History" alt="fuel"/>
+        <img :src="History" alt="0-100"/>
         <h3>
-          5,3 сек
+          {{ model.zero_to_hundred }} сек
           <span>0 - 100 км/ч</span>
         </h3>
       </div>
-
       <div class="model-more-config-item">
-        <img :src="Speed" alt="fuel"/>
+        <img :src="Speed" alt="speed"/>
         <h3>
-          180 км/ч
+          {{ model.max_speed }} км/ч
           <span>Максимальная скорость</span>
         </h3>
       </div>
-
       <div class="model-more-config-item">
-        <img :src="Gps" alt="fuel"/>
+        <img :src="Gps" alt="autopilot"/>
         <h3>
-          Автопилот
-          <span>Автоматияская парковка</span>
+          {{ model.autopilot ? 'Автопилот' : 'Без автопилота' }}
+          <span>{{ model.autopilot_description }}</span>
         </h3>
       </div>
     </div>
-    <div class="model-more-color">
+
+    <!-- Цвет кузова -->
+    <div class="model-more-color" v-if="model.color?.length">
       <h3>Цвет кузова</h3>
-      <img :src="carImage" alt="car" class="car-image"/>
+      <img :src="activeColorImage" alt="car" class="car-image" />
       <div class="model-more-color-wrapper">
+
         <div
-            v-for="(color, index) in colorOptions"
-            :key="index"
+            v-for="(color, index) in model.color"
+            :key="color.id"
             class="model-more-color-wrapper-item"
-            :class="{ active: color.name === activeColor.name }"
-            @click="setColor(color)"
+            :class="{ active: selectedColorIndex === index }"
+            @click="setColor(index)"
         >
-          <span :style="{ backgroundColor: color.hex }"></span>
+          <span :style="{ backgroundColor: color.hex_code }"></span>
           <h2>{{ color.name }}</h2>
         </div>
       </div>
     </div>
 
-    <div class="model-more-interier">
-      <h2>
-
-        Интерьер
-        <span>Комфортное пространство — огромный салон и <br> комфортабельные кресла для каждого члена семьи</span>
+    <!-- Интерьеры -->
+    <div class="model-more-interier" v-if="model.interior_desc?.length">
+      <h2>{{ model.interior_desc[0].title }}
+        <span v-html="model.interior_desc[0].description"></span>
       </h2>
-
       <div class="model-more-interier-wrapper">
-        <div class="model-more-interier-item">
-          <img :src="Interier" alt="interier"/>
-          <h4>4 передних кресла для сна</h4>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Interier2" alt="interier"/>
-          <h4>Двухпанельный панорманый люк</h4>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Interier3" alt="interier"/>
-          <h4>256-цветная подсветка салона</h4>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Interier5" alt="interier"/>
-          <h4>Двойные беспроводные зарядки</h4>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Interier4" alt="interier"/>
-          <h4>Холодильник во втором ряду</h4>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Interier6" alt="interier"/>
-          <h4>Двойные беспроводные зарядки</h4>
+        <div class="model-more-interier-item" v-for="option in model.interior_desc[0].interior_options" :key="option.id">
+          <img :src="option.image" alt="interior option"/>
+          <h4>{{ option.title }}</h4>
         </div>
       </div>
     </div>
 
-    <div class="model-more-interier">
-      <h2>
-
-        Пользуйтесь электричесивом?
-        <span>Подключайте бытовые электроприборы на открытом воздухе</span>
+    <!-- Электрическая информация -->
+    <div class="model-more-interier" v-if="model.electric_information?.length">
+      <h2>{{ model.electric_information[0].title }}
+        <span>{{ model.electric_information[0].description }}</span>
       </h2>
-
       <div class="model-more-interier-wrapper">
-        <div class="model-more-interier-item">
-          <img :src="Electric" alt="interier"/>
-          <h4>Источник питания 3,5 кВт</h4>
-          <p>Тостовый хлеб или говядина барбекю. Готовьте свободно с электричеством, как дома.</p>
-        </div>
-
-        <div class="model-more-interier-item">
-          <img :src="Electric2" alt="interier"/>
-          <h4>Разнообразие розеток</h4>
-          <p>Шесть портов Type-C, две розетки 12 В и одну розетку 220 В для ноутбуков и других устройств.</p>
+        <div class="model-more-interier-item" v-for="item in model.electric_information[0].electric_options" :key="item.id">
+          <img :src="item.image" alt="electric option"/>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.description }}</p>
         </div>
       </div>
     </div>
-    <div class="smart-driving">
+
+    <!-- Умная система вождения -->
+    <div class="smart-driving" v-if="model.smart_drive_system?.length">
       <div class="smart-driving-text">
-        <h2>Умная система вождения</h2>
-        <h3>Интелектуальная система вождения Full-Syack Li AD MAX</h3>
-        <p>
-          Два процессора NVIDIA Orin-X с общей вычислительной мощностью 508 TOPS могут эффективно
-          обрабатывать параллельные сигналы от датчиков в режиме реального времени, оцифровывая
-          окружающую дорожную обстановку в реальном времени.
-        </p>
+        <h2>{{ model.smart_drive_system[0].title }}</h2>
+        <h3>{{ model.smart_drive_system[0].sub_title }}</h3>
+        <p>{{ model.smart_drive_system[0].description }}</p>
       </div>
-
       <div class="smart-driving-content">
-        <img :src="SmartImage" alt="smart-driving" />
-
+        <img :src="model.smart_drive_system[0].image" alt="smart-driving" />
         <div class="smart-driving-boxes">
-          <div class="smart-driving-box">
-            <h4>Предупреждает о возможном столкновении</h4>
-            <p>
-              Определяет сценарии столкновения, особенно приближение грузовиков с большой разницей в скорости.
-            </p>
-          </div>
-          <div class="smart-driving-box">
-            <h4>Выявляет аварийные ситуации на дороге.</h4>
-            <p>
-              Идентифицирует дорожно-транспортные происшествия даже без машин и в ночное время
-            </p>
-          </div>
-          <div class="smart-driving-box">
-            <h4>Видит препятствия и строительные работы</h4>
-            <p>
-              Определяет дорожные конусы и разделители для предотвращения столкновений, заполненные водой барьеры и другие дорожные ограждения.
-            </p>
+          <div class="smart-driving-box" v-for="opt in model.smart_drive_system[0].smart_drive_options" :key="opt.id">
+            <h4>{{ opt.title }}</h4>
+            <p>{{ opt.description }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="model-more-adas-tabs">
+    <!-- Переключатели ADAS -->
+    <div class="model-more-adas-tabs" v-if="model.driving_assistance?.length">
       <div class="adas-tab-group">
         <button
-            v-for="(option, index) in adasOptions"
-            :key="index"
-            :class="{ active: selectedAdas.title === option.title }"
-            @click="setAdas(option)"
+            v-for="(opt, index) in model.driving_assistance"
+            :key="opt.id"
+            :class="{ active: selectedAdasIndex === index }"
+            @click="setAdas(index)"
         >
-          {{ option.title }}
+          {{ opt.title }}
         </button>
       </div>
-
-      <img :src="adasImage" alt="ADAS Image" class="adas-image" />
+      <img :src="model.driving_assistance[selectedAdasIndex].image" alt="ADAS Image" class="adas-image" />
     </div>
 
-    <div class="safety-section">
-      <h2>Безопасность всей семьи</h2>
-      <p class="safety-subtitle">
-        Li L9 получил несколько высших оценок (G) «Индекса безопасности автомобилей Китая (C-IASI)»,
-        став первой большой моделью внедорожника, получившей оценку G со стороны водителя и со стороны пассажира
-      </p>
-
+    <!-- Безопасность -->
+    <div class="safety-section" v-if="model.safety?.length">
+      <h2>{{ model.safety[0].title }}</h2>
+      <p class="safety-subtitle">{{ model.safety[0].description }}</p>
       <div class="safety-grid">
-        <!-- Верхний блок -->
-        <div class="safety-main">
-          <img :src="SafetyMain" alt="Безопасность салона" />
+        <div class="safety-feature" v-for="item in model.safety[0].safety_options" :key="item.id">
+          <img :src="item.image" alt="safety" />
           <div class="safety-text-block">
-            <h3>Флагманская схема подушек безопасности</h3>
-            <p>
-              Подушки безопасности расположены в 12 местах по всему автомобилю, включая 2 передние и 2 боковые подушки безопасности для первого ряда,
-              2 боковые подушки безопасности для второго ряда и шторки безопасности с обеих сторон, проходящие через все три ряда.
-            </p>
-          </div>
-        </div>
-
-        <!-- Средний блок -->
-        <div class="safety-feature">
-          <div class="safety-text-block">
-            <h3>Прочная конструкция автомобиля</h3>
-            <p>
-              Соотношение высокопрочной и термоформованной стали более 80% в сочетании с двойными передними балками из алюминиевого сплава
-              позволяет Li L9 смягчить лобовой удар и защитить водителя и пассажиров.
-            </p>
-          </div>
-          <img :src="SafetyFrame" alt="Каркас кузова" />
-        </div>
-
-        <!-- Нижний блок -->
-        <div class="safety-feature">
-          <img :src="Battery" alt="Защита аккумулятора" />
-          <div class="safety-text-block">
-            <h3>Двойная защита аккумулятора</h3>
-            <p>
-              Боковая защитная балка и корпус из алюминиевого сплава обеспечивают безопасность аккумуляторной батареи даже при повреждении боковой проекции и шасси.
-            </p>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="hybrid-section">
-      <h2>Электро-гибрид нового типа</h2>
-      <p class="subtitle">
-        Вы сами принимаете решение когда расходовать бензин, а когда нет переключая 4 режима движения — от батарейки, совместно с генератором, только на генераторе, а также режим кикдаун для максимального ускорения.
-      </p>
 
-      <!-- Первый блок -->
-      <div class="hybrid-row">
-        <div class="hybrid-image" >
-          <img :src="Hybrid1" alt="4WD" />
+    <!-- Гибридная система -->
+    <div class="hybrid-section" v-if="model.electro_hybrid?.length">
+      <h2>{{ model.electro_hybrid[0].title }}</h2>
+      <p class="subtitle">{{ model.electro_hybrid[0].description }}</p>
+      <div class="hybrid-row" v-for="(item, index) in model.electro_hybrid[0].electro_hybrid_options" :key="item.id" :class="{ reverse: index % 2 !== 0 }">
+        <div class="hybrid-image">
+          <img :src="item.image" :alt="item.title" />
         </div>
-        <div class="hybrid-text" >
-          <h3>Передний и задний моторы 4WD</h3>
-          <p>При максимальной мощности электропривода 330 кВт и крутящем моменте 620 Нм L9 разгоняется от 0 до 100 км/ч всего за 5,3 секунды, сохраняя мощность даже при полной загрузке.</p>
-        </div>
-      </div>
-
-      <!-- Второй блок -->
-      <div class="hybrid-row reverse">
-        <div class="hybrid-text" >
-          <h3>1.5-литровый четырёхцилиндровый бензо-генератор</h3>
-          <p>Четырехцилиндровый двигатель объёмом 1,5 литра обеспечивает увеличение дальности пробега на электротяге, а расход топлива CLTC составляет всего 5,9 л/100 км.</p>
-        </div>
-        <div class="hybrid-image" >
-          <img :src="Hybrid2" alt="Generator" />
-        </div>
-      </div>
-
-      <!-- Третий блок -->
-      <div class="hybrid-row">
-        <div class="hybrid-image" >
-          <img :src="Hybrid3" alt="Battery" />
-        </div>
-        <div class="hybrid-text" >
-          <h3>Огнезащитный аккумуляторный блок</h3>
-          <p>Аккумуляторная батарея емкостью 44,5 кВт*ч обеспечивает запас хода на чистом электричестве по циклу WLTC — до 180 км.</p>
+        <div class="hybrid-text">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
         </div>
       </div>
     </div>
-
-      <div class="video-section">
-        <h2>Видео и модели</h2>
-        <div class="video-grid">
-          <div
-              class="video-card"
-              v-for="(video, index) in videos"
-              :key="index"
-              @click="openVideo(video.youtubeId)"
-          >
-            <img :src="video.thumbnail" :alt="video.title" />
-            <div class="video-overlay">
-              <div class="play-button"></div>
-              <p>{{ video.title }}</p>
-            </div>
+    <!-- Видео и модели -->
+    <div class="video-section" v-if="model.videos?.length">
+      <h2>Видео и модели</h2>
+      <div class="video-grid">
+        <div
+            class="video-card"
+            v-for="(video, index) in model.videos"
+            :key="index"
+            @click="openVideo(getYoutubeId(video.video_url))"
+        >
+          <img :src="getYoutubeThumbnail(video.video_url)" alt="video" />
+          <div class="video-overlay">
+            <div class="play-button"></div>
+            <p>Видео {{ index + 1 }}</p>
           </div>
-        </div>
-
-        <div v-if="activeVideo" class="video-modal" @click.self="closeVideo">
-          <iframe
-              :src="`https://www.youtube.com/embed/${activeVideo}?autoplay=1`"
-              frameborder="0"
-              allowfullscreen
-          ></iframe>
-          <button class="close-btn" @click="closeVideo">×</button>
         </div>
       </div>
 
-
-
+      <div v-if="activeVideo" class="video-modal" @click.self="closeVideo">
+        <iframe
+            :src="`https://www.youtube.com/embed/${activeVideo}?autoplay=1`"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        <button class="close-btn" @click="closeVideo">×</button>
+      </div>
+    </div>
 
   </div>
+  <div v-else>Загрузка...</div>
 </template>
+
 <script setup lang="ts">
-import { ref } from 'vue';
-import Li9 from '@/assets/Li99.png'
-import Fuel from "@/assets/models/fuel.png"
-import Speed from "@/assets/models/speed.png"
-import History from "@/assets/models/history.png"
-import Gps from "@/assets/models/gps.png"
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
 
-import SafetyMain from '@/assets/models/safety/safety1.png';
-import SafetyFrame from '@/assets/models/safety/safety2.png';
-import Battery from '@/assets/models/safety/safety3.png';
+import Fuel from '@/assets/models/fuel.png'
+import Speed from '@/assets/models/speed.png'
+import History from '@/assets/models/history.png'
+import Gps from '@/assets/models/gps.png'
 
-import SmartImage from '@/assets/models/adwantages/auto.png';
+const route = useRoute()
+const model = ref<any>(null)
 
-import Interier from "@/assets/models/interier/interier.png"
-import Interier2 from "@/assets/models/interier/interier2.png"
-import Interier3 from "@/assets/models/interier/interier3.png"
-import Interier4 from "@/assets/models/interier/interier4.png"
-import Interier5 from "@/assets/models/interier/interier5.png"
-import Interier6 from "@/assets/models/interier/interier6.png"
+const selectedAdasIndex = ref(0)
+const setAdas = (index: number) => {
+  selectedAdasIndex.value = index
+}
 
-import Electric from "@/assets/models/interier/electric1.png"
-import Electric2 from "@/assets/models/interier/electric2.png";
+const selectedColorIndex = ref(0)
+const setColor = (index: number) => {
+  selectedColorIndex.value = index
+}
 
-
-import Hybrid1 from '@/assets/hybrid/hybrid1.png';
-import Hybrid2 from '@/assets/hybrid/hybrid2.png';
-import Hybrid3 from '@/assets/hybrid/hybrid3.png';
-
-const activeVideo = ref<string | null>(null);
+const activeColorImage = computed(() => {
+  return model.value?.color?.[selectedColorIndex.value]?.image || ''
+})
+const activeVideo = ref<string | null>(null)
 
 const openVideo = (id: string) => {
-  activeVideo.value = id;
-};
+  activeVideo.value = id
+}
 
 const closeVideo = () => {
-  activeVideo.value = null;
-};
+  activeVideo.value = null
+}
 
-const videos = [
-  {
-    title: 'Li Auto L9 lixang тест-драйв электромобиля в китае',
-    youtubeId: 'VPB1YLCn-yc',
-    thumbnail: 'https://img.youtube.com/vi/VPB1YLCn-yc/maxresdefault.jpg',
-  },
-  {
-    title: 'Купил L9 первый отзыв',
-    youtubeId: 'FwuHrjwVOqA',
-    thumbnail: 'https://img.youtube.com/vi/FwuHrjwVOqA/maxresdefault.jpg',
-  },
-  {
-    title: 'Li L9 статический тест',
-    youtubeId: 'wVaDMOynGQY',
-    thumbnail: 'https://img.youtube.com/vi/wVaDMOynGQY/maxresdefault.jpg',
-  },
-  {
-    title: 'Автомобиль года 2022. Автомобиль с генератором Li L9',
-    youtubeId: 'VzpqhZEf5tw',
-    thumbnail: 'https://img.youtube.com/vi/VzpqhZEf5tw/maxresdefault.jpg',
-  },
-];
+const getYoutubeId = (url: string): string => {
+  const match = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([^&]+)/)
+  return match ? match[1] : ''
+}
 
-const adasOptions = [
-  { title: 'Навигация по ADAS', image: () => import('@/assets/models/adwantages/plus1.png') },
-  { title: 'Ассистент движения в полосе', image: () => import('@/assets/models/adwantages/plus2.jpg') },
-  { title: 'Автоматическая помощь при парковке', image: () => import('@/assets/models/adwantages/plus3.jpg') }
-];
+const getYoutubeThumbnail = (url: string): string => {
+  const id = getYoutubeId(url)
+  return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
+}
 
-const selectedAdas = ref(adasOptions[0]);
-const adasImage = ref<string>('');
-
-const setAdas = async (option) => {
-  selectedAdas.value = option;
-  const img = await option.image();
-  adasImage.value = img.default;
-};
-
-setAdas(selectedAdas.value);
-
-// Цвета и картинки кузова
-const colorOptions = [
-  {
-    name: 'Silver Metallic',
-    hex: '#D9D9D9',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Gray Metallic',
-    hex: '#4D4D4D',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Black Metallic',
-    hex: '#1F1F1F',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Golden Metallic',
-    hex: '#D6C8B2',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Tech Blue',
-    hex: '#9BB4CD',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Deep Green',
-    hex: '#47614C',
-    image: () => import('@/assets/models/color.png')
-  },
-  {
-    name: 'Purple Light',
-    hex: '#8B6C94',
-    image: () => import('@/assets/models/color.png')
+onMounted(async () => {
+  try {
+    const res = await axios.get(`https://api.lixiang-uzbekistan.uz/api/models/${route.query.id}/`)
+    model.value = res.data
+  } catch (err) {
+    console.error('Ошибка загрузки модели:', err)
   }
-];
-
-// Активный цвет и изображение
-const activeColor = ref(colorOptions[0]);
-const carImage = ref<string>('');
-
-// Подгрузка картинки по цвету
-const setColor = async (color) => {
-  activeColor.value = color;
-  const imgModule = await color.image();
-  carImage.value = imgModule.default;
-};
-
-// Инициализация
-setColor(activeColor.value);
-
+})
 </script>
 
-
-<style>
+<style scoped>
 @import "./model-more.css";
+
+
 </style>

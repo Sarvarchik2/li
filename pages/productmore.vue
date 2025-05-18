@@ -84,7 +84,7 @@ onMounted(async () => {
   if (!id) return
 
   try {
-    const response = await axios.get('http://173.212.193.32:8001/api/market-models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/')
     const found = response.data.find((item: any) => item.id === Number(id))
     if (found) product.value = found
   } catch (e) {

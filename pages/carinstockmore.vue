@@ -3,7 +3,6 @@
     <div v-if="loading" class="loading">Загрузка...</div>
 
     <template v-else-if="car">
-      <!-- КАРУСЕЛЬ -->
       <div class="carousel-wrapper" v-if="car.images?.length">
         <Carousel
             v-model="currentSlide"
@@ -25,21 +24,18 @@
         </div>
       </div>
 
-      <!-- Если нет изображений -->
       <div class="carousel-wrapper" v-else>
         <img :src="defaultImage" class="main-image" />
       </div>
 
-      <!-- ЗАГОЛОВОК -->
       <div class="header">
         <h1>{{ car.car_name }}</h1>
         <div class="price-order">
           <p class="price">{{ car.price }}$</p>
-          <NuxtLink class="order-button" to="/cart">{{ $t('car.request') }}</NuxtLink>
+          <NuxtLink class="order-button" to="/contact">{{ $t('car.request') }}</NuxtLink>
         </div>
       </div>
 
-      <!-- ИНФО -->
       <div class="info-grid">
         <div class="column">
           <p><b>{{ $t('car.status') }}:</b> {{ car.status ? $t('car.available') : $t('car.on_order') }}</p>
@@ -71,13 +67,11 @@
         </div>
       </div>
 
-      <!-- МОДАЛ ЗУМА -->
       <div class="zoom-modal" v-if="zoomImage" @click.self="closeZoom">
         <img :src="zoomImage" class="zoom-img" />
       </div>
     </template>
 
-    <!-- 404 -->
     <div v-else class="not-found">
       <h2>Автомобиль не найден</h2>
       <NuxtLink to="/carsinstock">← Назад к списку</NuxtLink>

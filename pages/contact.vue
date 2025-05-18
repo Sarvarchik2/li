@@ -93,7 +93,7 @@ const submitForm = async () => {
     })
 
     const response = await axios.post(
-        'http://173.212.193.32:8001/api/contact/',
+        'https://api.lixiang-uzbekistan.uz/api/contact/',
         form.value,
         {
           headers: {

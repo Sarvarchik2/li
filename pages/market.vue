@@ -55,7 +55,7 @@ const formatPrice = (value: number) => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://173.212.193.32:8001/api/market-models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/')
     products.value = response.data
   } catch (e) {
     console.error('Ошибка загрузки товаров:', e)

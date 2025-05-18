@@ -101,7 +101,7 @@ async function submitForm() {
   }
 
   try {
-    await axios.post('http://173.212.193.32:8001/api/market-orders/', payload)
+    await axios.post('https://api.lixiang-uzbekistan.uz/api/market-orders/', payload)
     showSuccess.value = true
     setTimeout(() => {
       showSuccess.value = false

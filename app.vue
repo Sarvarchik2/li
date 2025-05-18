@@ -4,9 +4,9 @@
     <div class="container">
       <Navbar />
       <PageTransition name="page-fade">
-        <div>
+<!--        <div>-->
           <NuxtPage />
-        </div>
+<!--        </div>-->
       </PageTransition>
     </div>
     <Footer />

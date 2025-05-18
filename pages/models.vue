@@ -29,7 +29,7 @@ const models = ref([])
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://173.212.193.32:8001/api/models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/models/')
     models.value = response.data.filter(model => model.is_available)
   } catch (error) {
     console.error('Ошибка загрузки моделей:', error)
