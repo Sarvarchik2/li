@@ -7,6 +7,12 @@
     "in_stock": "Avtomobillar mavjud",
     "models": "Modellar"
   },
+  "stock": {
+    "title": "Mavjud avtomobillar",
+    "more": "Batafsil",
+    "empty": "Afsuski, hozircha mavjud avtomobillar yo‘q."
+  },
+
   "main": {
 
     "models": "Modellar",

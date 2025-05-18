@@ -7,6 +7,12 @@
     "in_stock": "Cars in Stock",
     "models": "Models"
   },
+  "stock": {
+    "title": "Available Cars",
+    "more": "Learn more",
+    "empty": "Unfortunately, there are no available cars at the moment."
+  },
+
   "main": {
     "models": "Models",
     "from": "From",

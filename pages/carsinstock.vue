@@ -1,6 +1,6 @@
 <template>
   <div class="stock">
-    <h1>Авто в наличии</h1>
+    <h1>{{ $t('stock.title') }}</h1>
 
     <div v-if="cars.length" class="stock-wrapper">
       <div v-for="car in cars" :key="car.id" class="stock-item">
@@ -11,13 +11,13 @@
         <div class="stock-item-text">
           <h3>{{ car.car_name }} {{ car.year_production }}</h3>
           <p>{{ car.description }}</p>
-          <h4>{{ car.price }}$ <NuxtLink :to="`/carinstockmore?id=${car.id}`">Подробнее</NuxtLink></h4>
+          <h4>{{ car.price }}$ <NuxtLink :to="`/carinstockmore?id=${car.id}`">{{ $t('stock.more') }}</NuxtLink></h4>
         </div>
       </div>
     </div>
 
     <div v-else class="no-cars">
-      К сожелению пока нет машин в наличие.
+      {{ $t('stock.empty') }}
     </div>
   </div>
 </template>
