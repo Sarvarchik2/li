@@ -21,16 +21,16 @@
         </div>
         <ul class="footer-list">
           <h2>Автомобили</h2>
-          <li><NuxtLink to="/model-more">Li 9</NuxtLink></li>
-          <li><NuxtLink  to="/model-more">Li 8</NuxtLink></li>
-          <li><NuxtLink  to="/model-more">Li 7</NuxtLink></li>
-          <li><NuxtLink  to="/model-more">Li 6</NuxtLink></li>
+          <li><NuxtLink to="/models">Li 9</NuxtLink></li>
+          <li><NuxtLink  to="/models">Li 8</NuxtLink></li>
+          <li><NuxtLink  to="/models">Li 7</NuxtLink></li>
+          <li><NuxtLink  to="/models">Li 6</NuxtLink></li>
         </ul>
         <ul class="footer-list">
           <h2>Компания</h2>
-          <li><NuxtLink>Журнал Li Auto</NuxtLink></li>
+          <li><NuxtLink  to="/contact">Журнал Li Auto</NuxtLink></li>
           <li><NuxtLink  to="/contact">Контакты</NuxtLink></li>
-          <li><NuxtLink>О компании</NuxtLink></li>
+          <li><NuxtLink  to="/#about-us">О компании</NuxtLink></li>
 
         </ul>
         <ul class="footer-list">

@@ -24,12 +24,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import {useI18n} from "vue-i18n";
 
 const models = ref([])
+const { locale } = useI18n()
 
 onMounted(async () => {
   try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/models/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     models.value = response.data.filter(model => model.is_available)
   } catch (error) {
     console.error('Ошибка загрузки моделей:', error)

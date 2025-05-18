@@ -27,6 +27,7 @@
     "branches": "Branches",
     "address": "Address",
     "phone": "Contact phone",
+    "category": "Category",
     "worktime": "Working hours",
     "leave_request": "Leave a request",
     "about": "About us",

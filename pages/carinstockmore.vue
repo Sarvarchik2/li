@@ -86,6 +86,7 @@ import axios from 'axios'
 import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import defaultImage from '@/assets/li9.png'
+import {useI18n} from "vue-i18n";
 
 const route = useRoute()
 const car = ref(null)
@@ -96,13 +97,18 @@ const loading = ref(true)
 
 const openZoom = (img: string) => (zoomImage.value = img)
 const closeZoom = () => (zoomImage.value = null)
+const { locale } = useI18n()
 
 onMounted(async () => {
   const id = route.query.id
   if (!id) return
 
   try {
-    const response = await axios.get(`http://173.212.193.32:8001/api/available-cars/${id}/`)
+    const response = await axios.get(`http://173.212.193.32:8001/api/available-cars/${id}/`, {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     const data = response.data[0]  // <--- ВАЖНО!
     if (!data) {
       car.value = null
@@ -113,7 +119,6 @@ onMounted(async () => {
       images: data.images || []
     }
 
-    console.log(data)
     equipmentList.value = data.equipment ? data.equipment.split('\n') : []
   } catch (e) {
     console.error('Ошибка загрузки автомобиля:', e)

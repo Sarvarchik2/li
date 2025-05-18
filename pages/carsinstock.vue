@@ -26,6 +26,8 @@
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import defaultImage from '@/assets/li9.png'
+import {useI18n} from "vue-i18n";
+
 
 interface CarImage {
   id: number
@@ -42,10 +44,15 @@ interface AvailableCar {
 }
 
 const cars = ref<AvailableCar[]>([])
+const { locale } = useI18n()
 
 onMounted(async () => {
   try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/available-cars/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/available-cars/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     cars.value = response.data
   } catch (error) {
     console.error('Ошибка при загрузке машин:', error)

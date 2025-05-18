@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import {useI18n} from "vue-i18n";
 
 interface ProductImage {
   id: number
@@ -52,10 +53,15 @@ const loading = ref(true)
 const formatPrice = (value: number) => {
   return value.toLocaleString('ru-RU', { minimumFractionDigits: 0 })
 }
+const { locale } = useI18n()
 
 onMounted(async () => {
   try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     products.value = response.data
   } catch (e) {
     console.error('Ошибка загрузки товаров:', e)
@@ -83,9 +89,8 @@ onMounted(async () => {
 .main-content-market-item {
   width: calc(33.333% - 20px);
   border: 1px solid #e0e0e0;
-  padding: 15px;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 34px;
   background-color: #fff;
 }
 

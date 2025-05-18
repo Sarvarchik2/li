@@ -8,7 +8,7 @@
 
       <ul class="navbar-list">
         <li><NuxtLink :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
-        <li><NuxtLink @click="toggleMenu" to="#">{{ $t('nav.about') }}</NuxtLink></li>
+        <li><NuxtLink @click="toggleMenu" to="/#about-us">{{ $t('nav.about') }}</NuxtLink></li>
         <li><NuxtLink @click="toggleMenu" :to="localePath('/models')">{{ $t('nav.configurator') }}</NuxtLink></li>
       </ul>
 
@@ -76,7 +76,7 @@
           <li><NuxtLink @click="toggleMenu" :to="localePath('/carsinstock')">{{ $t('nav.in_stock') }}</NuxtLink></li>
           <li><NuxtLink @click="toggleMenu" :to="localePath('/market')">{{ $t('nav.shop') }}</NuxtLink></li>
           <li><NuxtLink @click="toggleMenu" :to="localePath('/models')">{{ $t('nav.configurator') }}</NuxtLink></li>
-          <li><NuxtLink @click="toggleMenu" to="#">{{ $t('nav.about') }}</NuxtLink></li>
+          <li><NuxtLink @click="toggleMenu" to="/#about-us">{{ $t('nav.about') }}</NuxtLink></li>
           <li><NuxtLink @click="toggleMenu" :to="localePath('/contact')">{{ $t('nav.contact') }}</NuxtLink></li>
         </ul>
       </transition>

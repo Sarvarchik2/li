@@ -60,7 +60,8 @@ import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import Cart from '@/assets/cart.png'
 import { useCartStore } from '@/stores/cart'
-
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
 const route = useRoute()
 const product = ref(null)
 const loading = ref(true)
@@ -84,7 +85,11 @@ onMounted(async () => {
   if (!id) return
 
   try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/')
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     const found = response.data.find((item: any) => item.id === Number(id))
     if (found) product.value = found
   } catch (e) {

@@ -212,6 +212,7 @@ import Fuel from '@/assets/models/fuel.png'
 import Speed from '@/assets/models/speed.png'
 import History from '@/assets/models/history.png'
 import Gps from '@/assets/models/gps.png'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const model = ref<any>(null)
@@ -248,10 +249,14 @@ const getYoutubeThumbnail = (url: string): string => {
   const id = getYoutubeId(url)
   return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
 }
-
+const { locale } = useI18n()
 onMounted(async () => {
   try {
-    const res = await axios.get(`https://api.lixiang-uzbekistan.uz/api/models/${route.query.id}/`)
+    const res = await axios.get(`https://lixiang-uzbekistan.uz/api/models/${route.query.id}/`, {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
     model.value = res.data
   } catch (err) {
     console.error('Ошибка загрузки модели:', err)
