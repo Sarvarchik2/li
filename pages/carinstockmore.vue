@@ -104,7 +104,7 @@ onMounted(async () => {
   if (!id) return
 
   try {
-    const response = await axios.get(`http://173.212.193.32:8001/api/available-cars/${id}/`, {
+    const response = await axios.get(`https://api.lixiang-uzbekistan.uz/api/available-cars/${id}/`, {
       headers: {
         'Accept-Language': locale.value
       }

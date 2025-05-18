@@ -252,7 +252,7 @@ const getYoutubeThumbnail = (url: string): string => {
 const { locale } = useI18n()
 onMounted(async () => {
   try {
-    const res = await axios.get(`https://lixiang-uzbekistan.uz/api/models/${route.query.id}/`, {
+    const res = await axios.get(`https://api.lixiang-uzbekistan.uz/api/models/${route.query.id}/`, {
       headers: {
         'Accept-Language': locale.value
       }
