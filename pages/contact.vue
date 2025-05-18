@@ -80,7 +80,6 @@ const form = ref({
 
 const submitForm = async () => {
   try {
-    console.log('⏳ Отправка формы:', form.value)
 
     const loader = Swal.fire({
       title: 'Отправка...',

@@ -69,10 +69,29 @@
       "nozzle_heating": "Heated nozzles"
     }
   },
+  "model": {
+    "title": "One click to your new {name}",
+    "subtitle": "Build your perfect {name} using the configurator",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "wheelbase": "Wheelbase",
+    "power_reserve": "Power reserve",
+    "zero_to_hundred": "0 - 100 km/h",
+    "max_speed": "Max speed",
+    "autopilot_on": "Autopilot",
+    "autopilot_off": "No autopilot",
+    "color_title": "Body color",
+    "video": "Video about the model"
 
+  },
+
+  "loading": "Loading...",
 "buttons": {
     "add_to_cart": "Add to Cart",
     "go": "Go",
+  "configurator": "Configurator",
+
     "order": "Request to Dealer"
   },
   "product": {
@@ -112,5 +131,23 @@
     "agreement": "By clicking the 'Submit Request' button, I consent to the processing of my personal data in accordance with the privacy policy.",
     "submit": "Submit Request",
     "back": "Back"
+  },
+  "footer": {
+    "cars": "Cars",
+    "company": "Company",
+    "magazine": "Li Auto Magazine",
+    "contacts": "Contacts",
+    "about": "About Us",
+    "purchase": "Purchase",
+    "find_dealer": "Find a Dealer",
+    "test_drive": "Test Drive",
+    "leasing": "Leasing",
+    "offer": "Get an Offer",
+    "owners": "For Owners",
+    "service": "Service",
+    "service_booking": "Service Booking",
+    "accessories": "Accessories",
+    "rus": "Localization"
   }
+
 }

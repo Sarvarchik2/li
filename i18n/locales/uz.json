@@ -72,7 +72,26 @@
       "nozzle_heating": "Purkagichlarning elektr isitgichi"
     }
   },
+  "model": {
+    "title": "Yangi {name} avtomobilingizga bir qadam qoldi",
+    "subtitle": "Moslashtirish vositasi orqali o‘z ideal {name} avtomobilingizni yarating",
+    "length": "Uzunligi",
+    "width": "Kengligi",
+    "height": "Balandligi",
+    "wheelbase": "G‘ildirak bazasi",
+    "power_reserve": "Zaxira yurish masofasi",
+    "zero_to_hundred": "0 - 100 km/soat",
+    "max_speed": "Eng yuqori tezlik",
+    "autopilot_on": "Avtopilot",
+    "autopilot_off": "Avtopilotsiz",
+    "color_title": "Kuzov rangi",
+    "video": "Model haqida video"
+
+  },
+  "loading": "Yuklanmoqda...",
   "buttons": {
+    "configurator": "Konfigurator",
+
     "add_to_cart": "Savatga qo‘shish",
     "go": "O‘tish",
     "order": "Dilerga so‘rov"
@@ -115,5 +134,23 @@
     "agreement": "“So‘rov yuborish” tugmasini bosish orqali men shaxsiy ma’lumotlarimni maxfiylik siyosatiga muvofiq qayta ishlanishiga rozilik bildiraman.",
     "submit": "So‘rov yuborish",
     "back": "Ortga"
+  },
+  "footer": {
+    "cars": "Avtomobillar",
+    "company": "Kompaniya",
+    "magazine": "Li Auto Jurnali",
+    "contacts": "Aloqa",
+    "about": "Kompaniya haqida",
+    "purchase": "Xarid qilish",
+    "find_dealer": "Diler topish",
+    "test_drive": "Test haydov",
+    "leasing": "Lizing",
+    "offer": "Taklif olish",
+    "owners": "Egalar uchun",
+    "service": "Xizmat",
+    "service_booking": "Xizmatga yozilish",
+    "accessories": "Aksessuarlar",
+    "rus": "Ruslashtirish"
   }
+
 }

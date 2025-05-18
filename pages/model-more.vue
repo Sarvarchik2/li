@@ -2,31 +2,31 @@
   <div class="model-more" v-if="model">
     <!-- Основная информация -->
     <div class="main-content-model">
-      <h3>Один клик к вашему новому {{ model.name }}
-        <span>Создайте свой идеальный {{ model.name }} с помощью конфигуратора</span>
+      <h3>{{ $t('model.title', { name: model.name }) }}
+        <span>{{ $t('model.subtitle', { name: model.name }) }}</span>
       </h3>
       <img :src="activeColorImage" alt="car" class="car-image" />
       <div class="main-content-model-content">
         <div class="main-content-models-item-text">
           <div class="main-content-models-item-text-item">
             <h4>{{ model.length }} мм</h4>
-            <p>Длина</p>
+            <p>{{ $t('model.length') }}</p>
           </div>
           <div class="main-content-models-item-text-item">
             <h4>{{ model.width }} мм</h4>
-            <p>Ширина</p>
+            <p>{{ $t('model.width') }}</p>
           </div>
           <div class="main-content-models-item-text-item">
             <h4>{{ model.height }} мм</h4>
-            <p>Высота</p>
+            <p>{{ $t('model.height') }}</p>
           </div>
           <div class="main-content-models-item-text-item">
             <h4>{{ model.wheelbase }} мм</h4>
-            <p>Колёсная база</p>
+            <p>{{ $t('model.wheelbase') }}</p>
           </div>
         </div>
         <NuxtLink :to="`/configurator?id=${model.id}`" class="main-content-models-item-link">
-          Конфигуратор
+          {{ $t('buttons.configurator') }}
         </NuxtLink>
       </div>
     </div>
@@ -37,27 +37,27 @@
         <img :src="Fuel" alt="fuel"/>
         <h3>
           {{ model.power_reserve }} км
-          <span>Запас хода</span>
+          <span>{{ $t('model.power_reserve') }}</span>
         </h3>
       </div>
       <div class="model-more-config-item">
         <img :src="History" alt="0-100"/>
         <h3>
           {{ model.zero_to_hundred }} сек
-          <span>0 - 100 км/ч</span>
+          <span>{{ $t('model.zero_to_hundred') }}</span>
         </h3>
       </div>
       <div class="model-more-config-item">
         <img :src="Speed" alt="speed"/>
         <h3>
           {{ model.max_speed }} км/ч
-          <span>Максимальная скорость</span>
+          <span>{{ $t('model.max_speed') }}</span>
         </h3>
       </div>
       <div class="model-more-config-item">
         <img :src="Gps" alt="autopilot"/>
         <h3>
-          {{ model.autopilot ? 'Автопилот' : 'Без автопилота' }}
+          {{ model.autopilot ? $t('model.autopilot_on') : $t('model.autopilot_off') }}
           <span>{{ model.autopilot_description }}</span>
         </h3>
       </div>
@@ -65,7 +65,7 @@
 
     <!-- Цвет кузова -->
     <div class="model-more-color" v-if="model.color?.length">
-      <h3>Цвет кузова</h3>
+      <h3>{{ $t('model.color_title') }}</h3>
       <img :src="activeColorImage" alt="car" class="car-image" />
       <div class="model-more-color-wrapper">
 
@@ -173,7 +173,7 @@
     </div>
     <!-- Видео и модели -->
     <div class="video-section" v-if="model.videos?.length">
-      <h2>Видео и модели</h2>
+      <h2>{{ $t('model.video') }}</h2>
       <div class="video-grid">
         <div
             class="video-card"
@@ -184,7 +184,6 @@
           <img :src="getYoutubeThumbnail(video.video_url)" alt="video" />
           <div class="video-overlay">
             <div class="play-button"></div>
-            <p>Видео {{ index + 1 }}</p>
           </div>
         </div>
       </div>
@@ -200,7 +199,7 @@
     </div>
 
   </div>
-  <div v-else>Загрузка...</div>
+  <div v-else>{{ $t('loading') }}</div>
 </template>
 
 <script setup lang="ts">

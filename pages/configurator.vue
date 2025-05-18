@@ -1,10 +1,10 @@
 
 <template>
   <div class="configurator" v-if="model">
-    <h1>Конфигуратор</h1>
+    <h1>{{ $t('configurator.title') }}</h1>
 
     <div v-if="step === 1" class="model-more-color">
-      <h3>Цвет кузова</h3>
+      <h3>{{ $t('configurator.color') }}</h3>
       <img :src="activeColorImage" alt="car" class="car-image" />
       <div class="model-more-color-wrapper">
         <div
@@ -21,7 +21,7 @@
     </div>
 
     <div v-if="step === 2" class="configurator-step">
-      <h2>Диски</h2>
+      <h2>{{ $t('configurator.wheels') }}</h2>
       <div class="wheel-options">
         <div
             v-for="(wheel, index) in model.wheel_option"
@@ -37,7 +37,7 @@
     </div>
 
     <div v-if="step === 3" class="configurator-step">
-      <h2>Интерьер</h2>
+      <h2>{{ $t('configurator.interior') }}</h2>
       <div class="interior-options">
         <div
             v-for="(interior, index) in model.interior"
@@ -53,7 +53,7 @@
     </div>
 
     <div v-if="step === 4" class="configurator-step">
-      <h2>Дополнительные опции</h2>
+      <h2>{{ $t('configurator.extras') }}</h2>
       <div class="extras-options">
         <div
             v-for="extra in model.additional_options"
@@ -69,37 +69,39 @@
     </div>
 
     <div v-if="step === 5" class="configurator-step contact-step">
-      <h2 class="contact-heading">Контактная информация</h2>
+      <h2 class="contact-heading">{{ $t('configurator.contact_heading') }}</h2>
       <form class="contact-form" @submit.prevent="submitForm">
         <div class="form-grid">
           <div class="form-group">
-            <label>Имя</label>
-            <input v-model.trim="form.first_name" type="text" required />
+            <label>{{ $t('form.first_name') }}</label>
+            <input v-model.trim="form.first_name" :placeholder="$t('form.name_placeholder')" type="text" required />
           </div>
           <div class="form-group">
-            <label>Фамилия</label>
-            <input v-model.trim="form.last_name" type="text" required />
+            <label>{{ $t('form.last_name') }}</label>
+            <input v-model.trim="form.last_name" :placeholder="$t('form.lastname_placeholder')" type="text" required />
           </div>
           <div class="form-group">
-            <label>Телефон</label>
-            <input v-model.trim="form.phone_number" type="text" required />
+            <label>{{ $t('form.phone') }}</label>
+            <input v-model.trim="form.phone_number" :placeholder="$t('form.phone_placeholder')" type="text" required />
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input v-model.trim="form.email" type="email" required />
+            <label>{{ $t('form.email') }}</label>
+            <input v-model.trim="form.email" :placeholder="$t('form.email_placeholder')" type="email" required />
           </div>
         </div>
+        <p class="agreement-text">{{ $t('form.agreement') }}</p>
         <div class="configurator-buttons">
-          <button type="button" @click="prevStep">Назад</button>
-          <button type="submit">Отправить</button>
+          <button type="button" @click="prevStep">{{ $t('form.back') }}</button>
+          <button type="submit">{{ $t('form.submit') }}</button>
         </div>
       </form>
     </div>
 
     <div v-else-if="step < 5" class="configurator-buttons">
-      <button type="button" @click="prevStep">Назад</button>
-      <button type="button" @click="nextStep">Далее</button>
+      <button type="button" @click="prevStep">{{ $t('form.back') }}</button>
+      <button type="button" @click="nextStep">{{ $t('form.next') }}</button>
     </div>
+
   </div>
   <div v-else>Загрузка...</div>
 </template>
@@ -108,6 +110,8 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+
 const { locale } = useI18n()
 const route = useRoute()
 const model = ref<any>(null)
@@ -155,8 +159,10 @@ const nextStep = () => {
 const prevStep = () => {
   if (step.value > 1) step.value--
 }
+const isSubmitting = ref(false)
 
 const submitForm = async () => {
+  isSubmitting.value = true
   try {
     const payload: any = {
       ...form.value,
@@ -166,13 +172,57 @@ const submitForm = async () => {
       interior: model.value.interior[selectedInteriorIndex.value].id,
       additional_options: selectedExtras.value
     }
-    await axios.post('https://api.lixiang-uzbekistan.uz/api/configurator/', payload)
-    alert('Заявка отправлена успешно!')
-  } catch (err) {
-    console.error('Ошибка отправки:', err)
-    alert('Ошибка при отправке. Проверьте данные.')
+
+    const loading = Swal.fire({
+      title: 'Отправка заявки...',
+      text: 'Пожалуйста, подождите.',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
+
+    // Устанавливаем таймаут вручную на 15 сек.
+    await axios.post('https://api.lixiang-uzbekistan.uz/api/configurator/', payload, {
+      timeout: 15000 // 15 секунд
+    })
+
+    await Swal.close() // Закрываем лоадер
+
+    await Swal.fire({
+      icon: 'success',
+      title: 'Успешно!',
+      text: 'Спасибо, ваша заявка отправлена!',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ок'
+    })
+
+    form.value = {
+      first_name: '',
+      last_name: '',
+      phone_number: '',
+      email: ''
+    }
+
+    step.value = 1
+
+  } catch (err: any) {
+    console.error('❌ Ошибка при отправке:', err)
+    await Swal.close() // важно: закрыть загрузку перед ошибкой
+
+    await Swal.fire({
+      icon: 'error',
+      title: 'Ошибка!',
+      text: err?.response?.data?.message || 'Не удалось отправить. Сервер не отвечает.',
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Понял'
+    })
+  } finally {
+    isSubmitting.value = false
   }
 }
+
 
 onMounted(async () => {
   try {
