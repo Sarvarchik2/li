@@ -471,6 +471,7 @@ height: 100%;
     }
     .main-content-models-bottom-left{
         width: 100%;
+        height: max-content;
     }
     .main-content-models-bottom-right{
         width: 100%;
