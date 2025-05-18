@@ -6,40 +6,34 @@
     </header>
 
     <main class="main-content">
+
       <h2>{{ $t('main.models') }}</h2>
       <div class="main-content-models">
-        <NuxtLink to="/model-more" class="main-content-models-item">
-          <img :src="Model7" alt="li7" />
+        <NuxtLink
+            v-for="car in models"
+            :key="car.id"
+            :to="`/model-more?id=${car.id}`"
+            class="main-content-models-item"
+        >
+          <img :src="car.preview_image" :alt="car.name" />
           <div class="main-content-models-item-text">
-            <h3>L7 <span>40 000$ {{ $t('main.from') }}</span></h3>
-          </div>
-        </NuxtLink>
-        <NuxtLink to="/model-more" class="main-content-models-item">
-          <img :src="Model8" alt="li8" />
-          <div class="main-content-models-item-text">
-            <h3>L8 <span>50 000$ {{ $t('main.from') }}</span></h3>
-          </div>
-        </NuxtLink>
-        <NuxtLink to="/model-more" class="main-content-models-item">
-          <img :src="Model9" alt="li9" />
-          <div class="main-content-models-item-text">
-            <h3>L9 <span> 60 000$ {{ $t('main.from') }}</span></h3>
+            <h3>{{ car.name }} <span>{{ formatPrice(car.price) }} {{ $t('main.from') }}</span></h3>
           </div>
         </NuxtLink>
       </div>
-
-      <div class="main-content-models-bottom">
+      <div v-if="modelL9" class="main-content-models-bottom">
         <div class="main-content-models-bottom-left">
-          <h3>Lixiang 9 L9</h3>
-          <p>{{ $t('main.lorem_text') }}</p>
-          <NuxtLink to="/model-more">{{ $t('main.learn_more') }}</NuxtLink>
+          <h3>{{ modelL9.name }}</h3>
+          <p>{{ modelL9.description || $t('main.lorem_text') }}</p>
+          <NuxtLink :to="`/model-more?id=${modelL9.id}`">{{ $t('main.learn_more') }}</NuxtLink>
         </div>
+
         <div class="main-content-models-bottom-right">
-          <img :src="Model9" alt="li9" />
-          <h3>L9 <span> 60 000$ {{ $t('main.from') }}</span></h3>
+          <img :src="modelL9.preview_image" :alt="modelL9.name" />
+          <h3>{{ modelL9.name }} <span>{{ formatPrice(modelL9.price) }} {{ $t('main.from') }}</span></h3>
           <div class="main-content-models-bottom-right-text">
-            <NuxtLink to="/model-more">{{ $t('main.build_l9') }}</NuxtLink>
-            <NuxtLink to="/model-more">{{ $t('main.all_l9') }}</NuxtLink>
+            <NuxtLink :to="`/model-more?id=${modelL9.id}`">{{ $t('main.build_l9') }}</NuxtLink>
+            <NuxtLink :to="`/model-more?id=${modelL9.id}`">{{ $t('main.all_l9') }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -74,19 +68,35 @@
 
       <div class="main-content-market">
         <h3>{{ $t('main.shop') }}</h3>
-        <div class="main-content-market-wrapper">
-          <div v-for="n in 9" :key="n" class="main-content-market-item">
-            <img :src="n % 2 === 0 ? Market2 : Market" alt="li9" />
-            <h4>Lixiang R20-R23</h4>
-            <p>Колесные диски</p>
-            <h5>3.400.000 UZS</h5>
-            <NuxtLink to="/productmore">{{ $t('main.more') }}</NuxtLink>
+
+        <div v-if="loading" class="loading">Загрузка...</div>
+
+        <div v-else-if="products.length" class="main-content-market-wrapper">
+          <div
+              v-for="product in products.slice(0, 6)"
+              :key="product.id"
+              class="main-content-market-item"
+          >
+            <img
+                :src="product.images.length ? product.images[0].img : '/fallback.png'"
+                :alt="product.name"
+            />
+            <h4>{{ product.name }}</h4>
+            <p>{{ $t('main.category') }}: {{ product.category }}</p>
+            <h5>{{ formatPrice(product.price) }} UZS</h5>
+            <NuxtLink :to="`/productmore?id=${product.id}`">
+              {{ $t('main.more') }}
+            </NuxtLink>
           </div>
         </div>
+
+        <div v-else class="empty">{{ $t('main.no_products') }}</div>
+
         <NuxtLink to="/market" class="main-content-models-item-link">
           {{ $t('main.see_more') }}
         </NuxtLink>
       </div>
+
 
       <div class="main-content-contact">
         <h3>{{ $t('main.contact') }}</h3>
@@ -120,21 +130,24 @@
 
       <div class="main-content-about" id="about-us">
         <h3>{{ $t('main.about') }}</h3>
+
         <div class="main-content-about-wrapper">
           <img :src="Video" alt="video" />
           <div class="main-content-about-text">
-            <h2>{{ $t('main.lorem_title') }}</h2>
-            <p>{{ $t('main.lorem_text') }}</p>
+            <h2>{{ $t('main.about_block1_title') }}</h2>
+            <p>{{ $t('main.about_block1_text') }}</p>
           </div>
         </div>
+
         <div class="main-content-about-wrapper">
           <div class="main-content-about-text">
-            <h2>{{ $t('main.lorem_title') }}</h2>
-            <p>{{ $t('main.lorem_text') }}</p>
+            <h2>{{ $t('main.about_block2_title') }}</h2>
+            <p>{{ $t('main.about_block2_text') }}</p>
           </div>
           <img :src="Video2" alt="video" />
         </div>
       </div>
+
     </main>
   </div>
 </template>
@@ -142,14 +155,81 @@
 <script setup lang="ts">
 import Header from '@/assets/headerli.png'
 import LiText from '@/assets/litext.png'
-import Model7 from '@/assets/li7.png'
-import Model8 from '@/assets/li8.png'
-import Model9 from '@/assets/li9.png'
 import Li9 from '@/assets/Li99.png'
-import Market from '@/assets/market.png'
-import Market2 from '@/assets/market2.png'
 import Video from '@/assets/vid1.png'
 import Video2 from '@/assets/vid1.png'
+
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+
+interface ProductImage {
+  id: number
+  product: number
+  img: string
+}
+
+interface Product {
+  id: number
+  name: string
+  price: number
+  category: string
+  images: ProductImage[]
+}
+
+const { locale } = useI18n()
+const products = ref<Product[]>([])
+const loading = ref(true)
+
+
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
+    products.value = response.data
+  } catch (e) {
+    console.error('❌ Ошибка загрузки товаров:', e)
+  } finally {
+    loading.value = false
+  }
+})
+
+
+interface CarModel {
+  id: number
+  name: string
+  price: number
+  preview_image: string
+}
+
+const models = ref<CarModel[]>([])
+const modelL9 = ref<CarModel | null>(null)
+
+
+onMounted(async () => {
+  try {
+    const res = await axios.get('https://api.lixiang-uzbekistan.uz/api/models/', {
+      headers: {
+        'Accept-Language': locale.value
+      }
+    })
+
+    models.value = res.data.slice(0, 3)
+    modelL9.value = res.data.find((m: CarModel) => m.name.toLowerCase().includes('l9'))
+  } catch (err) {
+    console.error('Ошибка загрузки моделей:', err)
+  }
+})
+
+const formatPrice = (val: number) => {
+  return `${val.toLocaleString('ru-RU', { minimumFractionDigits: 0 })}`
+}
+
+
 </script>
 
 <style>

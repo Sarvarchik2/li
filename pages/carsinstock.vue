@@ -5,7 +5,7 @@
     <div v-if="cars.length" class="stock-wrapper">
       <div v-for="car in cars" :key="car.id" class="stock-item">
         <img
-            :src="car.images.length ? car.images[0].image : defaultImage"
+            :src="car.preview_image"
             alt="car image"
         />
         <div class="stock-item-text">
@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
-import defaultImage from '@/assets/li9.png'
 import {useI18n} from "vue-i18n";
 
 

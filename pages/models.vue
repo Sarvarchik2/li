@@ -9,7 +9,7 @@
           :to="{ path: '/model-more', query: { id: model.id } }"
           class="main-content-models-item"
       >
-        <img :src="model.image" :alt="model.name || 'Model'" />
+        <img :src="model.preview_image" :alt="model.name || 'Model'" />
         <div class="main-content-models-item-text">
           <h3>
             {{ model.name || 'Li' }}

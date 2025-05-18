@@ -17,6 +17,11 @@
     "create_ideal": "Создайте свой идеальный LiXiang с помощью конфигуратора",
     "length": "Длина",
     "category": "Категория",
+    "about_block1_title": "Официальный дилер Lixiang в Узбекистане",
+    "about_block1_text": "YAS AUTO — официальный дилер бренда Lixiang в Узбекистане. Мы специализируемся на продаже современных, умных и экологичных автомобилей, созданных для тех, кто ценит инновации, комфорт и безопасность.",
+
+    "about_block2_title": "Почему выбирают YAS AUTO?",
+    "about_block2_text": "• Официальная гарантия 4 года\n• Автомобили в наличии без ожидания\n• Полный пакет документов и сопровождение\n• Индивидуальный подход к каждому клиенту\n• Постпродажная поддержка и сервис\n\nМы предлагаем не просто авто — мы предлагаем новый уровень мобильности.",
 
     "width": "Ширина",
     "height": "Высота",
@@ -33,7 +38,7 @@
     "leave_request": "Оставить заявку",
     "about": "О нас",
     "lorem_title": "Lorem Ipsum",
-    "lorem_text": "Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit...Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit..Yorem ipsum dolor sit amet, consectetur adipiscing elit...orem ipsum dolor sit amet, consectetur adipiscing elit.."
+    "lorem_text": "Li 9 — это флагманский электромобиль нового поколения, сочетающий в себе премиальный комфорт, передовые технологии и впечатляющие технические характеристики.\n\nОн создан для тех, кто ценит безопасность, инновации и максимальное удобство как для водителя, так и для пассажиров. Просторный салон с интеллектуальной мультимедиа-системой, адаптивной подсветкой и функцией голосового управления превращает каждую поездку в удовольствие.\n\nБлагодаря большому запасу хода, интеллектуальной системе помощи водителю и продуманной подвеске, Li 9 идеально подходит как для городских условий, так и для дальних путешествий."
 
   },
   "car": {
