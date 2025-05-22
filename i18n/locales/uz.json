@@ -101,7 +101,8 @@
   "car": {
     "request": "Dilerga so‘rov",
     "status": "Holati",
-    "on_order": "Buyurtma asosida",
+    "available": "Yangi",
+    "on_order": "Haydalgan",
     "year": "Chiqarilgan yili",
     "mileage": "Yurgan masofa",
     "body": "Kuzov",

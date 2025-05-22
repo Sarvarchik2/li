@@ -110,9 +110,12 @@ onMounted(async () => {
         'Accept-Language': locale.value
       }
     })
-    const data = response.data[0]
+    const data = response.data.find((item: any) => item.id === Number(id))
+    console.log('🚗 Данные машины:', data)
+
     if (!data) {
       car.value = null
+
       return
     }
     car.value = {
@@ -120,11 +123,11 @@ onMounted(async () => {
       images: data.images || []
     }
     useHead({
-      title: `${data.car_name} ${data.year_production} — ${t('car.page_title') || 'Авто в наличии | YasAuto'}`,
+      title: `${data.car_name} ${data.year_production} — ${t('seo.car.page_title') || 'Авто в наличии | YasAuto'}`,
       meta: [
         {
           name: 'description',
-          content: data.description || t('car.page_description') || 'Автомобиль Lixiang в наличии в Узбекистане. Характеристики, цена, комплектация.'
+          content: data.description || t('seo.car.page_description') || 'Автомобиль Lixiang в наличии в Узбекистане. Характеристики, цена, комплектация.'
         },
         {
           property: 'og:title',
@@ -132,7 +135,7 @@ onMounted(async () => {
         },
         {
           property: 'og:description',
-          content: data.description || t('car.page_description')
+          content: data.description || t('seo.car.page_description')
         },
         {
           property: 'og:image',

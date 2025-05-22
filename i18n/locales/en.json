@@ -101,7 +101,8 @@
   "car": {
     "request": "Request to dealer",
     "status": "Status",
-    "on_order": "On order",
+    "available": "New",
+    "on_order": "Used",
     "year": "Year of production",
     "mileage": "Mileage",
     "body": "Body type",
