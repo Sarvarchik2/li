@@ -87,6 +87,7 @@ import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import defaultImage from '@/assets/li9.png'
 import {useI18n} from "vue-i18n";
+import { useHead } from '#imports'
 
 const route = useRoute()
 const car = ref(null)
@@ -97,7 +98,7 @@ const loading = ref(true)
 
 const openZoom = (img: string) => (zoomImage.value = img)
 const closeZoom = () => (zoomImage.value = null)
-const { locale } = useI18n()
+const { t,locale } = useI18n()
 
 onMounted(async () => {
   const id = route.query.id
@@ -109,7 +110,7 @@ onMounted(async () => {
         'Accept-Language': locale.value
       }
     })
-    const data = response.data[0]  // <--- ВАЖНО!
+    const data = response.data[0]
     if (!data) {
       car.value = null
       return
@@ -118,6 +119,38 @@ onMounted(async () => {
       ...data,
       images: data.images || []
     }
+    useHead({
+      title: `${data.car_name} ${data.year_production} — ${t('car.page_title') || 'Авто в наличии | YasAuto'}`,
+      meta: [
+        {
+          name: 'description',
+          content: data.description || t('car.page_description') || 'Автомобиль Lixiang в наличии в Узбекистане. Характеристики, цена, комплектация.'
+        },
+        {
+          property: 'og:title',
+          content: `${data.car_name} ${data.year_production}`
+        },
+        {
+          property: 'og:description',
+          content: data.description || t('car.page_description')
+        },
+        {
+          property: 'og:image',
+          content: data.images?.[0]?.image || 'https://lixiang-uzbekistan.uz/default-car.png'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        }
+      ],
+      link: [
+        {
+          rel: 'canonical',
+          href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/carinstockmore?id=${data.id}`
+        }
+      ]
+    })
+
 
     equipmentList.value = data.equipment ? data.equipment.split('\n') : []
   } catch (e) {

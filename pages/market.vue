@@ -53,7 +53,27 @@ const loading = ref(true)
 const formatPrice = (value: number) => {
   return value.toLocaleString('ru-RU', { minimumFractionDigits: 0 })
 }
-const { locale } = useI18n()
+
+const { t, locale } = useI18n()
+
+useHead(() => ({
+  title: t('seo.market.title') || 'Магазин Lixiang в Узбекистане — YasAuto',
+  meta: [
+    { name: 'description', content: t('seo.market.description') },
+    { name: 'keywords', content: t('seo.market.keywords') },
+    { property: 'og:title', content: t('seo.market.og_title') },
+    { property: 'og:description', content: t('seo.market.og_description') },
+    { property: 'og:image', content: 'https://lixiang-uzbekistan.uz/logoblack.png' },
+    { name: 'twitter:card', content: 'summary_large_image' }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/market`
+    }
+  ]
+}))
+
 
 onMounted(async () => {
   try {

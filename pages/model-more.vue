@@ -171,7 +171,6 @@
         </div>
       </div>
     </div>
-    <!-- Видео и модели -->
     <div class="video-section" v-if="model.videos?.length">
       <h2>{{ $t('model.video') }}</h2>
       <div class="video-grid">
@@ -257,6 +256,38 @@ onMounted(async () => {
       }
     })
     model.value = res.data
+    useHead({
+      title: `${res.data.name} — ${t('model.title_seo') || 'Электромобиль Lixiang'}`,
+      meta: [
+        {
+          name: 'description',
+          content: res.data.smart_drive_system?.[0]?.description || t('model.description_seo') || 'Официальный дилер YasAuto. Подробности и характеристики модели.'
+        },
+        {
+          property: 'og:title',
+          content: `${res.data.name} — ${t('model.title_seo') || 'Электромобиль Lixiang'}`
+        },
+        {
+          property: 'og:description',
+          content: res.data.smart_drive_system?.[0]?.description || t('model.description_seo')
+        },
+        {
+          property: 'og:image',
+          content: res.data.color?.[0]?.image || 'https://lixiang-uzbekistan.uz/logoblack.jpg'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        }
+      ],
+      link: [
+        {
+          rel: 'canonical',
+          href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/model-more?id=${res.data.id}`
+        }
+      ]
+    })
+
   } catch (err) {
     console.error('Ошибка загрузки модели:', err)
   }

@@ -10,7 +10,7 @@
         />
         <div class="stock-item-text">
           <h3>{{ car.car_name }} {{ car.year_production }}</h3>
-          <p>{{ car.description }}</p>
+          <p>{{ shortenText(car.description, 200) }}</p>
           <h4>{{ car.price }}$ <NuxtLink :to="`/carinstockmore?id=${car.id}`">{{ $t('stock.more') }}</NuxtLink></h4>
         </div>
       </div>
@@ -43,8 +43,11 @@ interface AvailableCar {
 }
 
 const cars = ref<AvailableCar[]>([])
-const { locale } = useI18n()
-
+const { t, locale } = useI18n()
+const shortenText = (text: string, limit = 200) => {
+  if (!text) return ''
+  return text.length > limit ? text.substring(0, limit) + '...' : text
+}
 onMounted(async () => {
   try {
     const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/available-cars/', {
@@ -53,10 +56,49 @@ onMounted(async () => {
       }
     })
     cars.value = response.data
+
+
   } catch (error) {
     console.error('Ошибка при загрузке машин:', error)
   }
 })
+
+useHead(() => ({
+  title: t('seo.stock.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.stock.description')
+    },
+    {
+      name: 'keywords',
+      content: t('seo.stock.keywords')
+    },
+    {
+      property: 'og:title',
+      content: t('seo.stock.og_title')
+    },
+    {
+      property: 'og:description',
+      content: t('seo.stock.og_description')
+    },
+    {
+      property: 'og:image',
+      content: 'https://lixiang-uzbekistan.uz/logoblack.jpg'
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/carsinstock`
+    }
+  ]
+}))
+
 </script>
 
 <style scoped>

@@ -12,6 +12,50 @@
     "more": "Batafsil",
     "empty": "Afsuski, hozircha mavjud avtomobillar yo‘q."
   },
+  "seo": {
+    "home": {
+      "title": "O‘zbekiston uchun rasmiy Lixiang dileri — YasAuto",
+      "description": "YasAuto — Lixiang’ning rasmiy dileri. L9, L7 elektromobillari. Test drayv, kafolat.",
+      "keywords": "Lixiang dileri, YasAuto, L9, L7, elektromobil Toshkent",
+      "og_title": "YasAuto — Lixiang O‘zbekistonda",
+      "og_description": "Lixiang elektromobillari. Rasmiy diler, kafolat, qulay shartlar."
+    },
+    "market": {
+      "title": "Lixiang doʻkoni — aksessuarlar va ehtiyot qismlar",
+      "description": "YasAuto rasmiy doʻkoni. Lixiang avtomobillari uchun aksessuarlar va ehtiyot qismlar. Butun Oʻzbekiston boʻylab yetkazib berish.",
+      "keywords": "lixiang doʻkoni, aksessuarlar, ehtiyot qismlar, L9, L7, yasauto, toshkent",
+      "og_title": "Lixiang doʻkoni | YasAuto Oʻzbekiston",
+      "og_description": "YasAuto rasmiy dileridan Lixiang elektromobillari uchun aksessuarlar va ehtiyot qismlar."
+    },
+    "product": {
+      "title": "Lixiang aksessuari",
+      "default_description": "YasAutoʼdan Lixiang avtomobillari uchun original aksessuar va ehtiyot qismlar."
+    },
+    "models": {
+      "title": "Lixiang modellari — O‘zbekistonda Li9, Li7, Li6",
+      "description": "Yangi Lixiang modellari bilan tanishing: Li9, Li7, Li6. Rasmiy diler YasAuto.",
+      "keywords": "lixiang modellari, li9, li7, li6, elektromobil, toshkent",
+      "og_title": "Lixiang elektromobillari — modellar ro‘yxati",
+      "og_description": "YasAuto’dan mavjud Lixiang modellarining narxlari va fotosuratlari."
+    },
+    "model": {
+      "title_seo": "Lixiang elektromobili",
+      "description_seo": "Lixiang modelining texnik xususiyatlari, xavfsizlik tizimi, interyer va video sharhlar."
+    },
+    "stock": {
+      "title": "O‘zbekistonda mavjud Lixiang avtomobillari | YasAuto",
+      "description": "Lixiang avtomobillari omborda. Yetkazib berish, kafolat va qulay narxlar bilan.",
+      "keywords": "lixiang mavjud avtomobillar, li9, li7, yasauto, toshkent",
+      "og_title": "Mavjud Lixiang avtomobillari",
+      "og_description": "Li9 va Li7 modellarini YasAuto orqali hozir sotib oling. Yetkazib berish va kafolat mavjud."
+    },
+    "car": {
+      "page_title": "Mavjud avtomobil",
+      "page_description": "Lixiang rasmiy dileri. Texnik maʼlumotlar, jihozlanish va mavjudlikni bilib oling."
+    }
+
+  },
+
 
   "main": {
     "weekdays": "DU-JU 24/7",

@@ -12,6 +12,50 @@
     "more": "Learn more",
     "empty": "Unfortunately, there are no available cars at the moment."
   },
+  "seo": {
+    "home": {
+      "title": "Official Lixiang Dealer in Uzbekistan — YasAuto",
+      "description": "YasAuto is the official Lixiang dealer. Electric cars L9, L7. Test drive, warranty.",
+      "keywords": "Lixiang dealer Uzbekistan, YasAuto, electric cars L9 L7, Tashkent",
+      "og_title": "YasAuto — Lixiang Dealer in Uzbekistan",
+      "og_description": "Official Lixiang EVs in Uzbekistan. Test drive & delivery."
+    },
+    "market": {
+      "title": "Lixiang Shop in Uzbekistan — Accessories and Parts",
+      "description": "Official YasAuto shop. Accessories, spare parts, and components for Lixiang vehicles. Fast delivery across Uzbekistan.",
+      "keywords": "lixiang shop, accessories, parts, L9, L7, yasauto, tashkent",
+      "og_title": "Lixiang Shop | YasAuto Uzbekistan",
+      "og_description": "Accessories and parts for Lixiang electric vehicles from the official dealer YasAuto."
+    },
+    "product": {
+      "title": "Lixiang Accessory",
+      "default_description": "Original accessories and parts for Lixiang vehicles from YasAuto."
+    },
+    "models": {
+      "title": "Lixiang Models in Uzbekistan — Li9, Li7, Li6",
+      "description": "Explore available Lixiang models — Li9, Li7, Li6. Official dealer YasAuto in Uzbekistan.",
+      "keywords": "lixiang models, electric cars, li9, li7, li6, yasauto",
+      "og_title": "Lixiang Electric Vehicles — Models Overview",
+      "og_description": "Current Lixiang models with prices and images. Order in Uzbekistan from YasAuto."
+    },
+    "model": {
+      "title_seo": "Lixiang Electric Vehicle",
+      "description_seo": "Detailed specs and features of the Lixiang model. Interior, safety, videos, autopilot system and more."
+    },
+    "stock": {
+      "title": "Lixiang Cars in Stock — Uzbekistan | YasAuto",
+      "description": "Current Lixiang inventory. Immediate delivery, warranty, prices and configurations in Uzbekistan.",
+      "keywords": "lixiang stock, buy lixiang uzbekistan, li9, li7, yasauto",
+      "og_title": "Buy Lixiang Cars in Stock",
+      "og_description": "Available Lixiang vehicles — fast delivery and warranty from YasAuto Uzbekistan."
+    },
+    "car": {
+      "page_title": "Available Car in Stock",
+      "page_description": "Lixiang official dealer in Uzbekistan. Check specifications, equipment and availability."
+    }
+
+  },
+
 
   "main": {
     "weekdays": "MON-FRI 24/7",

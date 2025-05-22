@@ -27,7 +27,7 @@ import axios from 'axios'
 import {useI18n} from "vue-i18n";
 
 const models = ref([])
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 
 onMounted(async () => {
   try {
@@ -41,6 +41,42 @@ onMounted(async () => {
     console.error('Ошибка загрузки моделей:', error)
   }
 })
+
+useHead(() => ({
+  title: t('seo.models.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.models.description')
+    },
+    {
+      name: 'keywords',
+      content: t('seo.models.keywords')
+    },
+    {
+      property: 'og:title',
+      content: t('seo.models.og_title')
+    },
+    {
+      property: 'og:description',
+      content: t('seo.models.og_description')
+    },
+    {
+      property: 'og:image',
+      content: 'https://lixiang.uz/logoblack.png'
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/models`
+    }
+  ]
+}))
 </script>
 
 <style>

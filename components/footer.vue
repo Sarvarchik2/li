@@ -38,6 +38,15 @@
           <li><NuxtLink to="/contact">{{ $t('footer.rus') }}</NuxtLink></li>
         </ul>
       </div>
+      <footer itemscope itemtype="https://schema.org/Organization" style="display: none">
+        <span itemprop="name">YasAuto</span>
+        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <meta itemprop="addressLocality" content="Tashkent">
+        <meta itemprop="streetAddress" content="Малая кольцевая дорога 4/1 блок 4">
+      </span>
+        <meta itemprop="url" content="https://lixiang.uz" />
+        <meta itemprop="telephone" content="+998773439999" />
+      </footer>
     </div>
   </div>
 </template>

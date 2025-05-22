@@ -61,7 +61,7 @@ import 'vue3-carousel/dist/carousel.css'
 import Cart from '@/assets/cart.png'
 import { useCartStore } from '@/stores/cart'
 import { useI18n } from 'vue-i18n'
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const product = ref(null)
 const loading = ref(true)
@@ -75,6 +75,7 @@ const increment = () => quantity.value++
 const decrement = () => {
   if (quantity.value > 1) quantity.value--
 }
+
 
 const formatPrice = (val: number) => {
   return val.toLocaleString('ru-RU', { minimumFractionDigits: 0 })
@@ -90,8 +91,44 @@ onMounted(async () => {
         'Accept-Language': locale.value
       }
     })
+
     const found = response.data.find((item: any) => item.id === Number(id))
-    if (found) product.value = found
+    if (found) {
+      product.value = found
+
+      // ✅ SEO: вызываем useHead после получения данных
+      useHead({
+        title: `${found.name} — ${t('product.title') || 'Lixiang аксессуар'}`,
+        meta: [
+          {
+            name: 'description',
+            content: found.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
+          },
+          {
+            property: 'og:title',
+            content: `${found.name} — ${t('product.title') || 'Lixiang аксессуар'}`
+          },
+          {
+            property: 'og:description',
+            content: found.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
+          },
+          {
+            property: 'og:image',
+            content: found.images[0]?.img || 'https://lixiang-uzbekistan.uz/logoblack.png'
+          },
+          {
+            name: 'twitter:card',
+            content: 'summary_large_image'
+          }
+        ],
+        link: [
+          {
+            rel: 'canonical',
+            href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${found.id}`
+          }
+        ]
+      })
+    }
   } catch (e) {
     console.error('Ошибка загрузки товара:', e)
   } finally {
@@ -117,6 +154,9 @@ const addToCart = () => {
     showNotification.value = false
   }, 2500)
 }
+
+
+
 </script>
 <style scoped>
 

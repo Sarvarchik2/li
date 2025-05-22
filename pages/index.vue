@@ -163,6 +163,7 @@ import Video2 from '@/assets/vid1.png'
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
+import { useHead } from '#imports'
 
 interface ProductImage {
   id: number
@@ -178,7 +179,7 @@ interface Product {
   images: ProductImage[]
 }
 
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 const products = ref<Product[]>([])
 const loading = ref(true)
 
@@ -230,6 +231,23 @@ const formatPrice = (val: number) => {
   return `${val.toLocaleString('ru-RU', { minimumFractionDigits: 0 })}`
 }
 
+useHead(() => ({
+  title: t('seo.home.title'),
+  meta: [
+    { name: 'description', content: t('seo.home.description') },
+    { name: 'keywords', content: t('seo.home.keywords') },
+    { property: 'og:title', content: t('seo.home.og_title') },
+    { property: 'og:description', content: t('seo.home.og_description') },
+    { property: 'og:image', content: 'https://lixiang-uzbekistan.uz/logoblack.png' },
+    { name: 'twitter:card', content: 'summary_large_image' }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/`
+    }
+  ]
+}))
 
 </script>
 
