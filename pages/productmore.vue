@@ -22,7 +22,7 @@
 
         <div class="price-line">
           <span class="label">{{ $t('product.price') }}</span>
-          <span class="price">{{ formatPrice(product.price) }} UZS</span>
+          <span class="price">{{ formatPrice(product.price) }} $</span>
         </div>
 
         <div class="quantity">

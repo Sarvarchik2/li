@@ -83,7 +83,7 @@
             />
             <h4>{{ product.name }}</h4>
             <p>{{ $t('main.category') }}: {{ product.category }}</p>
-            <h5>{{ formatPrice(product.price) }} UZS</h5>
+            <h5>{{ formatPrice(product.price) }} $</h5>
             <NuxtLink :to="`/productmore?id=${product.id}`">
               {{ $t('main.more') }}
             </NuxtLink>
@@ -115,8 +115,8 @@
               </div>
               <div class="main-content-contact-left-info-item">
                 <h4>{{ $t('main.worktime') }}</h4>
-                <NuxtLink>ПН-ПТ 24/7</NuxtLink>
-                <NuxtLink>СБ-ВС 8:00 - 20:00</NuxtLink>
+                <NuxtLink>{{ $t('main.weekdays') }}</NuxtLink>
+                <NuxtLink>{{ $t('main.weekends') }}</NuxtLink>
               </div>
             </div>
           </div>

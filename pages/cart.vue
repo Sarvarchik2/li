@@ -10,7 +10,7 @@
           <h3 class="item-name">{{ item.name }}</h3>
           <p class="item-category">{{ item.category }}</p>
         </div>
-        <div class="item-price">{{ item.price.toLocaleString() }} UZS</div>
+        <div class="item-price">{{ item.price.toLocaleString() }} $</div>
         <div class="quantity-controls">
           <button @click="decrement(index)">−</button>
           <span>{{ item.quantity }}</span>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="summary">
-          <p><strong>{{ $t('cart.total') }}</strong> {{ totalPrice.toLocaleString() }} UZS</p>
+          <p><strong>{{ $t('cart.total') }}</strong> {{ totalPrice.toLocaleString() }} $</p>
           <button class="submit-btn" @click="submitForm">{{ $t('form.submit') }}</button>
           <p v-if="hasError" class="error-msg">{{ $t('form.error') }}</p>
         </div>

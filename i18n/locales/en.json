@@ -14,6 +14,8 @@
   },
 
   "main": {
+    "weekdays": "MON-FRI 24/7",
+    "weekends": "SAT-SUN 8:00 AM - 8:00 PM",
     "models": "Models",
     "from": "From",
     "learn_more": "Learn more",

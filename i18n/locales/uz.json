@@ -14,7 +14,8 @@
   },
 
   "main": {
-
+    "weekdays": "DU-JU 24/7",
+    "weekends": "SH-YA 8:00 - 20:00",
     "models": "Modellar",
     "from": "Dan",
     "learn_more": "Batafsil",

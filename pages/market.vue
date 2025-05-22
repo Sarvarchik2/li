@@ -18,7 +18,7 @@
 
           <h4>{{ product.name }}</h4>
           <p>{{ $t('main.category') }}: {{ product.category }}</p>
-          <h5>{{ formatPrice(product.price) }} UZS</h5>
+          <h5>{{ formatPrice(product.price) }} $</h5>
           <NuxtLink :to="`/productmore?id=${product.id}`">{{ $t('main.more') }}</NuxtLink>
         </div>
       </div>
