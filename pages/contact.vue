@@ -62,7 +62,8 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
+import { useHead, useI18n } from '#imports'
+const { t, locale } = useI18n()
 const form = ref({
   name: '',
   last_name: '',
@@ -70,6 +71,52 @@ const form = ref({
   message: '',
   sent_to_telegram: true
 })
+useHead(() => ({
+  title: t('seo.contact.title') || 'Контакты YasAuto — официальный дилер Lixiang',
+  meta: [
+    { name: 'description', content: t('seo.contact.description') || 'Свяжитесь с YasAuto для покупки Lixiang в Узбекистане. Мы находимся в Ташкенте, звоните +998 (77) 343 99 99' },
+    { name: 'keywords', content: t('seo.contact.keywords') || 'контакты, yasauto, lixiang, ташкент, автосалон, дилер' },
+    { property: 'og:title', content: t('seo.contact.og_title') || 'Контакты YasAuto' },
+    { property: 'og:description', content: t('seo.contact.og_description') || 'Адрес и контакты YasAuto — официальный дилер Lixiang в Узбекистане' },
+    { property: 'og:image', content: 'https://lixiang-uzbekistan.uz/logoblack.png' },
+    { name: 'twitter:card', content: 'summary_large_image' }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/contact`
+    }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "YasAuto",
+        "url": "https://lixiang-uzbekistan.uz",
+        "logo": "https://lixiang-uzbekistan.uz/logoblack.png",
+        "description": "Официальный дилер Lixiang в Узбекистане. Продажа Li9, Li7, Li6, запчасти и обслуживание.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Малая кольцевая дорога 4/1 блок 4",
+          "addressLocality": "Ташкент",
+          "addressCountry": "UZ"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+998773439999",
+          "contactType": "customer service",
+          "areaServed": "UZ"
+        },
+        "sameAs": [
+          "https://www.instagram.com/_yas_auto_/",
+          "https://t.me/yas_auto"
+        ]
+      })
+    }
+  ]
+}))
 
 const submitForm = async () => {
   try {

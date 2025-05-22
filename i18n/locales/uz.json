@@ -52,8 +52,14 @@
     "car": {
       "page_title": "Mavjud avtomobil",
       "page_description": "Lixiang rasmiy dileri. Texnik maʼlumotlar, jihozlanish va mavjudlikni bilib oling."
+    },
+    "contact": {
+      "title": "YasAuto bilan aloqa — Lixiang rasmiy dileri",
+      "description": "Lixiang avtomobillarini sotib olish uchun YasAuto bilan bog‘laning. Biz Toshkent shahridamiz, +998 (77) 343 99 99 ga qo‘ng‘iroq qiling",
+      "keywords": "aloqa, yasauto, lixiang, toshkent, diler, avtomobil salon",
+      "og_title": "YasAuto aloqa ma’lumotlari",
+      "og_description": "YasAuto manzili va aloqa ma’lumotlari — Lixiang rasmiy dileri O‘zbekistonda"
     }
-
   },
 
 

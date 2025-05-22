@@ -205,6 +205,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { useHead } from '#imports'
 
 import Fuel from '@/assets/models/fuel.png'
 import Speed from '@/assets/models/speed.png'
@@ -247,7 +248,7 @@ const getYoutubeThumbnail = (url: string): string => {
   const id = getYoutubeId(url)
   return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
 }
-const { locale } = useI18n()
+const {  t,locale } = useI18n()
 onMounted(async () => {
   try {
     const res = await axios.get(`https://api.lixiang-uzbekistan.uz/api/models/${route.query.id}/`, {
@@ -256,24 +257,25 @@ onMounted(async () => {
       }
     })
     model.value = res.data
+    const car = res.data
     useHead({
-      title: `${res.data.name} — ${t('model.title_seo') || 'Электромобиль Lixiang'}`,
+      title: `${car.name} — ${t('seo.model.title_seo') || 'Электромобиль Lixiang'}`,
       meta: [
         {
           name: 'description',
-          content: res.data.smart_drive_system?.[0]?.description || t('model.description_seo') || 'Официальный дилер YasAuto. Подробности и характеристики модели.'
+          content: car.smart_drive_system?.[0]?.description || t('seo.model.description_seo') || 'Официальный дилер YasAuto. Подробности и характеристики модели.'
         },
         {
           property: 'og:title',
-          content: `${res.data.name} — ${t('model.title_seo') || 'Электромобиль Lixiang'}`
+          content: `${car.name} — ${t('seo.model.title_seo') || 'Электромобиль Lixiang'}`
         },
         {
           property: 'og:description',
-          content: res.data.smart_drive_system?.[0]?.description || t('model.description_seo')
+          content: car.smart_drive_system?.[0]?.description || t('seo.model.description_seo')
         },
         {
           property: 'og:image',
-          content: res.data.color?.[0]?.image || 'https://lixiang-uzbekistan.uz/logoblack.jpg'
+          content: car.color?.[0]?.image || 'https://lixiang-uzbekistan.uz/logoblack.jpg'
         },
         {
           name: 'twitter:card',
@@ -283,10 +285,34 @@ onMounted(async () => {
       link: [
         {
           rel: 'canonical',
-          href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/model-more?id=${res.data.id}`
+          href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/model-more?id=${car.id}`
+        }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": car.name,
+            "image": car.color?.[0]?.image || 'https://lixiang-uzbekistan.uz/logoblack.jpg',
+            "description": car.smart_drive_system?.[0]?.description || 'Электромобиль Lixiang',
+            "brand": {
+              "@type": "Brand",
+              "name": "Lixiang"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "USD",
+              "price": car.price,
+              "availability": "https://schema.org/InStock",
+              "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/model-more?id=${car.id}`
+            }
+          })
         }
       ]
     })
+
 
   } catch (err) {
     console.error('Ошибка загрузки модели:', err)

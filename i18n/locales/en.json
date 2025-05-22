@@ -52,8 +52,14 @@
     "car": {
       "page_title": "Available Car in Stock",
       "page_description": "Lixiang official dealer in Uzbekistan. Check specifications, equipment and availability."
+    },
+    "contact": {
+      "title": "Contact YasAuto — Official Lixiang Dealer",
+      "description": "Get in touch with YasAuto to purchase Lixiang vehicles in Uzbekistan. We’re located in Tashkent, call +998 (77) 343 99 99",
+      "keywords": "contact, yasauto, lixiang, tashkent, car dealership, dealer",
+      "og_title": "YasAuto Contact Information",
+      "og_description": "Address and contact info for YasAuto — Official Lixiang Dealer in Uzbekistan"
     }
-
   },
 
 

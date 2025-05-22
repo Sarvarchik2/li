@@ -232,6 +232,35 @@ const formatPrice = (val: number) => {
 }
 
 useHead(() => ({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "YasAuto",
+        "url": "https://lixiang-uzbekistan.uz",
+        "logo": "https://lixiang-uzbekistan.uz/logoblack.png",
+        "description": "Официальный дилер Lixiang в Узбекистане. Продажа Li9, Li7, Li6, запчасти и обслуживание.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Малая кольцевая дорога 4/1 блок 4",
+          "addressLocality": "Ташкент",
+          "addressCountry": "UZ"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+998773439999",
+          "contactType": "customer service",
+          "areaServed": "UZ"
+        },
+        "sameAs": [
+          "https://www.instagram.com/_yas_auto_/",
+          "https://t.me/yas_auto"
+        ]
+      })
+    }
+  ],
   title: t('seo.home.title'),
   meta: [
     { name: 'description', content: t('seo.home.description') },

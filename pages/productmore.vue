@@ -126,8 +126,33 @@ onMounted(async () => {
             rel: 'canonical',
             href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${found.id}`
           }
+        ],
+        script: [
+          {
+            type: 'application/ld+json',
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": found.name,
+              "image": found.images[0]?.img || 'https://lixiang-uzbekistan.uz/fallback.png',
+              "description": found.description || t('product.default_description'),
+              "sku": `prod-${found.id}`,
+              "brand": {
+                "@type": "Brand",
+                "name": "Lixiang"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${found.id}`,
+                "priceCurrency": "USD",
+                "price": found.price,
+                "availability": "https://schema.org/InStock"
+              }
+            })
+          }
         ]
       })
+
     }
   } catch (e) {
     console.error('Ошибка загрузки товара:', e)

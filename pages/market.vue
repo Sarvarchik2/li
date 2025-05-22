@@ -83,6 +83,39 @@ onMounted(async () => {
       }
     })
     products.value = response.data
+    useHead(() => {
+      if (!products.value.length) return {}
+
+      const productSchemas = products.value.map(product => ({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product.name,
+        "image": product.images?.[0]?.img || "https://lixiang-uzbekistan.uz/fallback.png",
+        "description": `${product.name} - ${product.category}`,
+        "sku": `prod-${product.id}`,
+        "brand": {
+          "@type": "Brand",
+          "name": "Lixiang"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${product.id}`,
+          "priceCurrency": "USD",
+          "price": product.price,
+          "availability": "https://schema.org/InStock"
+        }
+      }))
+
+      return {
+        script: [
+          {
+            type: 'application/ld+json',
+            children: JSON.stringify(productSchemas)
+          }
+        ]
+      }
+    })
+
   } catch (e) {
     console.error('Ошибка загрузки товаров:', e)
   } finally {
