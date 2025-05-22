@@ -1,13 +1,13 @@
 <template>
   <div class="intro" v-if="show">
     <img class="logo" :src="Logo" alt="LiXiang" />
-    <p class="tagline">Yas Auto</p>
+<!--    <p class="tagline">Yas Auto</p>-->
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Logo from '@/assets/logo.png';
+import Logo from '@/assets/logoblack.png';
 
 const show = ref(true);
 

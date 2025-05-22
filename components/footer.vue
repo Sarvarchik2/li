@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import FooterLogo from '@/assets/footer/Sub Container.png'
+import FooterLogo from '@/assets/logowhite.png'
 import Icon1 from '@/assets/footer/Button (1).png'
 import Icon2 from '@/assets/footer/inst.png'
 import Icon4 from '@/assets/footer/telegram.png'

@@ -407,6 +407,10 @@ height: 100%;
     border: 1px solid #BFBFBF;
     overflow: hidden;
 }
+.main-content-contact-right iframe{
+    width: 100%;
+    height: 100%;
+}
 .main-content-contact h3{
     font-size: 32px;
     font-weight: 600;

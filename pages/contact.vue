@@ -7,12 +7,12 @@
           <h4>{{ $t('main.branches') }}</h4>
           <button>Toshkent</button>
           <h4>{{ $t('main.address') }}</h4>
-          <p>Mirabad tumani, Taras Shevchenko 25A, Lixiang Auto part</p>
+          <p>Малая кольцевая дорога 4/1 блок 4</p>
           <div class="main-content-contact-left-info">
             <div class="main-content-contact-left-info-item">
               <h4>{{ $t('main.phone') }}</h4>
-              <NuxtLink>+998 90 999 99 99</NuxtLink>
-              <NuxtLink>+998 90 999 99 99</NuxtLink>
+              <NuxtLink>+998 (77) 343 99 99</NuxtLink>
+              <NuxtLink>+998 (20) 009 05 55</NuxtLink>
             </div>
             <div class="main-content-contact-left-info-item">
               <h4>{{ $t('main.worktime') }}</h4>
@@ -22,14 +22,7 @@
           </div>
         </div>
         <div class="main-content-contact-right">
-          <iframe
-              src="https://www.google.com/maps/embed?pb=..."
-              width="100%"
-              height="100%"
-              style="border:0;"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.135533100059!2d69.31460419999999!3d41.3276661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef5bd2c77a2f9%3A0x9328b277ea123405!2zNC8xINCx0LvQvtC6IDQ!5e0!3m2!1sru!2s!4v1747893666524!5m2!1sru!2s"  style="border:0;"  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
 
