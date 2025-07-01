@@ -64,7 +64,7 @@
 
 
   "main": {
-    "weekdays": "MON-FRI 24/7",
+    "weekdays": "No days off 9:00 - 20:00",
     "weekends": "SAT-SUN 8:00 AM - 8:00 PM",
     "models": "Models",
     "from": "From",

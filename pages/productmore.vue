@@ -1,4 +1,3 @@
-// Product Page// Product Page (productmore.vue)
 <template>
   <div class="product-page">
     <div v-if="loading" class="loading">Загрузка...</div>

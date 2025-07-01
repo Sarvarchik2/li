@@ -116,7 +116,7 @@
               <div class="main-content-contact-left-info-item">
                 <h4>{{ $t('main.worktime') }}</h4>
                 <NuxtLink>{{ $t('main.weekdays') }}</NuxtLink>
-                <NuxtLink>{{ $t('main.weekends') }}</NuxtLink>
+<!--                <NuxtLink>{{ $t('main.weekends') }}</NuxtLink>-->
               </div>
             </div>
           </div>
