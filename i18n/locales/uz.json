@@ -161,6 +161,8 @@
   "product": {
     "price": "Narxi",
     "quantity": "Mahsulot soni",
+    "title": "Toshkentda xarid qilish - ",
+"title_second": "uchun Lixiang",
     "category": "Kuzov obvesi",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
   },

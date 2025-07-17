@@ -168,6 +168,8 @@
   },
   "product": {
     "price": "Цена",
+    "title": "Купить в Ташкенте - ",
+    "title_second": "для Lixiang",
     "quantity": "Количество товара",
     "category": "Обвес корпуса",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."

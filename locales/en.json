@@ -15,6 +15,8 @@
   "product": {
     "price": "Price",
     "quantity": "Quantity",
+    "title": "Buy in Tashkent - ",
+"title_second": "for Lixiang",
     "category": "Body kit",
     "description": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
   },

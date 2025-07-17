@@ -52,9 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import axios from 'axios'
 import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import Cart from '@/assets/cart.png'
@@ -62,103 +61,89 @@ import { useCartStore } from '@/stores/cart'
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 const route = useRoute()
-const product = ref(null)
-const loading = ref(true)
+const cart = useCartStore()
+
 const quantity = ref(1)
 const currentSlide = ref(0)
 const showNotification = ref(false)
 const notificationMessage = ref('')
-const cart = useCartStore()
 
 const increment = () => quantity.value++
 const decrement = () => {
   if (quantity.value > 1) quantity.value--
 }
 
-
 const formatPrice = (val: number) => {
   return val.toLocaleString('ru-RU', { minimumFractionDigits: 0 })
 }
 
-onMounted(async () => {
+const { data: product, pending: loading } = await useAsyncData('product', async () => {
   const id = route.query.id
-  if (!id) return
-
-  try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/', {
-      headers: {
-        'Accept-Language': locale.value
-      }
-    })
-
-    const found = response.data.find((item: any) => item.id === Number(id))
-    if (found) {
-      product.value = found
-
-      // ✅ SEO: вызываем useHead после получения данных
-      useHead({
-        title: `${found.name} — ${t('product.title') || 'Lixiang аксессуар'}`,
-        meta: [
-          {
-            name: 'description',
-            content: found.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
-          },
-          {
-            property: 'og:title',
-            content: `${found.name} — ${t('product.title') || 'Lixiang аксессуар'}`
-          },
-          {
-            property: 'og:description',
-            content: found.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
-          },
-          {
-            property: 'og:image',
-            content: found.images[0]?.img || 'https://lixiang-uzbekistan.uz/logoblack.png'
-          },
-          {
-            name: 'twitter:card',
-            content: 'summary_large_image'
-          }
-        ],
-        link: [
-          {
-            rel: 'canonical',
-            href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${found.id}`
-          }
-        ],
-        script: [
-          {
-            type: 'application/ld+json',
-            children: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": found.name,
-              "image": found.images[0]?.img || 'https://lixiang-uzbekistan.uz/fallback.png',
-              "description": found.description || t('product.default_description'),
-              "sku": `prod-${found.id}`,
-              "brand": {
-                "@type": "Brand",
-                "name": "Lixiang"
-              },
-              "offers": {
-                "@type": "Offer",
-                "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${found.id}`,
-                "priceCurrency": "USD",
-                "price": found.price,
-                "availability": "https://schema.org/InStock"
-              }
-            })
-          }
-        ]
-      })
-
-    }
-  } catch (e) {
-    console.error('Ошибка загрузки товара:', e)
-  } finally {
-    loading.value = false
-  }
+  if (!id) return null
+  const response = await $fetch<any[]>('https://api.lixiang-uzbekistan.uz/api/market-models/', {
+    headers: { 'Accept-Language': locale.value }
+  })
+  return response.find((item: any) => item.id === Number(id))
 })
+
+if (product.value) {
+  useHead({
+    title: ` ${t('product.title')} ${product.value.name} ${t('product.title_second')}`,
+    meta: [
+      {
+        name: 'description',
+        content: product.value.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
+      },
+      {
+        property: 'og:title',
+        content: `${product.value.name} — ${t('product.title') || 'Lixiang аксессуар'}`
+      },
+      {
+        property: 'og:description',
+        content: product.value.description || t('product.default_description') || 'Оригинальные аксессуары и запчасти для автомобилей Lixiang.'
+      },
+      {
+        property: 'og:image',
+        content: product.value.images[0]?.img || 'https://lixiang-uzbekistan.uz/logoblack.png'
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image'
+      }
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${product.value.id}`
+      }
+      // Можно добавить hreflang здесь, если нужно
+    ],
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.value.name,
+          "image": product.value.images[0]?.img || 'https://lixiang-uzbekistan.uz/fallback.png',
+          "description": product.value.description || t('product.default_description'),
+          "sku": `prod-${product.value.id}`,
+          "brand": {
+            "@type": "Brand",
+            "name": "Lixiang"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${product.value.id}`,
+            "priceCurrency": "USD",
+            "price": product.value.price,
+            "availability": "https://schema.org/InStock"
+          }
+        })
+      }
+    ]
+  })
+}
 
 const addToCart = () => {
   if (!product.value) return
@@ -178,9 +163,6 @@ const addToCart = () => {
     showNotification.value = false
   }, 2500)
 }
-
-
-
 </script>
 <style scoped>
 
