@@ -80,89 +80,71 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import axios from 'axios'
 import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import defaultImage from '@/assets/li9.png'
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n'
 import { useHead } from '#imports'
 
 const route = useRoute()
-const car = ref(null)
+const { t, locale } = useI18n()
 const currentSlide = ref(0)
-const zoomImage = ref(null)
+const zoomImage = ref<string | null>(null)
 const equipmentList = ref<string[]>([])
-const loading = ref(true)
 
 const openZoom = (img: string) => (zoomImage.value = img)
 const closeZoom = () => (zoomImage.value = null)
-const { t,locale } = useI18n()
 
-onMounted(async () => {
-  const id = route.query.id
-  if (!id) return
-
-  try {
-    const response = await axios.get(`https://api.lixiang-uzbekistan.uz/api/available-cars/${id}/`, {
-      headers: {
-        'Accept-Language': locale.value
-      }
-    })
-    const data = response.data.find((item: any) => item.id === Number(id))
-    console.log('🚗 Данные машины:', data)
-
-    if (!data) {
-      car.value = null
-
-      return
-    }
-    car.value = {
-      ...data,
-      images: data.images || []
-    }
-    useHead({
-      title: `${data.car_name} ${data.year_production} — ${t('seo.car.page_title') || 'Авто в наличии | YasAuto'}`,
-      meta: [
-        {
-          name: 'description',
-          content: data.description || t('seo.car.page_description') || 'Автомобиль Lixiang в наличии в Узбекистане. Характеристики, цена, комплектация.'
-        },
-        {
-          property: 'og:title',
-          content: `${data.car_name} ${data.year_production}`
-        },
-        {
-          property: 'og:description',
-          content: data.description || t('seo.car.page_description')
-        },
-        {
-          property: 'og:image',
-          content: data.images?.[0]?.image || 'https://lixiang-uzbekistan.uz/default-car.png'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image'
-        }
-      ],
-      link: [
-        {
-          rel: 'canonical',
-          href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/carinstockmore?id=${data.id}`
-        }
-      ]
-    })
-
-
-    equipmentList.value = data.equipment ? data.equipment.split('\n') : []
-  } catch (e) {
-    console.error('Ошибка загрузки автомобиля:', e)
-    car.value = null
-  } finally {
-    loading.value = false
+const { data: car, pending: loading } = await useAsyncData('car', async () => {
+  const id = Number(route.query.id)
+  if (!id) return null
+  const data = await $fetch<any[]>(`https://api.lixiang-uzbekistan.uz/api/available-cars/${id}/`, {
+    headers: { 'Accept-Language': locale.value }
+  })
+  const found = data.find(item => item.id === id)
+  if (!found) return null
+  return {
+    ...found,
+    images: found.images || []
   }
 })
+
+if (car.value) {
+  useHead({
+    title: `${t('seo.car.page_title')} ${car.value.car_name} ${car.value.year_production} — ${t('seo.car.page_title2') || 'Авто в наличии | YasAuto'}`,
+    meta: [
+      {
+        name: 'description',
+        content: car.value.description || t('seo.car.page_description') || 'Автомобиль Lixiang в наличии в Узбекистане. Характеристики, цена, комплектация.'
+      },
+      {
+        property: 'og:title',
+        content: `${car.value.car_name} ${car.value.year_production}`
+      },
+      {
+        property: 'og:description',
+        content: car.value.description || t('seo.car.page_description')
+      },
+      {
+        property: 'og:image',
+        content: car.value.images?.[0]?.image || 'https://lixiang-uzbekistan.uz/default-car.png'
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image'
+      }
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/carinstockmore?id=${car.value.id}`
+      }
+    ]
+  })
+  equipmentList.value = car.value.equipment ? car.value.equipment.split('\n') : []
+}
 </script>
 
 
