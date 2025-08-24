@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import Logo from '@/assets/logoblack.png';
+import Logo from '@/assets/logo.png';
 
 const show = ref(true);
 

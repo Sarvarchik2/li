@@ -1,132 +1,139 @@
-
 <template>
   <div class="market">
-    <div class="main-content-market">
-      <h3>{{ $t('main.shop') }}</h3>
+    <section class="main-content-market">
+      <h1 class="page-title">{{ $t('main.shop') }}</h1>
 
-      <div v-if="loading" class="loading">Загрузка...</div>
-      <div v-else-if="products.length" class="main-content-market-wrapper">
-        <div
+      <div v-if="pending" class="loading">Загрузка…</div>
+
+      <div v-else-if="products?.length" class="main-content-market-wrapper">
+        <article
             v-for="product in products"
             :key="product.id"
             class="main-content-market-item"
         >
           <img
-              :src="product.images.length ? product.images[0].img : '/fallback.png'"
+              :src="product.images?.[0]?.img || '/fallback.png'"
               :alt="product.name"
+              loading="lazy"
+              width="480"
+              height="480"
           />
-
-          <h4>{{ product.name }}</h4>
-          <p>{{ $t('main.category') }}: {{ product.category }}</p>
-          <h5>{{ formatPrice(product.price) }} $</h5>
-          <NuxtLink :to="`/productmore?id=${product.id}`">{{ $t('main.more') }}</NuxtLink>
-        </div>
+          <h2 class="product-name">{{ product.name }}</h2>
+          <p class="product-category">
+            {{ $t('main.category') }}: {{ product.category }}
+          </p>
+          <p class="product-price">{{ formatPrice(product.price) }} $</p>
+          <NuxtLink :to="`/product/${product.id}`" class="product-link">
+            {{ $t('main.more') || 'Подробнее' }}
+          </NuxtLink>
+        </article>
       </div>
 
       <div v-else class="empty">{{ $t('main.no_products') }}</div>
-    </div>
+
+      <!-- Пагинация (опционально, когда появится серверная) -->
+      <!-- <Pagination :page="page" :pages="pages" @change="onPageChange" /> -->
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import {useI18n} from "vue-i18n";
+import { computed } from 'vue'
+import { useAsyncData, useHead } from '#imports'
+import { useI18n } from 'vue-i18n'
 
-interface ProductImage {
-  id: number
-  product: number
-  img: string
-}
-
+interface ProductImage { id: number; product: number; img: string }
 interface Product {
   id: number
+  id: string
   name: string
   price: number
   category: string
   images: ProductImage[]
-}
-
-const products = ref<Product[]>([])
-const loading = ref(true)
-
-const formatPrice = (value: number) => {
-  return value.toLocaleString('ru-RU', { minimumFractionDigits: 0 })
+  description?: string
 }
 
 const { t, locale } = useI18n()
 
+/* ---------- SSR: загрузка каталога ---------- */
+const { data, pending } = await useAsyncData<Product[]>(
+    'market-products',
+    () => $fetch('https://api.lixiang-uzbekistan.uz/api/market-models/', {
+      headers: { 'Accept-Language': locale.value }
+    }),
+    { server: true, default: () => [] }
+)
+
+const products = computed(() => data.value || [])
+
+/* ---------- Вспомогалки ---------- */
+const formatPrice = (v?: number) =>
+    `${Number(v || 0).toLocaleString('ru-RU', { minimumFractionDigits: 0 })}`
+
+/* ---------- SEO: мета, OG, каноникал, hreflang ---------- */
+const baseUrl = 'https://lixiang-uzbekistan.uz'
+const localizedPath = computed(() => `${locale.value !== 'ru' ? '/' + locale.value : ''}/market`)
 useHead(() => ({
   title: t('seo.market.title') || 'Магазин Lixiang в Узбекистане — YasAuto',
   meta: [
-    { name: 'description', content: t('seo.market.description') },
-    { name: 'keywords', content: t('seo.market.keywords') },
-    { property: 'og:title', content: t('seo.market.og_title') },
-    { property: 'og:description', content: t('seo.market.og_description') },
-    { property: 'og:image', content: 'https://lixiang-uzbekistan.uz/logoblack.png' },
+    { name: 'description', content: t('seo.market.description') || '' },
+    { property: 'og:title', content: t('seo.market.og_title') || (t('main.shop') as string) },
+    { property: 'og:description', content: t('seo.market.og_description') || '' },
+    { property: 'og:image', content: `${baseUrl}/logoblack.png` },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: `${baseUrl}${localizedPath.value}` },
     { name: 'twitter:card', content: 'summary_large_image' }
   ],
   link: [
-    {
-      rel: 'canonical',
-      href: `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/market`
-    }
+    { rel: 'canonical', href: `${baseUrl}${localizedPath.value}` }
   ]
 }))
 
+/* hreflang (если стоит @nuxtjs/i18n) */
+const localeHead = useLocaleHead?.({ addSeoAttributes: true })
+useHead({
+  link: [...(localeHead?.value?.link || [])],
+  htmlAttrs: localeHead?.value?.htmlAttrs
+})
 
-onMounted(async () => {
-  try {
-    const response = await axios.get('https://api.lixiang-uzbekistan.uz/api/market-models/', {
-      headers: {
-        'Accept-Language': locale.value
-      }
-    })
-    products.value = response.data
-    useHead(() => {
-      if (!products.value.length) return {}
+/* ---------- JSON-LD: WebPage + ItemList ---------- */
+useHead(() => {
+  // список URL-ов товаров на странице
+  const itemUrls = (products.value || []).map(p =>
+      `${baseUrl}${locale.value !== 'ru' ? '/' + locale.value : ''}/product/${p.id}`
+  )
 
-      const productSchemas = products.value.map(product => ({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": product.name,
-        "image": product.images?.[0]?.img || "https://lixiang-uzbekistan.uz/fallback.png",
-        "description": `${product.name} - ${product.category}`,
-        "sku": `prod-${product.id}`,
-        "brand": {
-          "@type": "Brand",
-          "name": "Lixiang"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": `https://lixiang-uzbekistan.uz${locale.value !== 'ru' ? '/' + locale.value : ''}/productmore?id=${product.id}`,
-          "priceCurrency": "USD",
-          "price": product.price,
-          "availability": "https://schema.org/InStock"
-        }
-      }))
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: itemUrls.map((url, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      url
+    }))
+  }
 
-      return {
-        script: [
-          {
-            type: 'application/ld+json',
-            children: JSON.stringify(productSchemas)
-          }
-        ]
-      }
-    })
+  const webPage = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('seo.market.title') || 'Магазин YasAuto',
+    description: t('seo.market.description') || '',
+    url: `${baseUrl}${localizedPath.value}`
+  }
 
-  } catch (e) {
-    console.error('Ошибка загрузки товаров:', e)
-  } finally {
-    loading.value = false
+  return {
+    script: [
+      { type: 'application/ld+json', children: JSON.stringify(webPage) },
+      { type: 'application/ld+json', children: JSON.stringify(itemList) }
+    ]
   }
 })
 </script>
 
 <style scoped>
-.loading,
-.empty {
+.page-title { font-size: 28px; font-weight: 800; margin: 100px 0 16px; text-align: center; }
+
+.loading, .empty {
   text-align: center;
   font-size: 18px;
   padding: 30px;
@@ -145,19 +152,16 @@ onMounted(async () => {
   text-align: center;
   border-radius: 34px;
   background-color: #fff;
+  padding: 16px;
 }
-@media (max-width: 769px) {
-  .main-content-market-item{
-    width: calc(50% - 10px);
 
-  }
-
+.product-name { font-size: 18px; margin: 8px 0 4px; font-weight: 700; }
+.product-category { font-size: 14px; color: #777; margin: 0 0 6px; }
+.product-price { font-weight: 800; margin: 6px 0 12px; }
+@media (max-width: 1024px) {
+  .main-content-market-item { width: calc(50% - 20px); }
 }
 @media (max-width: 580px) {
-  .main-content-market-item{
-    width: 100%;
-
-  }
-
+  .main-content-market-item { width: 100%; }
 }
 </style>
