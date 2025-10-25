@@ -6,12 +6,13 @@
       <div class="main-content-contact-wrapper">
         <div class="main-content-contact-left">
           <h4>{{ $t('main.branches') }}</h4>
-          <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <div class="branch-buttons">
             <button 
               type="button" 
               :aria-pressed="activeBranch === 'yunusabad'"
               @click="activeBranch = 'yunusabad'"
-              :style="{ background: activeBranch === 'yunusabad' ? '#000' : '#ddd', color: activeBranch === 'yunusabad' ? '#fff' : '#000', padding: '10px 20px', border: 'none', borderRadius: '25px', cursor: 'pointer', fontWeight: '500' }"
+              class="branch-btn"
+              :class="{ active: activeBranch === 'yunusabad' }"
             >
               {{ $t('main.branch_yunusabad') }}
             </button>
@@ -19,7 +20,8 @@
               type="button" 
               :aria-pressed="activeBranch === 'sergeli'"
               @click="activeBranch = 'sergeli'"
-              :style="{ background: activeBranch === 'sergeli' ? '#000' : '#ddd', color: activeBranch === 'sergeli' ? '#fff' : '#000', padding: '10px 20px', border: 'none', borderRadius: '25px', cursor: 'pointer', fontWeight: '500' }"
+              class="branch-btn"
+              :class="{ active: activeBranch === 'sergeli' }"
             >
               {{ $t('main.branch_sergeli') }}
             </button>

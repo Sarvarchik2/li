@@ -1,4 +1,89 @@
 
+/* Main contact section styles */
+.main-content-contact {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.main-content-contact h3 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-content-contact-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.main-content-contact-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    background: #ffff;
+    padding: 34px;
+    border-radius: 40px;
+    gap: 20px;
+}
+
+.main-content-contact-left h4 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    margin: 0;
+}
+
+.main-content-contact-left p {
+    color: #4B4B4B;
+    font-size: 16px;
+    width: 70%;
+    margin: 0;
+}
+
+.main-content-contact-left-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.main-content-contact-left-info-item {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-content-contact-left-info-item a {
+    color: #4B4B4B;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.main-content-contact-left-info-item span {
+    color: #4B4B4B;
+    font-size: 16px;
+}
+
+.main-content-contact-right {
+    width: 39%;
+    border-radius: 40px;
+    border: 1px solid #BFBFBF;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+.main-content-contact-right iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
 .contact-content {
     background: #fff;
     padding: 20px;
@@ -8,6 +93,34 @@ gap: 30px;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.branch-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.branch-btn {
+    background: #ddd;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.branch-btn.active {
+    background: #000;
+    color: #fff;
+}
+
+.branch-btn:hover {
+    opacity: 0.8;
+}
+
 .contact-content-left{
     display: flex;
     flex-direction: column;
@@ -40,10 +153,125 @@ gap: 30px;
     border-radius: 30px;
 }
 @media (max-width: 769px) {
+    .main-content-contact h3 {
+        font-size: 26px;
+    }
+    
+    .main-content-contact-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .main-content-contact-left {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .main-content-contact-left p {
+        width: 100%;
+    }
+    
+    .main-content-contact-right {
+        width: 100%;
+        height: 300px;
+        min-height: 300px;
+    }
+    
+    .main-content-contact-right iframe {
+        height: 300px;
+        min-height: 300px;
+    }
+    
     .contact-content-left{
         width: 100%;
     }
     .contact-content-right{
         width: 100%;
+    }
+}
+/* Mobile responsive styles */
+@media (max-width: 581px) {
+    .main-content-contact h3 {
+        font-size: 24px;
+    }
+    
+    .main-content-contact-left {
+        padding: 15px;
+    }
+    
+    .main-content-contact-left h4 {
+        font-size: 18px;
+    }
+    
+    .main-content-contact-left p {
+        font-size: 14px;
+        width: 100%;
+    }
+    
+    .main-content-contact-left-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .main-content-contact-left-info-item {
+        width: 100%;
+    }
+    
+    .main-content-contact-left-info-item a,
+    .main-content-contact-left-info-item span {
+        font-size: 14px;
+    }
+    
+    .main-content-contact-right {
+        height: 250px;
+        min-height: 250px;
+    }
+    
+    .main-content-contact-right iframe {
+        height: 250px;
+        min-height: 250px;
+    }
+    
+    .main-content-contact-wrapper {
+        gap: 20px;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 375px) {
+    .main-content-contact h3 {
+        font-size: 22px;
+    }
+    
+    .main-content-contact-left {
+        padding: 12px;
+    }
+    
+    .main-content-contact-left h4 {
+        font-size: 16px;
+    }
+    
+    .main-content-contact-left p {
+        font-size: 13px;
+    }
+    
+    .branch-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .main-content-contact-left-info-item a,
+    .main-content-contact-left-info-item span {
+        font-size: 13px;
+    }
+    
+    .main-content-contact-right {
+        height: 220px;
+        min-height: 220px;
+    }
+    
+    .main-content-contact-right iframe {
+        height: 220px;
+        min-height: 220px;
     }
 }
