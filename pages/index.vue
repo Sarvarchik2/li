@@ -129,9 +129,26 @@
         <div class="main-content-contact-wrapper">
           <div class="main-content-contact-left">
             <h4>{{ $t('main.branches') }}</h4>
-            <button type="button" aria-label="Филиал Ташкент">Ташкент</button>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+              <button 
+                type="button" 
+                :aria-pressed="activeBranch === 'yunusabad'"
+                @click="activeBranch = 'yunusabad'"
+                :style="{ background: activeBranch === 'yunusabad' ? '#000' : '#ddd', color: activeBranch === 'yunusabad' ? '#fff' : '#000', padding: '10px 20px', border: 'none', borderRadius: '25px', cursor: 'pointer', fontWeight: '500' }"
+              >
+                {{ $t('main.branch_yunusabad') }}
+              </button>
+              <button 
+                type="button" 
+                :aria-pressed="activeBranch === 'sergeli'"
+                @click="activeBranch = 'sergeli'"
+                :style="{ background: activeBranch === 'sergeli' ? '#000' : '#ddd', color: activeBranch === 'sergeli' ? '#fff' : '#000', padding: '10px 20px', border: 'none', borderRadius: '25px', cursor: 'pointer', fontWeight: '500' }"
+              >
+                {{ $t('main.branch_sergeli') }}
+              </button>
+            </div>
             <h4>{{ $t('main.address') }}</h4>
-            <p>Малая кольцевая дорога 4/1 блок 4</p>
+            <p>{{ activeBranch === 'yunusabad' ? $t('main.address_yunusabad') : $t('main.address_sergeli') }}</p>
 
             <div class="main-content-contact-left-info">
               <div class="main-content-contact-left-info-item">
@@ -151,11 +168,20 @@
           </div>
           <div class="main-content-contact-right">
             <iframe
+                v-if="activeBranch === 'yunusabad'"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.135533100059!2d69.31460419999999!3d41.3276661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef5bd2c77a2f9%3A0x9328b277ea123405!2zNC8xINCx0LvQvtC6IDQ!5e0!3m2!1sru!2s!4v1747893666524!5m2!1sru!2s"
                 style="border:0;"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                title="Офис YasAuto на карте"
+                title="Офис YasAuto в Юнусабаде"
+            ></iframe>
+            <iframe
+                v-else
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2998.8!2d69.2294194!3d41.2434444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE0JzM2LjQiTiA2OcKwMTMnNDYuMSJF!5e0!3m2!1sru!2s!4v1000000000000!5m2!1sru!2s"
+                style="border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Офис YasAuto в Сергели"
             ></iframe>
           </div>
         </div>
@@ -194,7 +220,7 @@ import Li9 from '@/assets/Li99.png'
 import Video from '@/assets/vid1.png'
 import Video2 from '@/assets/vid1.png'
 
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAsyncData, useHead } from '#imports'
 
@@ -210,6 +236,7 @@ interface CarModel {
 }
 
 const { t, locale } = useI18n()
+const activeBranch = ref<'yunusabad' | 'sergeli'>('yunusabad')
 
 /* --- SSR-загрузка данных (вместо onMounted) --- */
 const { data: productsData, pending: productsPending } = await useAsyncData<Product[]>(
@@ -278,12 +305,20 @@ useHead({
         "url": baseUrl,
         "logo": `${baseUrl}/logoblack.png`,
         "description": "Официальный дилер Lixiang в Узбекистане. Продажа Li9, Li7, Li6, запчасти и обслуживание.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Малая кольцевая дорога 4/1 блок 4",
-          "addressLocality": "Ташкент",
-          "addressCountry": "UZ"
-        },
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Малая кольцевая дорога 4/1 блок 4",
+            "addressLocality": "Ташкент, Юнусабадский район",
+            "addressCountry": "UZ"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Сход граждан Кут-Барака",
+            "addressLocality": "Ташкент, Сергелийский район",
+            "addressCountry": "UZ"
+          }
+        ],
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+998773439999",
@@ -301,17 +336,41 @@ useHead({
       children: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "AutoDealer",
-        "name": "YasAuto — Lixiang Uzbekistan",
+        "name": "YasAuto — Lixiang Uzbekistan (Юнусабад)",
         "image": `${baseUrl}/logoblack.png`,
         "url": baseUrl,
         "telephone": "+998773439999",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Малая кольцевая дорога 4/1 блок 4",
-          "addressLocality": "Ташкент",
+          "addressLocality": "Ташкент, Юнусабадский район",
           "addressCountry": "UZ"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 41.3276661, "longitude": 69.3146042 },
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        }]
+      })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AutoDealer",
+        "name": "YasAuto — Lixiang Uzbekistan (Сергели)",
+        "image": `${baseUrl}/logoblack.png`,
+        "url": baseUrl,
+        "telephone": "+998773439999",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Сход граждан Кут-Барака",
+          "addressLocality": "Ташкент, Сергелийский район",
+          "addressCountry": "UZ"
+        },
+        "geo": { "@type": "GeoCoordinates", "latitude": 41.2434444, "longitude": 69.2294194 },
         "openingHoursSpecification": [{
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
